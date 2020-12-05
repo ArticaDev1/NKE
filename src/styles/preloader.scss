@@ -1,3 +1,8 @@
+@import "./components/variables";
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins/breakpoints";
+
 .preloader {
   position: fixed;
   z-index: 100000;
@@ -22,5 +27,17 @@
   }
   &__back {
     color: var(--color-preloader);
+  }
+  @include media-breakpoint-down(xl) {
+    &__icon {
+      width: 18vw;
+      height: 18vw;
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    &__icon {
+      width: 24vw;
+      height: 24vw;
+    }
   }
 }
