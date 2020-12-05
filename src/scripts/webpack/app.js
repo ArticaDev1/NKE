@@ -38,6 +38,7 @@ window.onload = function(){
   TouchHoverEvents.init();
   Mask.init();
   Preloader.init();
+  onExitEvents();
 }
 
 const TouchHoverEvents = {
@@ -115,31 +116,48 @@ const TouchHoverEvents = {
 
 const Preloader = {
   init: function() {
-    this.vector = document.querySelector('.preloader__icon');
-    this.line1 = document.querySelector('.preloader__back path:nth-child(1)');
-    this.line2 = document.querySelector('.preloader__back path:nth-child(2)');
-    this.w1 = this.line1.getTotalLength();
-    this.w2 = this.line2.getTotalLength();
-
-    this.line1.setAttribute("style", `stroke-dasharray:${this.w1};stroke-dashoffset:0;`);
-    this.line2.setAttribute("style", `stroke-dasharray:${this.w2};stroke-dashoffset:0;`);
-
-    this.show();
-    setTimeout(()=>{
+    if(!preloader_flag) {
+      if(preloader_time<preloader_mintime) {
+        setTimeout(()=>{
+          this.hide();
+        }, (preloader_mintime-preloader_time)*1000)
+      }
+    } else {
+      localStorage.removeItem('preloader');
       this.hide();
-    }, speed*1000)
-
+    }
   },
   hide: function() {
     gsap.timeline()
-      .fromTo(this.line1, {css:{'stroke-dashoffset':0}}, {css:{'stroke-dashoffset':-this.w1}, duration:speed, ease:'power2.inOut'})
-      .fromTo(this.line2, {css:{'stroke-dashoffset':0}}, {css:{'stroke-dashoffset':this.w2}, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
-      .to(this.vector, {autoAlpha:0, duration:speed/2, ease:'power2.inOut'}, `-=${speed/2}`)
+      .fromTo($preloader_items[0], {css:{'stroke-dashoffset':preloader_values[0]*2}}, {css:{'stroke-dashoffset':preloader_values[0]}, duration:speed*0.75, ease:'power2.inOut'})
+      .fromTo($preloader_items[1], {css:{'stroke-dashoffset':preloader_values[1]*2}}, {css:{'stroke-dashoffset':preloader_values[1]}, duration:speed*0.75, ease:'power2.inOut'}, `-=${speed*0.75}`)
+      .to($preloader, {autoAlpha:0, duration:speed/2, ease:'power2.inOut'}, `-=${speed*0.5}`)
   }, 
-  show: function() {
+  show: function(callback) {
     gsap.timeline()
-      .to(this.vector, {autoAlpha:1, duration:speed/2, ease:'power2.inOut'})
-      .fromTo(this.line1, {css:{'stroke-dashoffset':this.w1}}, {css:{'stroke-dashoffset':0}, duration:speed, ease:'power2.inOut'}, `-=${speed/2}`)
-      .fromTo(this.line2, {css:{'stroke-dashoffset':-this.w2}}, {css:{'stroke-dashoffset':0}, duration:speed, ease:'power2.inOut'}, `-=${speed}`)
+      .to($preloader, {autoAlpha:1, duration:speed*0.5, ease:'power2.inOut'})
+      .fromTo($preloader_items[0], {css:{'stroke-dashoffset':preloader_values[0]}}, {css:{'stroke-dashoffset':0}, duration:speed*0.75, ease:'power2.inOut'}, `-=${speed*0.5}`)
+      .fromTo($preloader_items[1], {css:{'stroke-dashoffset':preloader_values[1]}}, {css:{'stroke-dashoffset':0}, duration:speed*0.75, ease:'power2.inOut'}, `-=${speed*0.75}`)
+      .eventCallback('onComplete', ()=>{
+        if(callback) callback();
+      })
   }
+}
+
+
+function onExitEvents() {
+  document.addEventListener('click',  (event)=>{
+    let $link = event.target!==document?event.target.closest('a'):false;
+    if($link) {
+      let href = $link.getAttribute('href'),
+          split = href.split('/')[0];
+      if(split=='.' || split=='') {
+        event.preventDefault();
+        Preloader.show(()=>{
+          localStorage.setItem('preloader', 'true');
+          document.location.href = href;
+        })
+      }
+    }
+  });
 }

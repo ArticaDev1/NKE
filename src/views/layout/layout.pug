@@ -40,14 +40,15 @@ html(lang='ru')
 
   body
     include ../blocks/preloader
-    .wrapper(style='opacity:0;')
+    .wrapper
       include ../blocks/header
       main.main
         block content
       include ../blocks/footer
 
-    //webpack
-    script(src="./scripts/app.js")
 
     //preview only
     include ../blocks/helper
+
+    //webpack
+    script(src="./scripts/app.js")
