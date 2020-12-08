@@ -267,6 +267,7 @@ const Nav = {
   open: function() {
     if(this.timeout) clearTimeout(this.timeout);
     $header.classList.add('header_nav-opened');
+    this.$nav.classList.add('nav_opened');
     this.state=true;
     this.animation.play();
     disablePageScroll();
@@ -275,6 +276,7 @@ const Nav = {
     this.timeout = setTimeout(()=>{
       $header.classList.remove('header_nav-opened');
     }, Math.max(0, (this.animation.time()-0.25)*1000))
+    this.$nav.classList.remove('nav_opened');
     this.state=false;
     this.animation.reverse();
     enablePageScroll();
