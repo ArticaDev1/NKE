@@ -66,6 +66,11 @@
       transition: opacity $trs1;
     }
   }
+  @include media-breakpoint-down(xxl) {
+    &__container {
+      height: 90px;
+    }
+  }
 }
 
 .logo {
@@ -128,6 +133,34 @@
   }
 }
 
+.theme-description {
+  position: absolute;
+  height: 20px;
+  top: 40px;
+  left: 90px;
+  color: inherit;
+  &__item {
+    margin: 0;
+    line-height: 20px;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    transition: opacity $trs1;
+    &:first-child {
+      opacity: var(--state-tt-l)
+    }
+    &:last-child {
+      opacity: var(--state-tt-d);
+    }
+  }
+  @include media-breakpoint-down(xxl) {
+    top: 35px;
+    left: 60px;
+  }
+}
+
 .nav {
   position: fixed;
   top: 0;
@@ -138,6 +171,8 @@
   overflow: hidden;
   opacity: 0;
   visibility: hidden;
+  color: var(--color-text-dark);
+  transition: color $trs1;
   &__bg {
     position: absolute;
     width: 100%;
@@ -146,6 +181,15 @@
     left: 0;
     z-index: 1;
     background-color: var(--color-bg-nav);
+  }
+  &__line {
+    position: absolute;
+    width: 354px;
+    top: 99px;
+    left: 0;
+    height: 1px;
+    background-color: var(--color-text-dark);
+    transition: background-color $trs1;
   }
   &__container {
     background-color: var(--color-bg-light);
@@ -157,9 +201,38 @@
     z-index: 2;
   }
   &__block {
-    width: 440px;
+    width: 380px;
     height: 100%;
-    padding: 160px 24px 100px 90px;
+    padding: 200px 24px 80px 90px;
     margin: 0;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+  &__link {
+    text-decoration: none;
+    color: var(--color-btn-accent);
+    transition: color $trs1;
+    display: block;
+  }
+  @include media-breakpoint-down(xxl) {
+    &__link {
+      font-size: 1.25rem;
+    }
+    &__line {
+      top: 89px;
+    }
+    &__block {
+      padding: 140px 24px 50px 60px;
+      width: 345px;
+    }
   }
 }

@@ -37,6 +37,7 @@ html(lang='ru')
     script.
       const theme_dark = document.querySelector('.theme-dark');
       const theme_light = document.querySelector('.theme-light');
+      let theme_state;
       let limit_time = 60, //minutes
           last_update_time = localStorage.getItem('theme_time'),
           time = +new Date(),
@@ -45,10 +46,15 @@ html(lang='ru')
         localStorage.removeItem('theme');
         localStorage.removeItem('theme_time');
       }
-      let theme = localStorage.getItem('theme');
-      if((!theme && time>8 && time<20) || theme=='light') {
+      let theme = localStorage.getItem('theme'),
+          hours = +new Date().getHours();
+      console.log((!theme && hours>8 && hours<20))
+      if((!theme && hours>8 && hours<20) || theme=='light') {
         theme_dark.setAttribute('disabled', '');
-      } 
+        theme_state = true;
+      } else {
+        theme_state = false;
+      }
   body
     include ../blocks/preloader
     .wrapper

@@ -59,7 +59,7 @@
   }
   @include media-breakpoint-down(xxl) {
     &__screen {
-      padding: 155px 0 60px 0;
+      padding: 150px 0 60px 0;
     }
     &-item {
       padding-top: 40px;
@@ -74,3 +74,4 @@
     }
   }
 }
+

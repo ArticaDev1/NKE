@@ -174,27 +174,21 @@ function onExitEvents() {
 
 const Theme = {
   init: function() {
-    let $toggle = document.querySelector('.theme-toggle-btn');
-    $toggle.addEventListener('click', ()=>{
-      let theme = localStorage.getItem('theme');
-      if(!theme || theme=='light') {
-        localStorage.setItem('theme', 'dark');
-      } else {
-        localStorage.setItem('theme', 'light');
-      }
-      localStorage.setItem('theme_time', +new Date());
-      this.check();
+    let $toggle = document.querySelectorAll('.theme-toggle-btn, .theme-description');
+    $toggle.forEach(($this)=>{
+      $this.addEventListener('click', ()=>{
+        localStorage.setItem('theme_time', +new Date());
+        if(theme_state) {
+          theme_state = false;
+          localStorage.setItem('theme', 'dark');
+          theme_dark.removeAttribute('disabled');
+        } else {
+          theme_state = true;
+          localStorage.setItem('theme', 'light');
+          theme_dark.setAttribute('disabled', '');
+        }
+      })
     })
-
-    this.check();
-  },
-  check: function() {
-    let theme = localStorage.getItem('theme');
-    if(theme=='light') {
-      theme_dark.setAttribute('disabled', '');
-    } else {
-      theme_dark.removeAttribute('disabled');
-    }
   }
 }
 
