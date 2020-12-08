@@ -23,7 +23,7 @@ const $wrapper = document.querySelector('.wrapper');
 const $header = document.querySelector('.header');
 const speed = 1;
 
-const dev = true;
+const dev = false;
 
 const Mask = {
   init: function() {
