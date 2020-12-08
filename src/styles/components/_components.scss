@@ -93,3 +93,16 @@
     }
   }
 }
+
+.dev-label {
+  a {
+    font-size: 0;
+    display: inline-block;
+    transform: translateY(5%);
+    color: inherit;
+  }
+  svg {
+    height: 15px;
+    width: 73px;
+  }
+}

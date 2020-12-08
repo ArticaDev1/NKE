@@ -37,7 +37,7 @@
       border-color: transparent;
     }
   }
-  .container {
+  & > .container {
     position: static;
   }
   &__container {
@@ -134,11 +134,10 @@
 }
 
 .theme-description {
-  position: absolute;
-  height: 20px;
-  top: 40px;
-  left: 90px;
+  height: 22px;
+  width: 140px;
   color: inherit;
+  position: relative;
   &__item {
     margin: 0;
     line-height: 20px;
@@ -154,10 +153,6 @@
     &:last-child {
       opacity: var(--state-tt-d);
     }
-  }
-  @include media-breakpoint-down(xxl) {
-    top: 35px;
-    left: 60px;
   }
 }
 
@@ -184,8 +179,8 @@
   }
   &__line {
     position: absolute;
-    width: 354px;
-    top: 99px;
+    width: calc(380px - #{$container-padding-x});
+    bottom: 0;
     left: 0;
     height: 1px;
     background-color: var(--color-text-dark);
@@ -200,17 +195,39 @@
     top: 0;
     z-index: 2;
   }
-  &__block {
-    width: 380px;
-    height: 100%;
-    padding: 200px 24px 80px 90px;
-    margin: 0;
+  &__head {
+    background-color: var(--color-bg-light);
+    transition: background-color $trs1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    padding-left: 90px;
   }
   &__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+  &__block {
+    width: 380px;
+    min-height: 100%;
+    padding: 200px 24px 80px 90px;
+    margin: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
+  }
+  &__list {
+    margin-bottom: 60px;
   }
   &__item {
     &:not(:last-child) {
@@ -223,16 +240,44 @@
     transition: color $trs1;
     display: block;
   }
+  .dev-label {
+    margin-top: 60px;
+    a {
+      transition: none;
+    }
+  }
   @include media-breakpoint-down(xxl) {
     &__link {
       font-size: 1.25rem;
     }
+    &__head {
+      height: 90px;
+      padding-left: 60px;
+    }
     &__line {
-      top: 89px;
+      width: calc(345px - #{$container-padding-x});
     }
     &__block {
-      padding: 140px 24px 50px 60px;
+      padding: 140px 24px 40px 60px;
       width: 345px;
+    }
+    .dev-label {
+      margin-top: 50px;
+    }
+    &__list {
+      margin-bottom: 40px;
+    }
+  }
+  @include media-breakpoint-between(xl, xxl) {
+    @media (max-height:660px) {
+      &__block {
+        padding: 130px 24px 35px 60px;
+      }
+      &__item {
+        &:not(:last-child) {
+          margin-bottom: 18px;
+        }
+      }
     }
   }
 }

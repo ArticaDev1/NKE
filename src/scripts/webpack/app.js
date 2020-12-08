@@ -8,7 +8,7 @@ document.addEventListener('lazybeforeunveil', function(e){
   }
 });
 import {gsap} from "gsap";
-import scrollLock from 'scroll-lock';
+import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import Inputmask from "inputmask";
 
 const brakepoints = {
@@ -23,7 +23,7 @@ const $wrapper = document.querySelector('.wrapper');
 const $header = document.querySelector('.header');
 const speed = 1;
 
-const dev = false;
+const dev = true;
 
 const Mask = {
   init: function() {
@@ -269,6 +269,7 @@ const Nav = {
     $header.classList.add('header_nav-opened');
     this.state=true;
     this.animation.play();
+    disablePageScroll();
   },
   close: function() {
     this.timeout = setTimeout(()=>{
@@ -276,6 +277,7 @@ const Nav = {
     }, Math.max(0, (this.animation.time()-0.25)*1000))
     this.state=false;
     this.animation.reverse();
+    enablePageScroll();
   },
   setSize: function() {
     if(window.innerWidth>brakepoints.md) {
