@@ -1,5 +1,37 @@
 //PRELOADER START
-link(rel="stylesheet" href="./styles/preloader.css")
+style.
+  body {
+  margin: 0; }
+  .preloader {
+  position: fixed;
+  z-index: 100000;
+  width: 100%;
+  height: 100%;
+  background-color: #fff; }
+  .preloader__container {
+  background: var(--color-preloader-bg);
+  width: 100%;
+  height: 100%;
+  position: relative;
+  opacity: 0; }
+  .preloader__icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 12vw;
+  height: 12vw;
+  margin: auto; }
+  .preloader__back {
+  color: var(--color-preloader); }
+  @media (max-width: 1279.98px) {
+  .preloader__icon {
+  width: 18vw;
+  height: 18vw; } }
+  @media (max-width: 575.98px) {
+  .preloader__icon {
+  width: 24vw;
+  height: 24vw; } }
 
 .preloader
   .preloader__container
@@ -19,5 +51,45 @@ link(rel="stylesheet" href="./styles/preloader.css")
         path(d='M10 20C10 14.4772 14.4772 10 20 10L154 10C159.523 10 164 14.4772 164 20V151C164 156.523 159.523 161 154 161H20C14.4772 161 10 156.523 10 151V20Z' stroke-width='20')
         path(d='M54.9925 124.038L54.1717 53.7082C54.0893 46.6505 61.147 41.7309 67.7403 44.2502L68.0389 44.3643C70.6996 45.3809 72.8005 47.4839 73.8145 50.1456L100.876 121.18C102.904 126.504 109 129.016 114.19 126.667V126.667C117.727 125.066 120 121.543 120 117.661V46.4595' stroke-width='19')
   
-script(src="./scripts/preloader.js")
+script.
+  const $preloader = document.querySelector('.preloader');
+  const $preloader_container = document.querySelector('.preloader__container');
+  const $preloader_items = document.querySelectorAll('.preloader__back path');
+  const preloader_flag = localStorage.getItem('preloader');
+  let preloader_time = 0;
+  let preloader_mintime = 1;
+  let preloader_values = [];
+  $preloader_items.forEach(($line, index)=>{
+    preloader_values[index] = $line.getTotalLength();
+    $line.style.strokeDasharray = preloader_values[index];
+  })
+  if(!preloader_flag) {
+    $preloader_container.style.transition = `opacity ${preloader_mintime/2}s ease-in-out`;
+    $preloader_container.style.opacity = '1';
+  //
+  let interval = setInterval(() => {
+    preloader_time+=0.1;
+  }, 100);
+  //
+  setTimeout(() => {
+    clearInterval(interval);
+    $preloader_items.forEach(($line)=>{
+      $line.style.transition = 'none';
+    })
+  }, preloader_mintime*1000);
+  //
+  $preloader_items.forEach(($line, index)=>{
+    $line.style.strokeDashoffset = preloader_values[index];
+  })
+  setTimeout(()=>{
+    $preloader_items.forEach(($line)=>{
+      $line.style.transition = `stroke-dashoffset ${preloader_mintime-0.1}s ease-in-out, opacity ${preloader_mintime/2}s ease-in-out`;
+      $line.style.strokeDashoffset = '0';
+    })
+  }, 100)
+  }
+  else {
+    $preloader_container.style.opacity = '1';
+  }
+
 //PRELOADER FINISH

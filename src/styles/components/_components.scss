@@ -55,7 +55,7 @@
     }
   }
   &_cover {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--color-bg-images);
     overflow: hidden;
     img {
       object-fit: cover;

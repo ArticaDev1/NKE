@@ -23,6 +23,8 @@ const $wrapper = document.querySelector('.wrapper');
 const $header = document.querySelector('.header');
 const speed = 1;
 
+const dev = false;
+
 const Mask = {
   init: function() {
     Inputmask({
@@ -37,7 +39,10 @@ window.onload = function(){
   lazySizes.init();
   TouchHoverEvents.init();
   Mask.init();
+  Theme.init();
+  Nav.init();
   Preloader.init();
+  Header.init();
   onExitEvents();
 }
 
@@ -116,16 +121,21 @@ const TouchHoverEvents = {
 
 const Preloader = {
   init: function() {
-    if(!preloader_flag) {
-      if(preloader_time<preloader_mintime) {
-        setTimeout(()=>{
-          this.hide();
-        }, (preloader_mintime-preloader_time)*1000)
+    if(!dev) {
+      if(!preloader_flag) {
+        if(preloader_time<preloader_mintime) {
+          setTimeout(()=>{
+            this.hide();
+          }, (preloader_mintime-preloader_time)*1000)
+        }
+      } else {
+        localStorage.removeItem('preloader');
+        this.hide();
       }
     } else {
-      localStorage.removeItem('preloader');
-      this.hide();
+      gsap.set($preloader, {autoAlpha:0})
     }
+    
   },
   hide: function() {
     gsap.timeline()
@@ -151,7 +161,7 @@ function onExitEvents() {
     if($link) {
       let href = $link.getAttribute('href'),
           split = href.split('/')[0];
-      if(split=='.' || split=='') {
+      if((split=='.' || split=='') && !dev) {
         event.preventDefault();
         Preloader.show(()=>{
           localStorage.setItem('preloader', 'true');
@@ -160,4 +170,126 @@ function onExitEvents() {
       }
     }
   });
+}
+
+const Theme = {
+  init: function() {
+    let $toggle = document.querySelector('.theme-toggle-btn');
+    $toggle.addEventListener('click', ()=>{
+      let theme = localStorage.getItem('theme');
+      if(!theme || theme=='light') {
+        localStorage.setItem('theme', 'dark');
+      } else {
+        localStorage.setItem('theme', 'light');
+      }
+      localStorage.setItem('theme_time', +new Date());
+      this.check();
+    })
+
+    this.check();
+  },
+  check: function() {
+    let theme = localStorage.getItem('theme');
+    if(theme=='light') {
+      theme_dark.setAttribute('disabled', '');
+    } else {
+      theme_dark.removeAttribute('disabled');
+    }
+  }
+}
+
+const Header = {
+  init: function() {
+    window.addEventListener('scroll', ()=>{
+      this.check();
+    })
+    this.check();
+  }, 
+  check: function() {
+    let y = window.pageYOffset;
+
+    if(y>0 && !this.fixed) {
+      this.fixed = true;
+      $header.classList.add('header_fixed');
+    } else if(y==0 && this.fixed) {
+      this.fixed = false;
+      $header.classList.remove('header_fixed');
+    }
+  }
+}
+
+const Nav = {
+  init: function() {
+    this.$nav = document.querySelector('.nav');
+    this.$bg = document.querySelector('.nav__bg');
+    this.$container = document.querySelector('.nav__container');
+    this.$toggle = document.querySelector('.nav-toggle');
+    this.$toggle_lines = this.$toggle.querySelectorAll('span');
+    this.state = false;
+    this.opened = false;
+
+    this.animation = gsap.timeline({paused:true, 
+      onStart:()=>{
+        this.opened = true;
+      }, 
+      onReverseComplete:()=>{
+        this.opened = false;
+      }
+    })
+      .set(this.$nav, {autoAlpha:1})
+      .to(this.$toggle_lines[1], {autoAlpha:0, duration:speed/2, ease:'power2.out'})
+      .to(this.$toggle_lines[1], {xPercent:-25, duration:speed/2, ease:'power2.out'}, `-=${speed/2}`)
+      .to(this.$toggle_lines[0], {rotate:45, y:9, duration:speed/2, ease:'power2.out'}, `-=${speed/2}`)
+      .to(this.$toggle_lines[2], {rotate:-45, y:-9, duration:speed/2, ease:'power2.out'}, `-=${speed/2}`)
+      //
+      .fromTo(this.$bg, {autoAlpha:0}, {autoAlpha:1, duration:speed/2, ease:'power2.out'}, `-=${speed/2}`)
+      .fromTo(this.$container, {xPercent:100}, {xPercent:0, duration:speed/2, ease:'power2.out'}, `-=${speed/2}`)
+      
+    this.$bg.addEventListener('click', ()=>{
+      if(this.state) this.close();
+    })
+    this.$toggle.addEventListener('click', ()=>{
+      if(!this.state) this.open();
+      else this.close();
+    })
+
+    this.setSize();
+    window.addEventListener('resize', ()=>{this.setSize()});
+  },
+  checkToggleButton: function(event) {
+    if(!this.opened) {
+      if((event.type=='mouseenter' && !TouchHoverEvents.touched) || event.type=='touchstart') {
+        this.$toggle_items.forEach(($item, index)=>{
+          $item.setAttribute('d', this.button_forms[2])
+        })
+      } 
+      else if(event.type=='mouseleave' || event.type=='customTouchend') {
+        this.$toggle_items.forEach(($item)=>{
+          $item.setAttribute('d', this.button_forms[0])
+        })
+      }
+    }
+  },
+  open: function() {
+    if(this.timeout) clearTimeout(this.timeout);
+    $header.classList.add('header_nav-opened');
+    this.state=true;
+    this.animation.play();
+  },
+  close: function() {
+    this.timeout = setTimeout(()=>{
+      $header.classList.remove('header_nav-opened');
+    }, Math.max(0, (this.animation.time()-0.25)*1000))
+    this.state=false;
+    this.animation.reverse();
+  },
+  setSize: function() {
+    if(window.innerWidth>brakepoints.md) {
+      let w = window.innerWidth,
+          cw = document.querySelector('.container').getBoundingClientRect().width,
+          w2 = (w-cw)/2,
+          nw = this.$container.querySelector('.nav__block').getBoundingClientRect().width;
+      this.$container.style.width = `${nw+w2}px`;
+    } 
+  }
 }

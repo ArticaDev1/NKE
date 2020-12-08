@@ -3,10 +3,12 @@ html {
 }
 body {
   font-family: 'Montserrat', sans-serif;
-  color: var(--color-text);
+  color: var(--color-text-light);
+  background-color: var(--color-bg-accent);
   font-size: 1rem;
   line-height: 1.5;
   min-width: 320px;
+  transition: color $trs1, background-color $trs1;
 }
 * {
   box-sizing: border-box;

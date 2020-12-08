@@ -1,2 +1,19 @@
 header.header
-  
+  .container
+    .header__container
+      a(href="./index.html").logo.header__logo
+        include logo
+      .header__right 
+        a(href="tel:79101668150").header__phone.h6 +7 (910) 166-81-50
+        button(aria-label='change theme').theme-toggle-btn
+        button(aria-label='nav button').nav-toggle
+          span
+          span
+          span
+
+  nav.nav
+    .nav__bg
+    .nav__container
+      .nav__block.container
+        .nav__content
+    

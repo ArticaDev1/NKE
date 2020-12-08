@@ -31,24 +31,40 @@ html(lang='ru')
     meta(property='og:url' content='https://articadev1.github.io/NKE/build/') 
     meta(property='og:description' content='Технология безостановочного подключения и ремонт трубопроводов.')
     meta(property='og:image' content='https://articadev1.github.io/NKE/build/img/logos/og.jpg')
-    //fonts
-    link(href='https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap', rel='stylesheet')
-    //styles
-    link(rel="stylesheet" href="./styles/theme.css")
-    block styles
-    link(rel="stylesheet" href="./styles/common.css")
-
+    //themes
+    link.theme-light(rel="stylesheet" href="./styles/theme-light.css")
+    link.theme-dark(rel="stylesheet" href="./styles/theme-dark.css")
+    script.
+      const theme_dark = document.querySelector('.theme-dark');
+      const theme_light = document.querySelector('.theme-light');
+      let limit_time = 60, //minutes
+          last_update_time = localStorage.getItem('theme_time'),
+          time = +new Date(),
+          time_remaining = limit_time-((time-last_update_time)/60000);
+      if(last_update_time && time_remaining<0) {
+        localStorage.removeItem('theme');
+        localStorage.removeItem('theme_time');
+      }
+      let theme = localStorage.getItem('theme');
+      if((!theme && time>8 && time<20) || theme=='light') {
+        theme_dark.setAttribute('disabled', '');
+      } 
   body
     include ../blocks/preloader
     .wrapper
       include ../blocks/header
       main.main
         block content
-      include ../blocks/footer
+      canvas
 
 
     //preview only
     include ../blocks/helper
 
+    //fonts
+    link(href='https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap', rel='stylesheet')
+    //styles
+    block styles
+    link(rel="stylesheet" href="./styles/common.css")
     //webpack
     script(src="./scripts/app.js")

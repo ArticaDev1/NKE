@@ -7,10 +7,15 @@
 .main {
   flex: 1 1 100%;
 }
+.container {
+  position: relative;
+  z-index: 2;
+}
 .section {
-  margin: 0 0 100px 0;
-  &:first-child {
-    margin-top: 50px;
+  padding: 120px 0;
+  transition: background-color $trs1;
+  &_light {
+    background-color: var(--color-bg-light);
   }
 }
 

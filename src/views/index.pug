@@ -2,3 +2,37 @@ extends layout/layout
 block variables
   -var title = sitename+' - Главная'
 block content
+  section.section.home
+    .home__screen
+      .image.image_cover.home__bg
+        img(src="./img/home.jpg", alt="image").lazyload
+      .container 
+        h1.home__title Технология безостановочного<br> подключения и ремонт<br> трубопроводов
+        p.h6 Единственный преемник корпорации T.D. Williamson в России
+    .home__info
+      .container
+        .row  
+          .home-item.col-xxl-2.col-xl-3
+            .home-item__head
+              span.h2 30 
+              span.h6 единиц техники
+            p Единственный преемник корпорации T.D. Williamson в России
+          .home-item.col-xxl-2.offset-xxl-1.col-xl-3
+            .home-item__head
+              span.h2 №1 
+              span.h6 В России
+            p Единственный преемник корпорации T.D. Williamson в России
+          .home-item.col-xxl-2.offset-xxl-1.col-xl-3
+            .home-item__head
+              span.h2 15 
+              span.h6 лет на рынке
+            p Единственный преемник корпорации T.D. Williamson в России
+          .home-more.col-xl-3.offset-xxl-1
+            .home-more__content
+              p Единственный преемник корпорации T.D. Williamson в России
+              a(href="javascript:void(0);").button-text.button-text_accent
+                span Оставить заявку
+                svg.icon
+                  use(xlink:href='./img/icons/icons.svg#arrow')
+
+  section.section.section_light.dir-block

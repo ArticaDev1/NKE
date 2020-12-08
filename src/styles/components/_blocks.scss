@@ -1,1 +1,76 @@
-
+.home {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  &__screen {
+    flex: 1 1 100%;
+    position: relative;
+    padding: 180px 0 90px 0;
+    .container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+  &__bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  &__info {
+    flex: 0 0 auto;
+    background: var(--color-bg-accent);
+    transition: background-color $trs1;
+  }
+  &-item {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    &__head {
+      margin: 0 0 5px 0;
+    }
+  }
+  &-more {
+    padding-left: 55px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--color-text-dark);
+    &__content {
+      position: relative;
+      z-index: 2;
+    }
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: calc(100% + #{$xxl-field});
+      background-color: var(--color-bg-light);
+      transition: background-color $trs1;
+      pointer-events: none;
+    }
+  }
+  @include media-breakpoint-down(xxl) {
+    &__screen {
+      padding: 155px 0 60px 0;
+    }
+    &-item {
+      padding-top: 40px;
+      padding-bottom: 40px;
+      padding-right: 40px;
+    }
+    &-more {
+      padding-left: 40px;
+      &:before {
+        width: calc(100% + #{$xl-field});
+      }
+    }
+  }
+}
