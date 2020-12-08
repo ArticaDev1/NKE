@@ -135,13 +135,14 @@
 
 .theme-description {
   line-height: 22px;
-  width: 140px;
+  width: 130px;
   color: inherit;
   white-space: nowrap;
   position: relative;
   color: var(--color-header3);
   margin: 0;
   transition: color $trs1;
+  text-align: left;
 }
 
 .nav {
@@ -173,7 +174,7 @@
   }
   &__line {
     position: absolute;
-    width: calc(380px - #{$container-padding-x});
+    width: calc(370px - #{$container-padding-x});
     bottom: 0;
     left: 0;
     height: 1px;
@@ -211,7 +212,7 @@
     height: 100%;
   }
   &__block {
-    width: 380px;
+    width: 370px;
     min-height: 100%;
     padding: 200px 24px 80px 90px;
     margin: 0;
@@ -248,11 +249,11 @@
       padding-left: 60px;
     }
     &__line {
-      width: calc(345px - #{$container-padding-x});
+      width: calc(335px - #{$container-padding-x});
     }
     &__block {
       padding: 140px 24px 40px 60px;
-      width: 345px;
+      width: 335px;
     }
     .dev-label {
       margin-top: 50px;
