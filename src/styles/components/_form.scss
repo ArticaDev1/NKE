@@ -94,6 +94,11 @@
       transform: translateX(0);
       opacity: 1;
     }
+    &:not(.focused) {
+      .input__title {
+        color: var(--color-input-border3);
+      }
+    }
   }
 }
 

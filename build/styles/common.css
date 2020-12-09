@@ -3623,6 +3623,8 @@ table:not([class]) {
   .input.error::after {
     transform: translateX(0);
     opacity: 1; }
+  .input.error:not(.focused) .input__title {
+    color: var(--color-input-border3); }
 
 .test {
   background: #000;
