@@ -174,7 +174,7 @@ function onExitEvents() {
 
 const Theme = {
   init: function() {
-    let $toggle = document.querySelectorAll('.theme-toggle-btn, .theme-description');
+    let $toggle = document.querySelectorAll('[data-theme-toggle]');
     $toggle.forEach(($this)=>{
       $this.addEventListener('click', ()=>{
         localStorage.setItem('theme_time', +new Date());
@@ -218,7 +218,11 @@ const Nav = {
     this.$bg = document.querySelector('.nav__bg');
     this.$container = document.querySelector('.nav__container');
     this.$toggle = document.querySelector('.nav-toggle');
-    this.$toggle_lines = this.$toggle.querySelectorAll('span');
+    this.$theme = document.querySelector('.nav__theme');
+    this.$items = document.querySelectorAll('.nav__item');
+    this.$dev = document.querySelector('.nav .dev-label');
+    this.$copy = document.querySelector('.nav__copy');
+    this.$socials = document.querySelectorAll('.nav .socials__item');
     this.state = false;
     this.opened = false;
 
@@ -231,13 +235,12 @@ const Nav = {
       }
     })
       .set(this.$nav, {autoAlpha:1})
-      .to(this.$toggle_lines[1], {autoAlpha:0, duration:speed/2, ease:'power2.out'})
-      .to(this.$toggle_lines[1], {xPercent:-25, duration:speed/2, ease:'power2.out'}, `-=${speed/2}`)
-      .to(this.$toggle_lines[0], {rotate:45, y:9, duration:speed/2, ease:'power2.out'}, `-=${speed/2}`)
-      .to(this.$toggle_lines[2], {rotate:-45, y:-9, duration:speed/2, ease:'power2.out'}, `-=${speed/2}`)
       //
-      .fromTo(this.$bg, {autoAlpha:0}, {autoAlpha:1, duration:speed/2, ease:'power2.out'}, `-=${speed/2}`)
-      .fromTo(this.$container, {xPercent:100}, {xPercent:0, duration:speed/2, ease:'power2.out'}, `-=${speed/2}`)
+      .fromTo(this.$bg, {autoAlpha:0}, {autoAlpha:1, duration:speed*0.5, ease:'power2.out'})
+      .fromTo(this.$container, {xPercent:100}, {xPercent:0, duration:speed*0.5, ease:'power2.out'}, `-=${speed*0.5}`)
+      .fromTo([this.$theme, this.$dev, this.$copy], {autoAlpha:0, x:15}, {autoAlpha:1, x:0, duration:speed*0.35, ease:'power2.inOut'}, `-=${speed*0.35}`)
+      .fromTo(this.$items, {autoAlpha:0, x:15}, {autoAlpha:1, x:0, duration:speed*0.35, ease:'power2.inOut', stagger:{amount:speed*0.15}}, `-=${speed*0.5}`)
+      .fromTo(this.$socials, {autoAlpha:0, x:15}, {autoAlpha:1, x:0, duration:speed*0.35, ease:'power2.inOut', stagger:{amount:speed*0.15}}, `-=${speed*0.5}`)
       
     this.$bg.addEventListener('click', ()=>{
       if(this.state) this.close();
@@ -268,6 +271,7 @@ const Nav = {
     if(this.timeout) clearTimeout(this.timeout);
     $header.classList.add('header_nav-opened');
     this.$nav.classList.add('nav_opened');
+    this.$toggle.classList.add('active');
     this.state=true;
     this.animation.play();
     disablePageScroll();
@@ -275,8 +279,9 @@ const Nav = {
   close: function() {
     this.timeout = setTimeout(()=>{
       $header.classList.remove('header_nav-opened');
-    }, Math.max(0, (this.animation.time()-0.25)*1000))
+    }, Math.max(0, (this.animation.time()-0.25)*1000));
     this.$nav.classList.remove('nav_opened');
+    this.$toggle.classList.remove('active');
     this.state=false;
     this.animation.reverse();
     enablePageScroll();

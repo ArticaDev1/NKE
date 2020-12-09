@@ -144,20 +144,16 @@ ol:not([class]) {
   }
 }
 
-a:not([class]), .link {
-  transition: color $trs1, border-color $trs1;
-  border-bottom: 1px solid var(--color-text);
+a {
   text-decoration: none;
   color: inherit;
-  &[data-touch], &[data-hover] {
-    color: var(--color-accent-hover);
-    border-color: transparent;
-  }
-  &[data-focus] {
-    color: var(--color-accent-focus);
+  &:not([class]), &.link {
+    transition: opacity $trs1;
+    &[data-touch], &[data-hover] {
+      opacity: 0.8;
+    }
   }
 }
-
 
 
 .table {

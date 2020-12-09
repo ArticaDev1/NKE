@@ -6,15 +6,19 @@
   transition: background-color $trs1, color $trs1;
   color: var(--color-header);
   &_nav-opened, &_fixed {
-    .nav-toggle {
-      span {
-        background-color: var(--color-header3);
-      }
+    .nav-toggle__burger > span span,
+    .nav-toggle__close span::before {
+      background-color: var(--color-header3);
     }
     .theme-toggle-btn {
       &::after {
         background-color: var(--color-header3);
       }
+    }
+  }
+  &_nav-opened {
+    .header__phone {
+      opacity: 0;
     }
   }
   &_fixed {
@@ -53,6 +57,7 @@
     margin: 0 52px 0 0;
     text-decoration: none;
     color: inherit;
+    transition: opacity $trs1;
   }
   &__right {
     display: flex;
@@ -87,16 +92,105 @@
   height: 50px;
   margin: -7px;
   padding: 14px 7px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
   z-index: 3;
-  span {
+  position: relative;
+  &__burger {
     width: 100%;
-    height: 4px;
-    background-color: var(--color-header);
-    transition: background-color $trs1;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    &>span {
+      width: 100%;
+      height: 4px;
+      transition: transform 285ms ease-out;
+      position: relative;
+      &:nth-child(2) {
+        transition-delay: 73ms;
+      }
+      &:nth-child(3) {
+        transition-delay: 142ms;
+      }
+      span {
+        display: block;
+        width: 100%;
+        height: 100%;
+        transition: background-color $trs1;
+        background-color: var(--color-header);
+        position: relative;
+        &::before {
+          content: '';
+          display: block;
+          width: 100%;
+          height: 100%;
+          background-color: inherit;
+          position: absolute;
+          left: 200%;
+          top: 0;
+        }
+      }
+    }
+  }
+  &__close {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    span {
+      display: block;
+      width: 36px;
+      height: 4px;
+      transition: transform 250ms ease-out;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      &::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: var(--color-header);
+        transition: background-color $trs1;
+      }
+      &:first-child {
+        transform: translate(-50%, -50%) rotate(45deg) scaleX(0);
+      }
+      &:last-child {
+        transform: translate(-50%, -50%) rotate(-45deg) scaleX(0);
+      }
+    }
+  }
+  &[data-touch], &[data-hover] {
+    .nav-toggle {
+      &__burger {
+        &>span {
+          transform: translateX(-200%);
+        }
+      }
+    }
+  }
+  &.active {
+    .nav-toggle {
+      &__burger {
+        &>span {
+          transform: translateX(-300%);
+        }
+      }
+      &__close {
+        span {
+          transition-delay: 250ms;
+          &:first-child {
+            transform: translate(-50%, -50%) rotate(45deg) scaleX(1);
+          }
+          &:last-child {
+            transform: translate(-50%, -50%) rotate(-45deg) scaleX(1);
+          }
+        }
+      }
+    }
   }
 }
 
@@ -131,18 +225,16 @@
     position: absolute;
     transition: transform $trs1, background-color $trs1;
   }
-}
-
-.theme-description {
-  line-height: 22px;
-  width: 130px;
-  color: inherit;
-  white-space: nowrap;
-  position: relative;
-  color: var(--color-header3);
-  margin: 0;
-  transition: color $trs1;
-  text-align: left;
+  &[data-touch], &[data-hover] {
+    &::after {
+      transform: translateX(var(--pos-tt)) scale(1.075);
+    }
+  }
+  &[data-focus] {
+    &::after {
+      transform: translateX(var(--pos-tt)) scale(1.15);
+    }
+  }
 }
 
 .nav {
@@ -159,7 +251,7 @@
   transition: color $trs1;
   &_opened {
     .nav__content {
-      overflow-y: scroll;
+      overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
   }
@@ -171,6 +263,38 @@
     left: 0;
     z-index: 1;
     background-color: var(--color-bg-nav);
+  }
+  &__copy {
+    position: absolute;
+    bottom: 160px;
+    left: 470px;
+    width: 1rem;
+    height: 245px;
+    line-height: 1;
+    white-space: nowrap;
+    box-sizing: content-box;
+    &-wrap {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    span {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+  }
+  &__theme {
+    line-height: 22px;
+    width: 130px;
+    color: inherit;
+    white-space: nowrap;
+    position: relative;
+    color: var(--color-header3);
+    margin: 0;
+    transition: color $trs1;
+    text-align: left;
   }
   &__line {
     position: absolute;
@@ -230,15 +354,18 @@
   }
   &__link {
     text-decoration: none;
-    color: var(--color-btn-accent);
+    color: var(--color-navb-1);
     transition: color $trs1;
     display: block;
+    &[data-touch], &[data-hover] {
+      color: var(--color-navb-2);
+    }
+    &[data-focus] {
+      color: var(--color-navb-3);
+    }
   }
   .dev-label {
     margin-top: 60px;
-    a {
-      transition: none;
-    }
   }
   @include media-breakpoint-down(xxl) {
     &__link {
@@ -260,6 +387,11 @@
     }
     &__list {
       margin-bottom: 40px;
+    }
+    &__copy {
+      left: auto;
+      bottom: 120px;
+      right: $container-padding-x;
     }
   }
   @include media-breakpoint-between(xl, xxl) {

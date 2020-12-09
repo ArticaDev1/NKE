@@ -5,19 +5,30 @@ header.header(data-scroll-lock-fill-gap)
         include logo
       .header__right 
         a(href="tel:79101668150").header__phone.h6 +7 (910) 166-81-50
-        button(aria-label='change theme').theme-toggle-btn
+        button(aria-label='change theme' data-theme-toggle).theme-toggle-btn
         button(aria-label='nav button').nav-toggle
-          span
-          span
-          span
+          .nav-toggle__burger
+            span
+              span
+            span
+              span
+            span
+              span
+          .nav-toggle__close
+            span
+            span
 
   nav.nav
     .nav__bg
     .nav__container(data-scroll-lock-fill-gap)
       //
       .nav__head
-        button.theme-description.h6(aria-label='theme toggle') Темная тема
+        button.nav__theme.h6(aria-label='change theme' data-theme-toggle) Темная тема
         span.nav__line
+      //copy
+      .nav__copy(data-scroll-lock-fill-gap)
+        .nav__copy-wrap
+          span © Все права защищены. 2020    
       //
       .nav__content(data-scroll-lock-scrollable)
         .nav__block.container

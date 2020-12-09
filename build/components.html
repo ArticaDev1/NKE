@@ -191,8 +191,11 @@
                 </g>
               </svg></a>
             <div class="header__right"> <a class="header__phone h6" href="tel:79101668150">+7 910 166-81-50</a>
-              <button class="theme-toggle-btn" aria-label="change theme"></button>
-              <button class="nav-toggle" aria-label="nav button"><span></span><span></span><span></span></button>
+              <button class="theme-toggle-btn" aria-label="change theme" data-theme-toggle></button>
+              <button class="nav-toggle" aria-label="nav button">
+                <div class="nav-toggle__burger"><span><span></span></span><span><span></span></span><span><span></span></span></div>
+                <div class="nav-toggle__close"><span></span><span></span></div>
+              </button>
             </div>
           </div>
         </div>
@@ -201,7 +204,11 @@
           <div class="nav__container" data-scroll-lock-fill-gap>
             <!---->
             <div class="nav__head">
-              <button class="theme-description h6" aria-label="theme toggle">Темная тема</button><span class="nav__line"></span>
+              <button class="nav__theme h6" aria-label="change theme" data-theme-toggle>Темная тема</button><span class="nav__line"></span>
+            </div>
+            <!--copy-->
+            <div class="nav__copy" data-scroll-lock-fill-gap>
+              <div class="nav__copy-wrap"><span>© Все права защищены. 2020 </span></div>
             </div>
             <!---->
             <div class="nav__content" data-scroll-lock-scrollable>
