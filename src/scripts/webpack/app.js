@@ -163,6 +163,7 @@ function onExitEvents() {
           split = href.split('/')[0];
       if((split=='.' || split=='') && !dev) {
         event.preventDefault();
+        Nav.close();
         Preloader.show(()=>{
           localStorage.setItem('preloader', 'true');
           document.location.href = href;

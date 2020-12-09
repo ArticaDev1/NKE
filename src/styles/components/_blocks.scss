@@ -24,7 +24,7 @@
   &__info {
     flex: 0 0 auto;
     background: var(--color-bg-accent);
-    transition: background-color $trs1;
+    transition: background-color $trs3;
   }
   &-item {
     padding-top: 50px;
@@ -40,6 +40,7 @@
     flex-direction: column;
     justify-content: center;
     color: var(--color-text-dark);
+    transition: color $trs3;
     &__content {
       position: relative;
       z-index: 2;
@@ -53,7 +54,7 @@
       height: 100%;
       width: calc(100% + #{$xxl-field});
       background-color: var(--color-bg-light);
-      transition: background-color $trs1;
+      transition: background-color $trs3;
       pointer-events: none;
     }
   }

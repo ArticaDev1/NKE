@@ -13,9 +13,10 @@
 }
 .section {
   padding: 120px 0;
-  transition: background-color $trs1;
+  transition: background-color $trs3, color $trs3;
   &_light {
     background-color: var(--color-bg-light);
+    color: var(--color-text-dark);
   }
 }
 

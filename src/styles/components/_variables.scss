@@ -25,6 +25,8 @@ $xxl-field-negative: calc((-100vw + #{map-get($container-max-widths, xxl) - $con
 $xl-field: calc((100vw - #{map-get($container-max-widths, xl) - $container-padding-x * 2})/2);
 $xl-field-negative: calc((-100vw + #{map-get($container-max-widths, xl) - $container-padding-x * 2})/2);
 
-$trs1: .25s ease-in-out;
-$trs2: .5s ease-in-out;
-$trs3: 1s ease-in-out;
+$trs1: 100ms ease-in-out;
+$trs2: 200ms ease-in-out;
+$trs3: 300ms ease-in-out;
+$trs4: 400ms ease-in-out;
+$trs5: 500ms ease-in-out;
