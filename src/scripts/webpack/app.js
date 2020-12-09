@@ -10,6 +10,7 @@ document.addEventListener('lazybeforeunveil', function(e){
 import {gsap} from "gsap";
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import Inputmask from "inputmask";
+const validate = require("validate.js");
 
 const brakepoints = {
   sm: 576,
@@ -43,7 +44,9 @@ window.onload = function(){
   Nav.init();
   Preloader.init();
   Header.init();
+  Validation.init();
   onExitEvents();
+  inputs();
 }
 
 const TouchHoverEvents = {
@@ -295,5 +298,204 @@ const Nav = {
           nw = this.$container.querySelector('.nav__block').getBoundingClientRect().width;
       this.$container.style.width = `${nw+w2}px`;
     } 
+  }
+}
+
+function inputs() {
+  let $inputs = document.querySelectorAll('input, textarea');
+  $inputs.forEach(($input)=>{
+
+    $input.addEventListener('focus', ()=>{
+      $input.parentNode.classList.add('focused');
+    })
+
+    $input.addEventListener('blur', ()=>{
+      let value = $input.value;
+      if(validate.single(value, {presence: {allowEmpty: false}})!==undefined) {
+        $input.value = '';
+        $input.parentNode.classList.remove('focused');
+      }
+    })
+
+  })
+  
+}
+
+
+const Validation = {
+  init: function() {
+    this.namspaces = {
+      name: 'name',
+      phone: 'phone',
+      email: 'email',
+      message: 'message'
+    }
+    this.constraints = {
+      name: {
+        presence: {
+          allowEmpty: false,
+          message: '^Введите ваше имя'
+        },
+        format: {
+          pattern: /[A-zА-яЁё ]+/,
+          message: '^Введите корректное имя'
+        },
+        length: {
+          minimum: 2,
+          tooShort: "^Имя слишком короткое (минимум %{count} символа)",
+          maximum: 20,
+          tooLong: "^Имя слишком длинное (максимум %{count} символов)"
+        }
+      },
+      phone: {
+        presence: {
+          allowEmpty: false,
+          message: '^Введите ваш номер телефона'
+        },
+        format: {
+          pattern: /^\+7 \d{3}\ \d{3}\-\d{4}$/,
+          message: '^Введите корректный номер телефона'
+        }
+      },
+      email: {
+        presence: {
+          allowEmpty: false,
+          message: '^Введите ваш email'
+        },
+        email: {
+          message: '^Неправильный формат email-адреса' 
+        }
+      },
+      message: {
+        presence: {
+          allowEmpty: false,
+          message: '^Введите ваше сообщение'
+        },
+        length: {
+          minimum: 5,
+          tooShort: "^Сообщение слишком короткое (минимум %{count} символов)",
+          maximum: 100,
+          tooLong: "^Сообщение слишком длинное (максимум %{count} символов)"
+        }
+      }
+    };
+    this.mask = Inputmask({
+      mask: "+7 999 999-9999",
+      showMaskOnHover: false,
+      clearIncomplete: false
+    }).mask("[data-validate='phone']");
+
+    document.addEventListener('submit', (event)=>{
+      event.preventDefault();
+      let $form = event.target;
+      if($form.classList.contains('js-validation') && this.checkValid($form)) {
+        /* $form.classList.add('loading');
+        //submit
+        $($form).request('onSend', {
+          success: ()=>{
+            let modal = document.querySelector('#modal-succes');
+            Modal.open(modal);
+            setTimeout(()=>{
+              Modal.close(modal);
+            }, 3000)
+            this.reset($form);
+            $form.classList.remove('loading');
+          }
+        }) */
+      }
+    })
+    document.addEventListener('input', (event)=>{
+      let $input = event.target,
+          $form = $input.closest('form');
+      if($form.classList.contains('js-validation')) {
+        this.checkValid($form, $input);
+      }
+    })
+
+  },
+  checkValid: function($form, $input) {
+    let $inputs = $form.querySelectorAll('input, textarea'),
+        values = {},
+        constraints = {},
+        resault;
+
+    $inputs.forEach(($input)=>{
+      let name = $input.getAttribute('name');
+      for(let key in this.namspaces) {
+        if($input.getAttribute('data-validate')==this.namspaces[key]) {
+          values[name] = $input.value;
+          constraints[name] = this.constraints[key];
+        }
+      }
+    })
+
+    resault = validate(values, constraints);
+
+    if(resault!==undefined) {
+      if($input!==undefined) {
+        let flag = true,
+            name = $input.getAttribute('name');
+        for(let key in resault) {
+          if(name==key) {
+            flag=false;
+          }
+        }
+        if(flag && $input.parentNode.classList.contains('error')) {
+          $input.parentNode.classList.remove('error');
+          let $msg = $input.parentNode.querySelector('.input__message');
+          gsap.to($msg, {autoAlpha:0, duration:0.3, ease:'power2.inOut', onComplete:function() {
+            $msg.remove();
+          }})
+        }
+      } 
+      else {
+        $inputs.forEach(($input)=>{
+          let name = $input.getAttribute('name');
+          for(let key in resault) {
+            if(name==key) {
+              if(!$input.parentNode.classList.contains('error')) {
+                $input.parentNode.classList.add('error');
+                $input.parentNode.insertAdjacentHTML('beforeend', `<span class="input__message">${resault[key][0]}</span>`);
+                let $msg = $input.parentNode.querySelector('.input__message');
+                gsap.to($msg, {autoAlpha:1, duration:0.3, ease:'power2.inOut'})
+              } else {
+                $input.parentNode.querySelector('.input__message').textContent = `${resault[key][0]}`;
+              }
+            }
+          }
+        })
+      }
+      return false;
+    } else {
+      $inputs.forEach(($input)=>{
+        $input.parentNode.classList.remove('error');
+        let $msg = $input.parentNode.querySelector('.input__message');
+        if($msg) {
+          gsap.to($msg, {autoAlpha:0, duration:0.3, ease:'power2.inOut'}).eventCallback('onComplete', ()=>{
+            $msg.remove();
+          })
+        }
+      })
+      return true;
+    }
+  },
+  reset: function($form) {
+    let $inputs = $form.querySelectorAll('input, textarea');
+    $inputs.forEach(($input)=>{
+      $input.value = '';
+      let $parent = $input.parentNode;
+      if($parent.classList.contains('focused')) {
+        $parent.classList.remove('focused');
+      }
+      if($parent.classList.contains('error')) {
+        $parent.classList.remove('error');
+        let $msg = $input.parentNode.querySelector('.input__message');
+        if($msg) {
+          gsap.to($msg, {autoAlpha:0, duration:0.3, ease:'power2.inOut', onComplete:function() {
+            $msg.remove();
+          }})
+        }
+      }
+    })
   }
 }

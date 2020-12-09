@@ -24,26 +24,29 @@
   &__info {
     flex: 0 0 auto;
     background: var(--color-bg-accent);
-    transition: background-color $trs3;
+    transition: background-color $trs2;
   }
   &-item {
     padding-top: 50px;
-    padding-bottom: 50px;
+    padding-bottom: 80px;
     &__head {
       margin: 0 0 5px 0;
     }
   }
   &-more {
     padding-left: 55px;
+    padding-top: 62px;
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     color: var(--color-text-dark);
-    transition: color $trs3;
+    transition: color $trs2;
     &__content {
       position: relative;
       z-index: 2;
+    }
+    p {
+      margin-bottom: 10px;
     }
     &:before {
       content: '';
@@ -54,7 +57,7 @@
       height: 100%;
       width: calc(100% + #{$xxl-field});
       background-color: var(--color-bg-light);
-      transition: background-color $trs3;
+      transition: background-color $trs2;
       pointer-events: none;
     }
   }
@@ -64,11 +67,12 @@
     }
     &-item {
       padding-top: 40px;
-      padding-bottom: 40px;
+      padding-bottom: 50px;
       padding-right: 40px;
     }
     &-more {
       padding-left: 40px;
+      padding-top: 52px;
       &:before {
         width: calc(100% + #{$xl-field});
       }
@@ -78,6 +82,9 @@
         padding-top: 30px;
         padding-bottom: 35px;
       }
+      &-more {
+        padding-top: 42px;
+      }
       &__screen {
         padding: 130px 0 50px 0;
       }
@@ -85,3 +92,15 @@
   }
 }
 
+.form-section {
+  &__head {
+    align-items: flex-start;
+    margin-bottom: 80px;
+  }
+  @include media-breakpoint-up(xl) {
+    &__title {
+      transform: translateY(-8px);
+      margin: 0;
+    }
+  }
+}

@@ -1,3 +1,14 @@
-section.section.section_light
+section.section.section_light.form-section
   .container
-    h1 dsds
+    .form-section__head.row
+      h2.h1.section__title.form-section__title.col-xl-6 Свяжитесь с нами!
+      p.col-xxl-4.col-xl-5 Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями и способом бурения.
+    form.form(method='post').js-validation
+      .row
+        .form__item.col-xl-4
+          label.input
+            span.input__title Имя
+            input(type="text" name="names" data-validate='name').input__element
+        .form__item.col-xl-12
+          button.test test
+        

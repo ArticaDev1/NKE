@@ -8,7 +8,7 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   min-width: 320px;
-  transition: color $trs3, background-color $trs3;
+  transition: color $trs2, background-color $trs2;
 }
 * {
   box-sizing: border-box;
@@ -29,6 +29,7 @@ button, input, textarea {
   appearance: none;
   padding: 0;
   border-radius: 0;
+  color: inherit;
 }
 a, button, label {
   user-select: none;

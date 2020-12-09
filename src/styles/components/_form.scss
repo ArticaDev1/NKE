@@ -1,0 +1,106 @@
+.input {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 24px 0 27px 0;
+  pointer-events: none;
+  &__title {
+    display: block;
+    position: absolute;
+    pointer-events: none;
+    font-size: 1rem;
+    line-height: 20px;
+    left: 10px;
+    top: 36px;
+    transition: transform $trs2, font-size $trs2, color $trs2;
+    color: var(--color-input-ph);
+    z-index: 2;
+  }
+  &__element {
+    position: relative;
+    line-height: 24px;
+    padding: 10px;
+    display: block;
+    width: 100%;
+    height: 45px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 1rem;
+    border-radius: 3px 3px 0 0;
+    border-bottom: 1px solid var(--color-input-border);
+    transition: background-color $trs2;
+    pointer-events: all;
+    cursor: pointer;
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover, 
+    &:-webkit-autofill:focus {
+      -webkit-text-fill-color: var(--color-text-dark);
+      box-shadow: 0 0 0px 1000px transparent inset;
+      transition: background-color 5000s;
+    }
+  }
+  &::before, &::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    bottom: 26px;
+    left: 0;
+    opacity: 0;
+    transition: transform $trs2, opacity $trs2;
+    transform: translateX(-20%);
+  }
+  &::before {
+    z-index: 2;
+    background-color: var(--color-input-border2);
+  }
+  &::after {
+    z-index: 3;
+    background-color: var(--color-input-border3);
+  }
+  &__message {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    line-height: 20px;
+    font-size: 0.875rem;
+    color: var(--color-input-border3);
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &.focused {
+    .input__element {
+      background-color: var(--color-input-bg2);
+      cursor: auto;
+    }
+    .input__title {
+      transform: translate(-10px, -36px);
+      font-size: 0.875rem;
+    }
+    &::before {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  &.error {
+    .input__element {
+      background-color: var(--color-input-bg3);
+    }
+    &::after {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}
+
+.test {
+  background: #000;
+  color: #fff;
+  margin-top: 40px;
+  padding: 10px;
+  border-radius: 4px;
+}
