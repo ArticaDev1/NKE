@@ -46,7 +46,6 @@
       }
       let theme = localStorage.getItem('theme'),
           hours = +new Date().getHours();
-      console.log((!theme && hours>8 && hours<20))
       if((!theme && hours>8 && hours<20) || theme=='light') {
         theme_dark.setAttribute('disabled', '');
         theme_state = true;
@@ -55,7 +54,7 @@
       }
     </script>
   </head>
-  <body>
+  <body style="overflow:hidden;">
     <!--PRELOADER START-->
     <style>
       body {
@@ -67,11 +66,21 @@
       height: 100%;
       background-color: #fff; }
       .preloader__container {
-      background: var(--color-bg-gradient);
+      background: var(--color-bg-accent);
       width: 100%;
       height: 100%;
       position: relative;
       opacity: 0; }
+      .preloader__container::before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      top: 0;
+      left: 0;
+      background: var(--color-gradient);}
       .preloader__icon {
       position: absolute;
       left: 50%;
@@ -81,7 +90,7 @@
       height: 12vw;
       margin: auto; }
       .preloader__back {
-      color: var(--color-preloader); }
+      color: var(--color-light); }
       @media (max-width: 1279.98px) {
       .preloader__icon {
       width: 18vw;
@@ -207,23 +216,23 @@
               <button class="nav__theme h6" aria-label="change theme" data-theme-toggle>Темная тема</button><span class="nav__line"></span>
             </div>
             <!--copy-->
-            <div class="nav__copy" data-scroll-lock-fill-gap>
-              <div class="nav__copy-wrap"><span>© Все права защищены. 2020 </span></div>
+            <div class="nav__copy">
+              <div class="nav__copy-wrap"><span>© Все права защищены. 2021</span></div>
             </div>
             <!---->
             <div class="nav__content" data-scroll-lock-scrollable>
-              <div class="nav__block container">
+              <div class="nav__block">
                 <ul class="nav__list">
-                  <li class="nav__item"> <a class="nav__link h4" href="#">Производство </a></li>
-                  <li class="nav__item"><a class="nav__link h4" href="#">Аренда</a></li>
-                  <li class="nav__item"><a class="nav__link h4" href="#">Сервис</a></li>
-                  <li class="nav__item"><a class="nav__link h4" href="#">Ремонт</a></li>
-                  <li class="nav__item"><a class="nav__link h4" href="#">Обучение</a></li>
-                  <li class="nav__item"><a class="nav__link h4" href="#">Проектирование</a></li>
-                  <li class="nav__item"><a class="nav__link h4" href="#">Контакты</a></li>
+                  <li class="nav__item"> <a class="nav__link h4" href="./proizvodstvo.html">Производство </a></li>
+                  <li class="nav__item"><a class="nav__link h4" href="./arenda.html">Аренда</a></li>
+                  <li class="nav__item"><a class="nav__link h4" href="./servis.html">Сервис</a></li>
+                  <li class="nav__item"><a class="nav__link h4" href="./remont.html">Ремонт</a></li>
+                  <li class="nav__item"><a class="nav__link h4" href="./education.html">Обучение</a></li>
+                  <li class="nav__item"><a class="nav__link h4" href="./engineering.html">Проектирование</a></li>
+                  <li class="nav__item"><a class="nav__link h4" href="./contacts.html">Контакты</a></li>
                 </ul>
                 <div class="nav__bottom">
-                  <div class="socials">
+                  <div class="socials nav__socials">
                     <ul class="socials__list">
                       <li class="socials__item"><a class="socials__link" href="#">
                            youtube
@@ -243,7 +252,7 @@
                     </ul>
                   </div>
                   <!---->
-                  <div class="dev-label"><span>Разработка сайта — </span><a href="https://artica.art/" rel="noopener" target="_blank">artica.art
+                  <div class="dev-label nav__dev-label"><span>Разработка сайта — </span><a href="https://artica.art/" rel="noopener" target="_blank">artica.art
                       <svg viewBox="0 0 74 15" fill="currentColor">
                         <path d="M42.4491 5.10225L40.8535 5.1062L40.8776 14.8511L42.4733 14.8471L42.4491 5.10225Z"></path>
                         <path d="M50.682 5.03761C49.369 5.04084 48.1351 5.55516 47.2089 6.48638C46.2828 7.41714 45.7741 8.65304 45.7774 9.96661C45.7806 11.2797 46.2954 12.5131 47.2261 13.4397C48.1569 14.3659 49.3933 14.8741 50.7064 14.8708C52.1361 14.8673 53.4864 14.2431 54.4207 13.1563L53.2439 12.46C52.568 13.1482 51.6669 13.5284 50.703 13.5308C48.7308 13.5357 47.1227 11.935 47.1178 9.96329C47.113 7.99107 48.7131 6.38296 50.6853 6.37809C51.6492 6.37569 52.5522 6.75101 53.2315 7.43634L54.4048 6.73414C53.4652 5.65157 52.1118 5.03407 50.682 5.03761Z"></path>
@@ -259,68 +268,183 @@
         </nav>
       </header>
       <main class="main">
-        <section class="section home">
-          <div class="home__screen">
-            <div class="image image_cover home__bg"><img class="lazyload" src="./img/home.jpg" alt="image"></div>
-            <div class="container">
+        <section class="section home-screen home">
+          <div class="home__content" data-mobile-window>
+            <div class="home-screen__background">
+              <div class="image image_cover"><img class="lazyload" src="./img/home.jpg" alt="image"></div>
+            </div>
+            <div class="container home-screen__content">
               <h1 class="home__title">Технология безостановочного<br> подключения и ремонт<br> трубопроводов</h1>
-              <p class="h6">Единственный преемник корпорации T.D. Williamson в России</p>
+              <p class="h6 home__text">Единственный преемник корпорации T.D. Williamson в России</p>
             </div>
           </div>
           <div class="home__info">
             <div class="container">
               <div class="row">
-                <div class="home-item col-xxl-2 col-xl-3">
-                  <div class="home-item__head"><span class="h2">30 </span><span class="h6">единиц техники</span></div>
-                  <p>Единственный преемник корпорации T.D. Williamson в России</p>
-                </div>
-                <div class="home-item col-xxl-2 offset-xxl-1 col-xl-3">
-                  <div class="home-item__head"><span class="h2">№ 1 </span><span class="h6">В России</span></div>
-                  <p>Единственный преемник корпорации T.D. Williamson в России</p>
-                </div>
-                <div class="home-item col-xxl-2 offset-xxl-1 col-xl-3">
-                  <div class="home-item__head"><span class="h2">15 </span><span class="h6">лет на рынке</span></div>
-                  <p>Единственный преемник корпорации T.D. Williamson в России</p>
-                </div>
-                <div class="home-more col-xl-3 offset-xxl-1">
+                <div class="home-more col-lg-3 offset-xxl-1 order-sm-4">
                   <div class="home-more__content">
-                    <p>Единственный преемник корпорации T.D. Williamson в России</p><a class="button-text button-text_accent" href="javascript:void(0);"><span>Оставить заявку</span>
+                    <p>Единственный преемник корпорации T.D. Williamson в России</p><a class="button-text button-text_accent" href="#modal-form" data-modal="open"><span>Оставить заявку</span>
                       <svg class="icon">
                         <use xlink:href="./img/icons/icons.svg#arrow"></use>
                       </svg></a>
+                  </div>
+                </div>
+                <div class="home-item col-xxl-2 col-lg-3 col-sm-4">
+                  <div class="home-item__head"><span class="home-item__index">30 <br></span><span class="h6">единиц техники</span></div>
+                  <p>Единственный преемник корпорации T.D. Williamson в России</p>
+                </div>
+                <div class="home-item col-xxl-2 offset-xxl-1 col-lg-3 col-sm-4">
+                  <div class="home-item__head"><span class="home-item__index">№ 1 <br></span><span class="h6">В России</span></div>
+                  <p>Единственный преемник корпорации T.D. Williamson в России</p>
+                </div>
+                <div class="home-item col-xxl-2 offset-xxl-1 col-lg-3 col-sm-4">
+                  <div class="home-item__head"><span class="home-item__index">15 <br></span><span class="h6">лет на рынке</span></div>
+                  <p>Единственный преемник корпорации T.D. Williamson в России</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section video-slider">
+          <div class="video-slider__background">
+            <video class="video-slider__video video-slider__video_reversed" style="display:none">
+              <source src="./videos/analizer_reverse.mp4" type="video/mp4">
+            </video>
+            <video class="video-slider__video video-slider__video_normal">
+              <source src="./videos/analizer.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-slider__content">
+            <div class="container">
+              <div class="video-slider__nav">
+                <button class="video-slider__control video-slider__prev">назад</button>
+                <button class="video-slider__control video-slider__next">вперед</button>
+              </div>
+              <div class="row">
+                <div class="video-slider__timeline col-xxl-3 col-xl-4">
+                  <div class="video-slider__timeline-line">
+                    <div class="video-slider__timeline-item"><span>01</span></div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
-        <!--section.section.section_light.dir-block-->
-        <section class="section section_light form-section">
+        <!--section.section.bg-accent.bg-gradient
+        .container
+          h2.h1 Направления деятельности
+        -->
+        <section class="section form-section bg-light">
           <div class="container">
-            <div class="form-section__head row">
-              <h2 class="h1 section__title form-section__title col-xl-6">Свяжитесь с нами!</h2>
-              <p class="col-xxl-4 col-xl-5">Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями и способом бурения.</p>
-            </div>
-            <form class="form js-validation" method="post">
-              <div class="row">
-                <div class="form__item col-xl-4">
-                  <label class="input"><span class="input__title">Имя</span>
-                    <input class="input__element" type="text" name="names" data-validate="name">
-                  </label>
+            <div class="row">
+              <div class="col-10 col-sm-12">
+                <div class="form-section__head row">
+                  <h2 class="h1 color-accent form-section__title col-xl-6">Свяжитесь с нами!</h2>
+                  <p class="col-xxl-4 col-xl-5">Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями и способом бурения.</p>
                 </div>
-                <div class="form__item col-xl-12">
-                  <button class="test">test</button>
+                <form class="form" method="post">
+                  <div class="row">
+                    <div class="form__item col-xl-4">
+                      <label class="input"><span class="input__title">Имя</span>
+                        <input class="input__element" type="text" name="name" data-validate="name" data-required><span class="input__line"></span>
+                      </label>
+                    </div>
+                    <div class="form__item col-xl-4">
+                      <label class="input"><span class="input__title">Телефон</span>
+                        <input class="input__element" type="text" name="phone" data-validate="phone" data-required><span class="input__line"></span>
+                      </label>
+                    </div>
+                    <div class="form__item col-xl-4">
+                      <label class="input"><span class="input__title">Комментарий</span>
+                        <input class="input__element" type="text" name="message" data-validate="message"><span class="input__line"></span>
+                      </label>
+                    </div>
+                    <div class="form__submit col-xxl-2 col-xl-3 offset-xl-6">
+                      <button class="button-text button-text_accent"><span class="button-text__loader"></span><span>Отправить</span>
+                        <svg class="icon">
+                          <use xlink:href="./img/icons/icons.svg#arrow"></use>
+                        </svg>
+                      </button>
+                      <p class="form__message">Нажимая кнопку «Отправить» вы соглашаетесь с условиями <a href="privacy.html" target="_blank">Политики конфиденциальности</a></p>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="section contacts">
+          <div class="contacts__content">
+            <div class="container">
+              <div class="row">
+                <div class="col-10 col-sm-12">
+                  <div class="contacts__head row">
+                    <h2 class="h1 contacts__title col-xl-3">Контакты</h2>
+                    <div class="contacts__block col-xl-4">
+                      <div class="contacts__item">
+                        <svg class="icon">
+                          <use xlink:href="./img/icons/icons.svg#point"></use>
+                        </svg>Московская обл, Ленинский р-н, Совхоз имени Ленина с/п, совхоза им. Ленина п, Восточная промзона тер, влд 3 стр 1, 501
+                      </div>
+                    </div>
+                    <div class="contacts__block col-xl-4 offset-xl-1"><a class="contacts__item" href="tel:74951316972">
+                        <svg class="icon">
+                          <use xlink:href="./img/icons/icons.svg#phone"></use>
+                        </svg>+7 495 131-69-72</a><a class="contacts__item" href="mailto:office@nceurasia.com">
+                        <svg class="icon">
+                          <use xlink:href="./img/icons/icons.svg#envelope"></use>
+                        </svg>office@nceurasia.com </a></div>
+                  </div>
                 </div>
               </div>
-            </form>
+            </div>
+          </div>
+          <div class="contacts__map">
+            <svg class="contacts__loader" viewBox="0 0 120 30" fill="currentColor">
+              <circle cx="15" cy="15" r="15">
+                <animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s" values="15;9;15" calcMode="linear" repeatCount="indefinite"></animate>
+                <animate attributeName="fill-opacity" from="1" to="1" begin="0s" dur="0.8s" values="1;.5;1" calcMode="linear" repeatCount="indefinite"></animate>
+              </circle>
+              <circle cx="60" cy="15" r="9" fill-opacity="0.3">
+                <animate attributeName="r" from="9" to="9" begin="0s" dur="0.8s" values="9;15;9" calcMode="linear" repeatCount="indefinite"></animate>
+                <animate attributeName="fill-opacity" from="0.5" to="0.5" begin="0s" dur="0.8s" values=".5;1;.5" calcMode="linear" repeatCount="indefinite"></animate>
+              </circle>
+              <circle cx="105" cy="15" r="15">
+                <animate attributeName="r" from="15" to="15" begin="0s" dur="0.8s" values="15;9;15" calcMode="linear" repeatCount="indefinite"></animate>
+                <animate attributeName="fill-opacity" from="1" to="1" begin="0s" dur="0.8s" values="1;.5;1" calcMode="linear" repeatCount="indefinite"></animate>
+              </circle>
+            </svg>
+            <iframe class="contacts__map-element lazyload" data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d577325.347800229!2d36.82511018697867!3d55.58152438542563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54afc73d4b0c9%3A0x3d44d6cc5757cf4c!2z0JzQvtGB0LrQstCwLCDQoNC-0YHRgdC40Y8!5e0!3m2!1sru!2sua!4v1605699083673!5m2!1sru!2sua"></iframe>
           </div>
         </section>
       </main>
       <footer class="footer">
-        <div class="container">
-          <div class="footer__container"><a class="logo footer__logo" href="./index.html"><img src="./img/logos/logo2.svg" alt="logo"></a><span>Состав узлов буровой установки, их конструкция.</span></div>
+        <div class="footer__container container"><a class="logo footer__logo" href="./index.html"><img src="./img/logos/logo2.svg" alt="logo"></a>
+          <div class="footer__item"><a href="./privacy.html">Политика конфеденциальности</a></div><span class="footer__copyright">© Все права защищены. 2020 </span>
         </div>
       </footer>
+    </div>
+    <!--modals-->
+    <div class="modal modal-succes" id="succes">
+      <div class="modal__wrapper" data-scroll-lock-scrollable>
+        <div class="modal-block bg-gradient">
+          <button class="modal-close modal-block__close" data-modal="close" aria-label="close"></button>
+          <div class="modal-succes__container">
+            <h2 class="h1 modal-succes__title modal__title">Спасибо!</h2>
+            <svg class="modal-succes__icon" width="264" height="257" viewBox="0 0 264 257" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M0 257H263.993V0H0V257ZM25.7947 21.3383H131.747H237.977C240.022 21.3383 241.048 21.3383 241.563 21.8514C242.082 22.368 242.082 23.4045 242.082 25.4844V231.958C242.082 236.104 242.082 236.159 237.977 236.159H25.7947C23.8787 236.159 22.9218 236.159 22.4439 235.681C21.9671 235.203 21.9671 234.25 21.9671 232.345V25.0421C21.9671 23.2105 21.9671 22.2847 22.43 21.8167C22.9031 21.3383 23.8599 21.3383 25.7947 21.3383ZM93.4732 78.3877V74.6839C95.6921 74.0758 96.6906 74.6286 97.3563 76.5634C97.8206 78.0333 108.144 103.67 118.809 130.156C129.803 157.458 141.16 185.662 142.455 189.225C143.176 191.216 144.009 191.658 145.895 191.658C162.093 191.603 178.235 191.603 194.433 191.658C196.541 191.658 197.318 191.105 197.318 188.839C197.262 148.76 197.262 108.682 197.318 68.603C197.318 66.2812 196.485 65.7837 194.378 65.839C187.443 65.9495 180.509 66.0048 173.575 65.839C171.135 65.7837 170.469 66.5576 170.469 68.99C170.552 83.42 170.542 97.881 170.531 112.327C170.528 117.139 170.524 121.951 170.524 126.758C170.524 144.559 170.524 162.304 170.469 180.104C170.469 180.861 170.131 181.617 169.794 182.374C169.638 182.723 169.482 183.072 169.359 183.421C169.073 183.171 168.752 182.939 168.432 182.707C167.759 182.22 167.09 181.736 166.752 181.099C164.922 177.506 121.875 71.8646 120.821 68.7136C120.155 66.6682 119.212 65.8942 117.16 65.8942C100.906 65.9495 84.5976 65.9495 68.3442 65.8942C66.3472 65.839 65.5706 66.3365 65.5706 68.4924C65.626 108.682 65.626 148.815 65.5706 189.004C65.5706 191.105 66.3472 191.658 68.3442 191.658C69.3755 191.65 70.4069 191.641 71.4382 191.632C77.6183 191.578 83.7983 191.524 89.9784 191.713C92.863 191.768 93.5287 190.884 93.5287 188.12C93.4455 160.675 93.4559 133.261 93.4662 105.831C93.4697 96.6856 93.4732 87.5384 93.4732 78.3877Z" fill="#5760CC"></path>
+            </svg>
+            <p>Ваша заявка успешно отправлена. На указанный номер скоро позвонит наш менеджер</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal modal-form" id="modal-form">
+      <div class="modal__wrapper" data-scroll-lock-scrollable>
+        <div class="modal-block">
+          <button class="modal-close modal-block__close" data-modal="close" aria-label="close"></button>
+        </div>
+      </div>
     </div>
     <!--preview only-->
     <link rel="stylesheet" href="./styles/helper.css">
@@ -335,8 +459,16 @@
         </svg></a>
       <div class="helper__container">
         <!--section-->
+        <div class="helper__section"><span class="helper__section-title">Всплывающие окна:</span>
+          <div class="helper__section-content"><a class="helper__section-button" href="#modal-form" data-modal="open">Всплывающая форма</a><a class="helper__section-button" href="#succes" data-modal="open">Успешная отправка формы</a></div>
+        </div>
+        <!--section-->
         <div class="helper__section"><span class="helper__section-title">Страницы:</span>
-          <div class="helper__section-content"><a class="helper__section-button" href="./index.html">Главная</a><a class="helper__section-button" href="./components.html">Components</a><a class="helper__section-button" href="./grid.html">Grid</a></div>
+          <div class="helper__section-content"><a class="helper__section-button" href="./index.html">Главная</a><a class="helper__section-button" href="./proizvodstvo.html">Производство </a><a class="helper__section-button" href="./arenda.html">Аренда</a><a class="helper__section-button" href="./servis.html">Сервис</a><a class="helper__section-button" href="./remont.html">Ремонт</a><a class="helper__section-button" href="./education.html">Обучение</a><a class="helper__section-button" href="./engineering.html">Проектирование</a><a class="helper__section-button" href="./contacts.html">Контакты</a></div>
+        </div>
+        <!--section-->
+        <div class="helper__section"><span class="helper__section-title">Прочее:</span>
+          <div class="helper__section-content"><a class="helper__section-button" href="./privacy.html">Политика конфиденциальности</a></div>
         </div>
       </div>
     </div>

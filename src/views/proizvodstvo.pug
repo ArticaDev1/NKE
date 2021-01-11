@@ -1,0 +1,22 @@
+extends layout/layout
+block variables
+  -var title = sitename+' - Производство'
+  -var n1 = true;
+block content
+  section.section.home-screen
+
+    .home-screen__background
+      .image.image_cover
+        img(src="./img/photo-1539186607619-df476afe6ff1 1.jpg", alt="image").lazyload
+
+    .home-screen__container
+      .container.home-screen__nav
+        a(href=arenda).button-text.home-screen__next
+          span Аренда
+          svg.icon
+            use(xlink:href='./img/icons/icons.svg#arrow')
+      .container.home-screen__content
+        .row
+          h1.home-screen__title.col-xxl-8.col-xl-9 Производстводим продукцию для врезки под давлением и перекрытия полости магистральных и распределительных трубопроводов
+          p.h6.home-screen__text.col-xl-3.col-lg-4.col-md-5 В рамках существующей программы импортозамещения 
+  include blocks/form-section

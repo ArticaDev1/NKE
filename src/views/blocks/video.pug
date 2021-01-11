@@ -1,0 +1,18 @@
+section.section.video-slider
+  .video-slider__background
+    video.video-slider__video.video-slider__video_reversed(style='display:none')
+      source(src='./videos/analizer_reverse.mp4' type='video/mp4')
+    video.video-slider__video.video-slider__video_normal
+      source(src='./videos/analizer.mp4' type='video/mp4')
+
+
+  .video-slider__content
+    .container
+      .video-slider__nav
+        button.video-slider__control.video-slider__prev назад
+        button.video-slider__control.video-slider__next вперед
+      .row
+        .video-slider__timeline.col-xxl-3.col-xl-4
+          .video-slider__timeline-line  
+            .video-slider__timeline-item
+              span 01

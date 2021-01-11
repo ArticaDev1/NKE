@@ -1,0 +1,38 @@
+.bg-light, .bg-gray {
+  transition: background-color $trs2, color $trs2;
+}
+.bg-light {
+  background-color: var(--color-bg-light);
+  color: var(--color-text-dark);
+}
+.bg-gray {
+  background-color: var(--color-bg-gray);
+}
+.bg-gradient, .bg-skew-gradient {
+  position: relative;
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+  }
+}
+.bg-gradient {
+  &::before {
+    background: var(--color-gradient);
+  }
+}
+.bg-gradient-skew {
+  &::before {
+    background: var(--color-gradient-skew);
+  }
+}
+
+.color-accent {
+  transition: color $trs2;
+  color: var(--color-text-accent);
+}

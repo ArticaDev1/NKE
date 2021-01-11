@@ -2,39 +2,47 @@ extends layout/layout
 block variables
   -var title = sitename+' - Главная'
 block content
-  section.section.home
-    .home__screen
-      .image.image_cover.home__bg
-        img(src="./img/home.jpg", alt="image").lazyload
-      .container 
+  section.section.home-screen.home
+    .home__content(data-mobile-window)
+      .home-screen__background
+        .image.image_cover
+          img(src="./img/home.jpg", alt="image").lazyload
+      .container.home-screen__content
         h1.home__title Технология безостановочного<br> подключения и ремонт<br> трубопроводов
-        p.h6 Единственный преемник корпорации T.D. Williamson в России
+        p.h6.home__text Единственный преемник корпорации T.D. Williamson в России
     .home__info
       .container
         .row  
-          .home-item.col-xxl-2.col-xl-3
-            .home-item__head
-              span.h2 30 
-              span.h6 единиц техники
-            p Единственный преемник корпорации T.D. Williamson в России
-          .home-item.col-xxl-2.offset-xxl-1.col-xl-3
-            .home-item__head
-              span.h2 №1 
-              span.h6 В России
-            p Единственный преемник корпорации T.D. Williamson в России
-          .home-item.col-xxl-2.offset-xxl-1.col-xl-3
-            .home-item__head
-              span.h2 15 
-              span.h6 лет на рынке
-            p Единственный преемник корпорации T.D. Williamson в России
-          .home-more.col-xl-3.offset-xxl-1
+          .home-more.col-lg-3.offset-xxl-1.order-sm-4
             .home-more__content
               p Единственный преемник корпорации T.D. Williamson в России
-              a(href="javascript:void(0);").button-text.button-text_accent
+              a(href='#modal-form' data-modal='open').button-text.button-text_accent
                 span Оставить заявку
                 svg.icon
                   use(xlink:href='./img/icons/icons.svg#arrow')
+          .home-item.col-xxl-2.col-lg-3.col-sm-4
+            .home-item__head
+              span.home-item__index 30 <br>
+              span.h6 единиц техники
+            p Единственный преемник корпорации T.D. Williamson в России
+          .home-item.col-xxl-2.offset-xxl-1.col-lg-3.col-sm-4
+            .home-item__head
+              span.home-item__index №1 <br>
+              span.h6 В России
+            p Единственный преемник корпорации T.D. Williamson в России
+          .home-item.col-xxl-2.offset-xxl-1.col-lg-3.col-sm-4
+            .home-item__head
+              span.home-item__index 15 <br>
+              span.h6 лет на рынке
+            p Единственный преемник корпорации T.D. Williamson в России
 
-  //section.section.section_light.dir-block
+  include blocks/video
+
+  //section.section.bg-accent.bg-gradient
+    .container
+      h2.h1 Направления деятельности
   include blocks/form-section
+  include blocks/contacts
+
+
   

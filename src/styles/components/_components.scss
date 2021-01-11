@@ -104,9 +104,10 @@
     font-size: 0;
     display: inline-block;
     transform: translateY(5%);
+    border: none !important;
   }
   svg {
-    height: 15px;
-    width: 73px;
+    height: 20px;
+    width: 100px;
   }
 }

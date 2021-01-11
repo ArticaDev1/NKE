@@ -3,29 +3,53 @@
   flex-direction: column;
   min-height: 100vh;
   overflow: hidden;
+  position: relative;
+  z-index: 2;
+  background-color: var(--color-bg-accent);
+  transition: background-color $trs2;
 }
 .main {
   flex: 1 1 100%;
+  position: relative;
+  z-index: 1;
 }
 .container {
   position: relative;
   z-index: 2;
 }
+
 .section {
-  padding: 120px 0;
-  transition: background-color $trs2, color $trs2;
-  &_light {
-    background-color: var(--color-bg-light);
-    color: var(--color-text-dark);
-    .section__title {
-      color: var(--color-accent-light);
-      transition: color $trs2;
+  &:not(.home-screen) {
+    padding: 120px 0;
+    &:first-child {
+      padding-top: 200px;
+    }
+  }
+  @include media-breakpoint-down(xxl) {
+    &:not(.home-screen) {
+      padding: 100px 0;
+      &:first-child {
+        padding-top: 160px;
+      }
+    }
+  }
+  @include media-breakpoint-down(lg) {
+    &:not(.home-screen) {
+      padding: 80px 0;
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    &:not(.home-screen) {
+      padding: 80px 0;
+      &:first-child {
+        padding-top: 120px;
+      }
     }
   }
 }
 
 
-@include media-breakpoint-down(md) {
+@include media-breakpoint-down(sm) {
   .container {
     padding-right: $mobile-container-padding-x;
     padding-left: $mobile-container-padding-x;

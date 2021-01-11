@@ -4,11 +4,11 @@ html {
 body {
   font-family: 'Montserrat', sans-serif;
   color: var(--color-text-light);
-  background-color: var(--color-bg-accent);
   font-size: 1rem;
   line-height: 1.5;
   min-width: 320px;
-  transition: color $trs2, background-color $trs2;
+  transition: color $trs2;
+  position: relative;
 }
 * {
   box-sizing: border-box;

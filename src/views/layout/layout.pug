@@ -48,20 +48,22 @@ html(lang='ru')
       }
       let theme = localStorage.getItem('theme'),
           hours = +new Date().getHours();
-      console.log((!theme && hours>8 && hours<20))
       if((!theme && hours>8 && hours<20) || theme=='light') {
         theme_dark.setAttribute('disabled', '');
         theme_state = true;
       } else {
         theme_state = false;
       }
-  body
+  body(style='overflow:hidden;')
     include ../blocks/preloader
-    .wrapper
+    .wrapper(class=body_geadient?'bg-gradient':'')
       include ../blocks/header
       main.main
         block content
       include ../blocks/footer
+    
+    //modals
+    include ../blocks/modals
 
 
     //preview only

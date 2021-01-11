@@ -25,8 +25,13 @@ $xxl-field-negative: calc((-100vw + #{map-get($container-max-widths, xxl) - $con
 $xl-field: calc((100vw - #{map-get($container-max-widths, xl) - $container-padding-x * 2})/2);
 $xl-field-negative: calc((-100vw + #{map-get($container-max-widths, xl) - $container-padding-x * 2})/2);
 
+$lg-field: calc((100vw - #{map-get($container-max-widths, lg) - $container-padding-x * 2})/2);
+$lg-field-negative: calc((-100vw + #{map-get($container-max-widths, lg) - $container-padding-x * 2})/2);
+
 $trs1: 100ms ease-in-out;
 $trs2: 200ms ease-in-out;
 $trs3: 300ms ease-in-out;
 $trs4: 400ms ease-in-out;
 $trs5: 500ms ease-in-out;
+
+$trs10: 1s ease-in-out;

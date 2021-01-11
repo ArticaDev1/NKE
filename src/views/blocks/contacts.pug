@@ -1,0 +1,34 @@
+section.section.contacts
+  .contacts__content
+    .container
+      .row
+        .col-10.col-sm-12
+          .contacts__head.row
+            h2.h1.contacts__title.col-xl-3 Контакты
+            .contacts__block.col-xl-4
+              .contacts__item 
+                svg.icon
+                  use(xlink:href='./img/icons/icons.svg#point')
+                | Московская обл, Ленинский р-н, Совхоз имени Ленина с/п, совхоза им. Ленина п, Восточная промзона тер, влд 3 стр 1, 501
+            .contacts__block.col-xl-4.offset-xl-1
+              a(href="tel:74951316972").contacts__item
+                svg.icon
+                  use(xlink:href='./img/icons/icons.svg#phone')
+                | +7 (495) 131-69-72
+              a(href="mailto:office@nceurasia.com").contacts__item
+                svg.icon
+                  use(xlink:href='./img/icons/icons.svg#envelope')
+                | office@nceurasia.com    
+ 
+  .contacts__map
+    svg(viewBox='0 0 120 30' fill='currentColor').contacts__loader
+      circle(cx='15' cy='15' r='15')
+        animate(attributeName='r' from='15' to='15' begin='0s' dur='0.8s' values='15;9;15' calcMode='linear' repeatCount='indefinite')
+        animate(attributeName='fill-opacity' from='1' to='1' begin='0s' dur='0.8s' values='1;.5;1' calcMode='linear' repeatCount='indefinite')
+      circle(cx='60' cy='15' r='9' fill-opacity='0.3')
+        animate(attributeName='r' from='9' to='9' begin='0s' dur='0.8s' values='9;15;9' calcMode='linear' repeatCount='indefinite')
+        animate(attributeName='fill-opacity' from='0.5' to='0.5' begin='0s' dur='0.8s' values='.5;1;.5' calcMode='linear' repeatCount='indefinite')
+      circle(cx='105' cy='15' r='15')
+        animate(attributeName='r' from='15' to='15' begin='0s' dur='0.8s' values='15;9;15' calcMode='linear' repeatCount='indefinite')
+        animate(attributeName='fill-opacity' from='1' to='1' begin='0s' dur='0.8s' values='1;.5;1' calcMode='linear' repeatCount='indefinite')
+    iframe.contacts__map-element(data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d577325.347800229!2d36.82511018697867!3d55.58152438542563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54afc73d4b0c9%3A0x3d44d6cc5757cf4c!2z0JzQvtGB0LrQstCwLCDQoNC-0YHRgdC40Y8!5e0!3m2!1sru!2sua!4v1605699083673!5m2!1sru!2sua").lazyload

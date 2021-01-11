@@ -1,0 +1,22 @@
+extends layout/layout
+block variables
+  -var title = sitename+' - Проектирование'
+  -var n7 = true;
+block content
+  section.section.home-screen
+
+    .home-screen__background
+      .image.image_cover
+        img(src="./img/dddd.jpg", alt="image").lazyload
+
+    .home-screen__container
+      .container.home-screen__nav
+        a(href=education).button-text.home-screen__prev
+          svg.icon
+            use(xlink:href='./img/icons/icons.svg#arrow')
+          span Обучение
+      .container.home-screen__content
+        .row
+          h1.home-screen__title.col-xxl-6.col-xl-7.col-lg-8 Осуществлям деятельность по импортозамещению технологий и предоставлению профильных улуг 
+          p.h6.home-screen__text.col-xl-3.col-lg-4.col-md-5 В рамках программы научно-исследовательских и опытно-конструкторских работ (НИОКР)
+  include blocks/form-section

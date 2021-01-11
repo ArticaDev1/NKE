@@ -1,44 +1,49 @@
 :root {
-  //btns
-  --color-btn-accent: #252EB6;
-
   //toggle theme
   --color-tt-dot: #fff;
   --color-tt-bg: #C4C4C4;
   --pos-tt: 0;
 
+  //colors
+  --color-light: #fff;
+  --color-muted: #C4C4C4;
+
+  //buttons
+  --color-btn-accent: #252EB6;
+  --color-btn-accent-hover: #3562FF;
+  --color-btn-accent-click: #575757;
+  --color-btn-light: #fff;
+  --color-btn-light-hover: #C4C4C4;
+  --color-btn-light-click: #949494;
+  --color-btn-dark: #393939;
+  --color-btn-dark-hover: #575757;
+  --color-btn-dark-click: #252EB6;
+
   //text
   --color-text-light: #fff;
+  --color-text-accent: #252EB6;
   --color-text-dark: #393939;
+  --color-text-gray: #575757;
+  --color-text-muted: #949494;
 
   //bg
   --color-bg-accent: #434BC3;
   --color-bg-light: #F2F3F7;
-  --color-bg-gradient: linear-gradient(96.13deg, #474FC5 0.21%, #5C66CE 52.13%, #474FC5 98.52%);
+  --color-bg-gray: #6F7A8E;
   --color-bg-images: #99A2B5;
-  --color-bg-nav: rgba(0, 0, 0, 0.3);
-
-  //header
-  --color-header: #fff;
-  --color-header2: #575757;
-  --color-header3: #393939;
-  --color-fixed-header-bg: #F2F3F7;
-  --color-navb-1: #252EB6;
-  --color-navb-2: #575757;
-  --color-navb-3: #393939;
-
-  //preloader
-  --color-preloader: #fff;
+  --color-bg-transparent: rgba(0, 0, 0, 0.4);
+  --color-bg-overlay: rgba(0, 0, 0, 0.2);
+  --color-bg-images: rgba(255, 255, 255, 0.2);
+  --color-gradient: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 45%, rgba(255, 255, 255, 0.1) 55%, rgba(255, 255, 255, 0) 100%);
+  --color-gradient-skew: linear-gradient(45deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 45%, rgba(255, 255, 255, 0.1) 55%, rgba(255, 255, 255, 0) 100%);
 
   //inputs
   --color-input-border: #949494;
   --color-input-border2: #252EB6;
   --color-input-border3: #CE4242;
+  --color-input-border4: #575757;
   --color-input-bg2: #E9EBF4;
   --color-input-bg3: rgba(206, 66, 66, 0.1);
-  --color-input-ph: #949494;
+  --color-input-bg4: rgba(87, 87, 87, 0.1);
 
-  //test
-  --color-accent-light: #252EB6;
-  
 }

@@ -1,37 +1,45 @@
 :root {
-  //btns
-  --color-btn-accent: #fff;
-
   //toggle theme
   --color-tt-dot: #fff;
   --color-tt-bg: #434BC3;
   --pos-tt: 24px;
 
+  //buttons
+  --color-btn-accent: #fff;
+  --color-btn-accent-hover: #C4C4C4;
+  --color-btn-accent-click: #949494;
+  --color-btn-light: #fff;
+  --color-btn-light-hover: #C4C4C4;
+  --color-btn-light-click: #949494;
+  --color-btn-dark: #fff;
+  --color-btn-dark-hover: #C4C4C4;
+  --color-btn-dark-click: #949494;
+
   //text
   --color-text-light: #fff;
+  --color-text-accent: #fff;
   --color-text-dark: #fff;
+  --color-text-gray: #C4C4C4;
+  --color-text-muted: #949494;
 
   //bg
   --color-bg-accent: #575757;
   --color-bg-light: #393939;
-  --color-bg-gradient: linear-gradient(96.13deg, #484848 0.21%, #575757 52.13%, #484848 98.52%);;
+  --color-bg-gray: #6F7A8E;
   --color-bg-images: #949494;
-  --color-bg-nav: rgba(0, 0, 0, 0.3);
+  --color-bg-transparent: rgba(0, 0, 0, 0.4);
+  --color-bg-overlay: rgba(0, 0, 0, 0.3);
+  --color-bg-images: rgba(255, 255, 255, 0.2);
+  --color-gradient: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 45%, rgba(255, 255, 255, 0.1) 55%, rgba(255, 255, 255, 0) 100%);
+  --color-gradient-skew: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 45%, rgba(255, 255, 255, 0) 55%, rgba(255, 255, 255, 0.1) 100%);
 
-  //header
-  --color-header: #fff;
-  --color-header2: #fff;
-  --color-header3: #fff;
-  --color-fixed-header-bg: #393939;
-  --color-navb-1: #fff;
-  --color-navb-2: #C4C4C4;
-  --color-navb-3: #949494;
-  
-
-  //preloader
-  --color-preloader: #fff;
-
-  //test
-  --color-accent-light: #fff;
+  //inputs
+  --color-input-border: #949494;
+  --color-input-border2: #252EB6;
+  --color-input-border3: #CE4242;
+  --color-input-border4: #575757;
+  --color-input-bg2:rgba(114, 122, 249, 0.2);;
+  --color-input-bg3: rgba(206, 66, 66, 0.1);
+  --color-input-bg4: rgba(87, 87, 87, 0.1);
   
 }

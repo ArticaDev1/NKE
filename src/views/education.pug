@@ -1,0 +1,27 @@
+extends layout/layout
+block variables
+  -var title = sitename+' - Обучение'
+  -var n5 = true;
+block content
+  section.section.home-screen
+
+    .home-screen__background
+      .image.image_cover
+        img(src="./img/lslslsl.jpg", alt="image").lazyload
+
+    .home-screen__container
+      .container.home-screen__nav
+        a(href=remont).button-text.home-screen__prev
+          svg.icon
+            use(xlink:href='./img/icons/icons.svg#arrow')
+          span Ремонт
+        a(href=engineering).button-text.home-screen__next
+          span Проектирование
+          svg.icon
+            use(xlink:href='./img/icons/icons.svg#arrow')
+      .container.home-screen__content
+        .row
+          h1.home-screen__title.col-xxl-6.col-xl-7.col-lg-8 В рамках импортозамещения и стандартизации иностранной технологии Т.D.Williamson в правовом поле Российской Федерации, в части действующей программы 
+          p.h6.home-screen__text.col-xl-3.col-lg-4.col-md-5 «Технико-экономическая стандартизация иностранных инновационных технологий. Импортозамещение технологии врезок под давлением и перекрытия полости трубопроводов под давлением до 10 МПа с применением оборудования Т.D.Williamson»
+      
+  include blocks/form-section

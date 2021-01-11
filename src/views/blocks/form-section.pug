@@ -1,14 +1,33 @@
-section.section.section_light.form-section
+section.section.form-section.bg-light
   .container
-    .form-section__head.row
-      h2.h1.section__title.form-section__title.col-xl-6 Свяжитесь с нами!
-      p.col-xxl-4.col-xl-5 Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями и способом бурения.
-    form.form(method='post').js-validation
-      .row
-        .form__item.col-xl-4
-          label.input
-            span.input__title Имя
-            input(type="text" name="names" data-validate='name').input__element
-        .form__item.col-xl-12
-          button.test test
-        
+    .row
+      .col-10.col-sm-12
+        .form-section__head.row
+          h2.h1.color-accent.form-section__title.col-xl-6 Свяжитесь с нами!
+          p.col-xxl-4.col-xl-5 Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями и способом бурения.
+        form.form(method='post')
+          .row
+            .form__item.col-xl-4
+              label.input
+                span.input__title Имя
+                input(type="text" name="name" data-validate='name' data-required).input__element
+                span.input__line
+            .form__item.col-xl-4
+              label.input
+                span.input__title Телефон
+                input(type="text" name="phone" data-validate='phone' data-required).input__element
+                span.input__line
+            .form__item.col-xl-4
+              label.input
+                span.input__title Комментарий
+                input(type="text" name="message" data-validate='message').input__element
+                span.input__line
+            .form__submit.col-xxl-2.col-xl-3.offset-xl-6
+              button.button-text.button-text_accent
+                span.button-text__loader
+                span Отправить
+                svg.icon
+                  use(xlink:href='./img/icons/icons.svg#arrow')
+              p.form__message Нажимая кнопку “Отправить” вы соглашаетесь с условиями 
+                a(href="privacy.html" target='_blank') Политики конфиденциальности
+            
