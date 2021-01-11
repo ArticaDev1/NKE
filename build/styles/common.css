@@ -3177,7 +3177,6 @@ table {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  overflow: hidden;
   position: relative;
   z-index: 2;
   background-color: var(--color-bg-accent);
@@ -3186,7 +3185,8 @@ table {
 .main {
   flex: 1 1 100%;
   position: relative;
-  z-index: 1; }
+  z-index: 1;
+  overflow: hidden; }
 
 .container {
   position: relative;
