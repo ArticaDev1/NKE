@@ -4217,13 +4217,14 @@ table:not([class]) {
 /*========== Header ==========*/
 .header {
   flex-shrink: 0;
-  position: fixed;
+  position: absolute;
   z-index: 2;
   width: 100%;
   z-index: 1000;
   transition: background-color 200ms ease-in-out, color 200ms ease-in-out, transform 500ms ease-in-out;
   color: var(--color-text-light);
-  background-color: transparent; }
+  background-color: transparent;
+  box-sizing: content-box; }
   .header_nav-opened .theme-toggle-btn::after,
   .header_nav-opened .nav-toggle__burger > span span,
   .header_nav-opened .nav-toggle__close span:before, .header_fixed .theme-toggle-btn::after,
@@ -4237,6 +4238,8 @@ table:not([class]) {
   .header_nav-opened .nav-toggle[data-focus] .nav-toggle__close span:before {
     background-color: var(--color-btn-dark-click); }
   .header_fixed {
+    position: fixed;
+    box-sizing: border-box;
     background-color: var(--color-bg-light);
     color: var(--color-text-dark); }
     .header_fixed:not(.header_nav-opened).header_hidden {
