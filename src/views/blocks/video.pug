@@ -1,8 +1,8 @@
 section.section.video-slider
   .video-slider__background
-    video.video-slider__video.video-slider__video_reversed(style='display:none')
+    video.video-slider__video.video-slider__video_reversed(style='display:none' preload="metadata" playsinline)
       source(src='./videos/analizer_reverse.mp4' type='video/mp4')
-    video.video-slider__video.video-slider__video_normal
+    video.video-slider__video.video-slider__video_normal(preload="metadata" playsinline)
       source(src='./videos/analizer.mp4' type='video/mp4')
 
 

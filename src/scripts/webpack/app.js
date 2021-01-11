@@ -58,13 +58,11 @@ window.onload = function () {
   }
   //video
   let $video = document.querySelector('.video-slider');
-  if ($video) {
-    new Video($video, {
-      points: [2, 4, 5.9, 9.08, 11.5]
-    }).init();
-  }
+  if ($video) new Video($video, {points: [2, 4, 5.9, 9.08, 11.5]}).init();
   //
-  
+  if(mobile()) {
+    $body.classList.add('mobile');
+  }
 }
 
 const TouchHoverEvents = {
@@ -814,13 +812,13 @@ class Video {
 
 
     this.resize();
-    this.checkHeader();
+    if(!mobile()) this.checkHeader();
     this.checkButtons(this.index);
     this.$parent.addEventListener('wheel', ()=>{
       if(Scroll.inScroll) Scroll.stop();
     });
     window.addEventListener('resize', this.resize);
-    window.addEventListener('scroll', this.checkHeader);
+    if(!mobile()) window.addEventListener('scroll', this.checkHeader);
   }
 
   slide(direction) {
