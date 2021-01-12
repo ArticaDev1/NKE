@@ -340,6 +340,15 @@ const Nav = {
       else this.close();
     })
 
+    this.swipes = SwipeListener($body);
+    $body.addEventListener('swipe', (event) => {
+      if(!event.detail.target.closest('.video-slider')) {
+        let dir = event.detail.directions;
+        if (dir.left && !this.state) this.open();
+        else if (dir.right && this.state) this.close();
+      }
+    });
+
     this.setSize();
     window.addEventListener('resize', () => {
       this.setSize()
@@ -588,6 +597,7 @@ const mobileWindow = {
     this.h = $el.getBoundingClientRect().height;
     $el.remove();
     //
+    let $window = document.querySelector('[data-mobile-window]');
     if ($window) {
       $window.style.height = `${this.h}px`;
       if ($window.closest('.home')) {
