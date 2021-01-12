@@ -4,10 +4,19 @@
   z-index: 2;
   width: 100%;
   z-index: 1000;
+  transition: color $trs2, transform $trs5;
   color: var(--color-text-light);
-  background-color: transparent;
-  //transition: background-color $trs2, color $trs2, transform $trs5;
-  /* &_nav-opened, &_fixed {
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: background-color $trs2;
+    pointer-events: none;
+    z-index: 0;
+  }
+  &_nav-opened, &_fixed {
     .theme-toggle-btn::after,
     .nav-toggle__burger > span span,
     .nav-toggle__close span:before {
@@ -30,11 +39,12 @@
         }
       }
     }
-  } */
+  }
   &_fixed {
-    //background-color: var(--color-bg-light);
-    background-color: red;
-    /* color: var(--color-text-dark);
+    color: var(--color-text-dark);
+    &::before {
+      background-color: var(--color-bg-light);
+    }
     &:not(.header_nav-opened) {
       &.header_hidden {
         transform: translateY(-100%);
@@ -47,6 +57,8 @@
       }
     }
     .header__logo {
+      position: relative;
+      z-index: 2;
       .logo-words {
         opacity: 0;
       }
@@ -56,17 +68,19 @@
     }
     .header__phone {
       color: var(--color-btn-dark);
+      position: relative;
+      z-index: 2;
       &[data-touch], &[data-hover] {
         color: var(--color-btn-dark-hover);
       }
       &[data-focus] {
         color: var(--color-btn-dark-click);
       }
-    } */
+    }
   }
 
   & > .container {
-    position: initial;
+    position: static;
   }
   &__container {
     height: 100px;
@@ -135,7 +149,7 @@
   height: 50px;
   margin: -7px;
   padding: 14px 7px;
-  z-index: 3;
+  z-index: 4;
   position: relative;
   &__burger {
     width: 100%;
@@ -240,7 +254,7 @@
   height: 22px;
   margin-right: 43px;
   position: relative;
-  z-index: 3;
+  z-index: 4;
   &::before {
     content: '';
     position: absolute;

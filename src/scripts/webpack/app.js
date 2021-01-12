@@ -780,7 +780,7 @@ class Video {
     this.resize();
     if(!mobile()) this.checkHeader();
     this.checkButtons(this.index);
-    this.$parent.addEventListener('wheel', ()=>{
+    window.addEventListener('wheel', ()=>{
       if(Scroll.inScroll) Scroll.stop();
     });
     window.addEventListener('resize', this.resize);
