@@ -298,7 +298,7 @@ const Header = {
       this.sticky = true;
       $header.classList.add('header_sticky');
       document.querySelector('.consol').insertAdjacentHTML('beforeend', '<span>sticky</span>');
-    } else if(this.sticky) {
+    } else if(y>=0 && this.sticky) {
       this.sticky = false;
       $header.classList.remove('header_sticky');
       document.querySelector('.consol').insertAdjacentHTML('beforeend', '<span>unsticky</span>');
