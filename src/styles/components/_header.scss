@@ -7,10 +7,7 @@
   transition: background-color $trs2, color $trs2, transform $trs5;
   color: var(--color-text-light);
   background-color: transparent;
-  &_sticky {
-    background-color: transparent !important;
-  }
-  &_nav-opened, &_fixed {
+  /* &_nav-opened, &_fixed {
     .theme-toggle-btn::after,
     .nav-toggle__burger > span span,
     .nav-toggle__close span:before {
@@ -33,11 +30,11 @@
         }
       }
     }
-  }
+  } */
   &_fixed {
     //background-color: var(--color-bg-light);
     background-color: red;
-    color: var(--color-text-dark);
+    /* color: var(--color-text-dark);
     &:not(.header_nav-opened) {
       &.header_hidden {
         transform: translateY(-100%);
@@ -65,11 +62,11 @@
       &[data-focus] {
         color: var(--color-btn-dark-click);
       }
-    }
+    } */
   }
 
   & > .container {
-    position: static;
+    position: initial;
   }
   &__container {
     height: 100px;
