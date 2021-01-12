@@ -3224,6 +3224,17 @@ table {
     padding-left: calc(16px / 2);
     padding-right: calc(16px / 2); } }
 
+.consol {
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  z-index: 1000;
+  overflow: auto;
+  background-color: rgba(255, 255, 255, 0.502);
+  color: #000;
+  height: 100px; }
+
 /*========== Modals ==========*/
 .modal {
   position: fixed;

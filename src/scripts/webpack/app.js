@@ -281,6 +281,7 @@ const Header = {
     this.check();
   },
   check: function () {
+    document.querySelector('.consol').textContent = window.pageYOffset;
     let y = window.pageYOffset;
 
     if (y > 0 && !this.fixed) {
@@ -835,10 +836,10 @@ class Video {
     this.$content.classList.add('disabled');
     if (direction == 'next') {
       play(vn, vr, pn, pr);
-      changeIndex(Speed, 15);
+      changeIndex(time, 15);
     } else if (direction == 'prev') {
       play(vr, vn, pr, pn)
-      changeIndex(Speed, -15);
+      changeIndex(time, -15);
     }
     this.index = index;
   }
