@@ -288,9 +288,11 @@ const Header = {
       $header.style.top = '0px';
       this.fixed = true;
       $header.classList.add('header_fixed');
-    } else if (y<=0 && this.fixed) {
-      this.fixed = false;
-      $header.classList.remove('header_fixed');
+    } else if (y<=0) {
+      if(this.fixed) {
+        this.fixed = false;
+        $header.classList.remove('header_fixed');
+      }
       $header.style.top = `${Math.abs(y)}px`;
     }
   }
