@@ -6,6 +6,19 @@
   z-index: 1000;
   transition: color $trs2, transform $trs5;
   color: var(--color-text-light);
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-bg-light);
+    transition: background-color $trs2, opacity $trs2;
+    pointer-events: none;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
   &_nav-opened, &_fixed {
     .theme-toggle-btn::after,
     .nav-toggle__burger > span span,
@@ -32,6 +45,9 @@
   }
   &_fixed {
     color: var(--color-text-dark);
+    &:before {
+      opacity: 1;
+    }
     &:not(.header_nav-opened) {
       &.header_hidden {
         transform: translateY(-100%);
@@ -42,9 +58,6 @@
       .header__logo {
         height: 40px;
       }
-    }
-    .header__bg {
-      opacity: 1;
     }
     .header__logo {
       .logo-words {
@@ -66,19 +79,6 @@
       }
     }
   }
-
-  &__bg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: var(--color-bg-light);
-    transition: background-color $trs2, opacity $trs2;
-    pointer-events: none;
-    z-index: 0;
-    top: 0;
-    left: 0;
-    opacity: 0;
-  }
   & > .container {
     position: static;
   }
@@ -88,13 +88,13 @@
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid var(--color-text-light);
-    transition: height $trs3, border-color $trs3;
+    transition: height $trs2, border-color $trs2;
   }
   &__phone {
     display: inline-block;
     margin: 0 52px 0 0;
     text-decoration: none;
-    transition: opacity $trs3, color $trs1;
+    transition: opacity $trs2, color $trs1;
     color: var(--color-btn-light);
     &[data-touch], &[data-hover] {
       color: var(--color-btn-light-hover);
@@ -113,10 +113,10 @@
   }
   &__logo {
     height: 46px;
-    transition: height $trs3;
+    transition: height $trs2;
     color: inherit;
     .logo-words {
-      transition: opacity $trs3;
+      transition: opacity $trs2;
     }
   }
   @include media-breakpoint-down(xxl) {

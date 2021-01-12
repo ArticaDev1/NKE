@@ -281,9 +281,7 @@ const Header = {
     this.check();
   },
   check: function () {
-    let y = window.pageYOffset,
-        $bg = $header.querySelector('.header_bg');
-
+    let y = window.pageYOffset;
     if (y > 0 && !this.fixed) {
       this.fixed = true;
       $header.classList.add('header_fixed');
@@ -590,7 +588,6 @@ const mobileWindow = {
     this.h = $el.getBoundingClientRect().height;
     $el.remove();
     //
-    let $window = document.querySelector('[data-mobile-window]');
     if ($window) {
       $window.style.height = `${this.h}px`;
       if ($window.closest('.home')) {
