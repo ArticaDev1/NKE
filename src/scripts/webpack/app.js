@@ -287,7 +287,7 @@ const Header = {
     if (y > 0 && !this.fixed) {
       this.fixed = true;
       $header.classList.add('header_fixed');
-    } else if (y == 0 && this.fixed) {
+    } else if (y<=0 && this.fixed) {
       this.fixed = false;
       $header.classList.remove('header_fixed');
     }
