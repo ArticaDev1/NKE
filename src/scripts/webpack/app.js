@@ -300,6 +300,7 @@ const Nav = {
     this.$container = document.querySelector('.nav__container');
     this.$toggle = document.querySelector('.nav-toggle');
     this.$theme = document.querySelector('.nav__theme');
+    this.$theme_t = document.querySelector('.header .theme-toggle-btn');
     this.$items = document.querySelectorAll('.nav__item');
     this.$dev = document.querySelector('.nav .dev-label');
     this.$copy = document.querySelector('.nav__copy');
@@ -307,8 +308,14 @@ const Nav = {
     this.state = false;
     this.opened = false;
 
-    this.animation = gsap.timeline({
-        paused: true,
+    if(window.innerWidth<brakepoints.sm) {
+      let w1 = this.$theme.getBoundingClientRect().width,
+          x1 = this.$theme_t.getBoundingClientRect().left,
+          val = x1 - w1 - 16;
+      this.swanim = gsap.timeline({paused:true}).to(this.$theme_t, {x:-val, duration:Speed*0.5, ease:'power2.inOut'})
+    }
+
+    this.animation = gsap.timeline({paused: true,
         onStart: () => {
           disablePageScroll();
           this.opened = true;
@@ -318,57 +325,12 @@ const Nav = {
           this.opened = false;
         }
       })
-      .set(this.$nav, {
-        autoAlpha: 1
-      })
-      //
-      .fromTo(this.$bg, {
-        autoAlpha: 0
-      }, {
-        autoAlpha: 1,
-        duration: Speed * 0.5,
-        ease: 'power2.out'
-      })
-      .fromTo(this.$container, {
-        xPercent: 100
-      }, {
-        xPercent: 0,
-        duration: Speed * 0.5,
-        ease: 'power2.out'
-      }, `-=${Speed*0.5}`)
-      .fromTo([this.$theme, this.$dev, this.$copy], {
-        autoAlpha: 0,
-        x: 15
-      }, {
-        autoAlpha: 1,
-        x: 0,
-        duration: Speed * 0.35,
-        ease: 'power2.inOut'
-      }, `-=${Speed*0.35}`)
-      .fromTo(this.$items, {
-        autoAlpha: 0,
-        x: 15
-      }, {
-        autoAlpha: 1,
-        x: 0,
-        duration: Speed * 0.35,
-        ease: 'power2.inOut',
-        stagger: {
-          amount: Speed * 0.15
-        }
-      }, `-=${Speed*0.5}`)
-      .fromTo(this.$socials, {
-        autoAlpha: 0,
-        x: 15
-      }, {
-        autoAlpha: 1,
-        x: 0,
-        duration: Speed * 0.35,
-        ease: 'power2.inOut',
-        stagger: {
-          amount: Speed * 0.15
-        }
-      }, `-=${Speed*0.5}`)
+      .set(this.$nav, {autoAlpha: 1})
+      .fromTo(this.$bg, {autoAlpha: 0}, {autoAlpha: 1,duration: Speed * 0.5,ease: 'power2.out'})
+      .fromTo(this.$container, {xPercent: 100}, {xPercent: 0,duration: Speed * 0.5,ease: 'power2.out'}, `-=${Speed*0.5}`)
+      .fromTo([this.$theme, this.$dev, this.$copy], {autoAlpha: 0,x: 15}, {autoAlpha: 1,x: 0,duration: Speed * 0.35,ease: 'power2.inOut'}, `-=${Speed*0.35}`)
+      .fromTo(this.$items, {autoAlpha: 0,x: 15}, {autoAlpha: 1,x: 0,duration: Speed * 0.35,ease: 'power2.inOut',stagger: {amount: Speed * 0.15}}, `-=${Speed*0.5}`)
+      .fromTo(this.$socials, {autoAlpha: 0,x: 15}, {autoAlpha: 1,x: 0,duration: Speed * 0.35,ease: 'power2.inOut',stagger: {amount: Speed * 0.15}}, `-=${Speed*0.5}`)
 
     this.$bg.addEventListener('click', () => {
       if (this.state) this.close();
@@ -398,6 +360,7 @@ const Nav = {
     this.$toggle.classList.add('active');
     this.state = true;
     this.animation.play();
+    if(this.swanim) this.swanim.play();
   },
   close: function () {
     this.timeout = setTimeout(() => {
@@ -407,6 +370,7 @@ const Nav = {
     this.$toggle.classList.remove('active');
     this.state = false;
     this.animation.reverse();
+    if(this.swanim) this.swanim.reverse();
   }
 }
 

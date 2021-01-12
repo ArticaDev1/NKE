@@ -6,7 +6,7 @@
   z-index: 1000;
   transition: background-color $trs2, color $trs2, transform $trs5;
   color: var(--color-text-light);
-  background-color: red;
+  background-color: var(--color-bg-none);
   &_nav-opened, &_fixed {
     .theme-toggle-btn::after,
     .nav-toggle__burger > span span,
@@ -316,12 +316,12 @@
   }
   &__theme {
     line-height: 22px;
-    width: 130px;
     color: inherit;
     white-space: nowrap;
     position: relative;
     margin: 0;
     text-align: left;
+    padding-right: 30px;
   }
   &__line {
     position: absolute;
@@ -365,7 +365,7 @@
     -webkit-overflow-scrolling: touch;
   }
   &__block {
-    width: 370px;
+    width: 376px;
     min-height: 100%;
     padding: 200px 24px 80px 90px;
     margin: 0;
@@ -416,6 +416,9 @@
       height: 90px;
       padding-left: 60px;
     }
+    &__theme {
+      padding-right: 20px;
+    }
     &__line {
       width: calc(335px - #{$container-padding-x});
     }
@@ -454,15 +457,14 @@
     &__head {
       height: 70px;
       width: 100%;
-      justify-content: flex-end;
-      padding: 0 140px 0 0;
+      padding: 0 $mobile-container-padding-x;
     }
     &__block {
       width: 100%;
       padding: 110px $mobile-container-padding-x 40px $mobile-container-padding-x;
     }
     &__theme {
-      width: auto;
+      padding-right: 16px;
     }
     &__line {
       width: calc(100% - #{$mobile-container-padding-x} * 2);
