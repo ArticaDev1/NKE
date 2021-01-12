@@ -4250,7 +4250,7 @@ table:not([class]) {
   .header_nav-opened .nav-toggle[data-focus] .nav-toggle__close span:before {
     background-color: var(--color-btn-dark-click); }
   .header_fixed {
-    background-color: var(--color-bg-light);
+    background-color: red;
     color: var(--color-text-dark); }
     .header_fixed:not(.header_nav-opened).header_hidden {
       transform: translateY(-100%); }

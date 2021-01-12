@@ -35,7 +35,8 @@
     }
   }
   &_fixed {
-    background-color: var(--color-bg-light);
+    //background-color: var(--color-bg-light);
+    background-color: red;
     color: var(--color-text-dark);
     &:not(.header_nav-opened) {
       &.header_hidden {
