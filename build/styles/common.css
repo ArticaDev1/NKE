@@ -4234,7 +4234,7 @@ table:not([class]) {
   z-index: 1000;
   transition: background-color 200ms ease-in-out, color 200ms ease-in-out, transform 500ms ease-in-out;
   color: var(--color-text-light);
-  background-color: var(--color-bg-none); }
+  background-color: transparent; }
   .header_nav-opened .theme-toggle-btn::after,
   .header_nav-opened .nav-toggle__burger > span span,
   .header_nav-opened .nav-toggle__close span:before, .header_fixed .theme-toggle-btn::after,

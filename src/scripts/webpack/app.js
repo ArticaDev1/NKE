@@ -288,13 +288,22 @@ const Header = {
       $header.style.top = '0px';
       this.fixed = true;
       $header.classList.add('header_fixed');
-    } else if (y<=0) {
-      if(this.fixed) {
-        this.fixed = false;
-        $header.classList.remove('header_fixed');
-      }
-      $header.style.top = `${Math.abs(y)}px`;
+    } else if (y<=0 && this.fixed) {
+      this.fixed = false;
+      $header.classList.remove('header_fixed');
     }
+
+
+    if(y<0 && !this.sticky) {
+      this.sticky = true;
+      $header.classList.add('header_sticky');
+      document.querySelector('.consol').insertAdjacentHTML('beforeend', '<span>sticky</span>');
+    } else if(this.sticky) {
+      this.sticky = false;
+      $header.classList.remove('header_sticky');
+      document.querySelector('.consol').insertAdjacentHTML('beforeend', '<span>unsticky</span>');
+    }
+
   }
 }
 
