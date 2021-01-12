@@ -7,6 +7,9 @@
   transition: background-color $trs2, color $trs2, transform $trs5;
   color: var(--color-text-light);
   background-color: transparent;
+  &_sticky {
+    position: absolute;
+  }
   &_nav-opened, &_fixed {
     .theme-toggle-btn::after,
     .nav-toggle__burger > span span,
