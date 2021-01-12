@@ -281,7 +281,6 @@ const Header = {
     this.check();
   },
   check: function () {
-    document.querySelector('.consol').textContent = window.pageYOffset;
     let y = window.pageYOffset;
 
     if (y > 0 && !this.fixed) {
