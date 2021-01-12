@@ -4236,7 +4236,7 @@ table:not([class]) {
   color: var(--color-text-light);
   background-color: transparent; }
   .header_sticky {
-    position: absolute; }
+    background-color: transparent !important; }
   .header_nav-opened .theme-toggle-btn::after,
   .header_nav-opened .nav-toggle__burger > span span,
   .header_nav-opened .nav-toggle__close span:before, .header_fixed .theme-toggle-btn::after,

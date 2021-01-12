@@ -8,7 +8,7 @@
   color: var(--color-text-light);
   background-color: transparent;
   &_sticky {
-    position: absolute;
+    background-color: transparent !important;
   }
   &_nav-opened, &_fixed {
     .theme-toggle-btn::after,
