@@ -44,7 +44,7 @@
       }
     }
     .header__bg {
-      background-color: var(--color-bg-light);
+      opacity: 1;
     }
     .header__logo {
       .logo-words {
@@ -71,11 +71,13 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    transition: background-color $trs2;
+    background-color: var(--color-bg-light);
+    transition: background-color $trs2, opacity $trs2;
     pointer-events: none;
     z-index: 0;
     top: 0;
     left: 0;
+    opacity: 0;
   }
   & > .container {
     position: static;

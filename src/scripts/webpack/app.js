@@ -281,7 +281,8 @@ const Header = {
     this.check();
   },
   check: function () {
-    let y = window.pageYOffset;
+    let y = window.pageYOffset,
+        $bg = $header.querySelector('.header_bg');
 
     if (y > 0 && !this.fixed) {
       this.fixed = true;

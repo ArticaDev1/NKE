@@ -4255,7 +4255,7 @@ table:not([class]) {
     .header_fixed:not(.header_nav-opened) .header__logo {
       height: 40px; }
     .header_fixed .header__bg {
-      background-color: var(--color-bg-light); }
+      opacity: 1; }
     .header_fixed .header__logo .logo-words {
       opacity: 0; }
     .header_fixed .header__container {
@@ -4272,11 +4272,13 @@ table:not([class]) {
     position: absolute;
     width: 100%;
     height: 100%;
-    transition: background-color 200ms ease-in-out;
+    background-color: var(--color-bg-light);
+    transition: background-color 200ms ease-in-out, opacity 200ms ease-in-out;
     pointer-events: none;
     z-index: 0;
     top: 0;
-    left: 0; }
+    left: 0;
+    opacity: 0; }
   .header > .container {
     position: static; }
   .header__container {
