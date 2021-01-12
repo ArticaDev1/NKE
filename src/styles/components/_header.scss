@@ -4,9 +4,9 @@
   z-index: 2;
   width: 100%;
   z-index: 1000;
-  transition: background-color $trs2, color $trs2, transform $trs5;
   color: var(--color-text-light);
   background-color: transparent;
+  //transition: background-color $trs2, color $trs2, transform $trs5;
   /* &_nav-opened, &_fixed {
     .theme-toggle-btn::after,
     .nav-toggle__burger > span span,

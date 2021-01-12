@@ -4232,7 +4232,6 @@ table:not([class]) {
   z-index: 2;
   width: 100%;
   z-index: 1000;
-  transition: background-color 200ms ease-in-out, color 200ms ease-in-out, transform 500ms ease-in-out;
   color: var(--color-text-light);
   background-color: transparent;
   /* &_nav-opened, &_fixed {
