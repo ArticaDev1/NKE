@@ -25,6 +25,9 @@
       padding-top: 200px;
     }
   }
+  &__title {
+    margin-bottom: 60px;
+  }
   @include media-breakpoint-down(xxl) {
     &:not(.home-screen) {
       padding: 100px 0;
@@ -32,18 +35,28 @@
         padding-top: 160px;
       }
     }
+    &__title {
+      margin-bottom: 50px;
+    }
   }
   @include media-breakpoint-down(lg) {
     &:not(.home-screen) {
       padding: 80px 0;
     }
+    &__title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
   }
   @include media-breakpoint-down(sm) {
     &:not(.home-screen) {
-      padding: 80px 0;
+      padding: 60px 0;
       &:first-child {
         padding-top: 120px;
       }
+    }
+    &__title {
+      margin-bottom: 22px;
     }
   }
 }

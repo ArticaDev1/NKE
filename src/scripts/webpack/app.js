@@ -11,6 +11,8 @@ import {gsap} from "gsap";
 import {disablePageScroll, enablePageScroll} from 'scroll-lock';
 import Inputmask from "inputmask";
 import SwipeListener from 'swipe-listener';
+import autosize from 'autosize';
+import Rellax from 'rellax';
 const validate = require("validate.js");
 
 const brakepoints = {
@@ -39,6 +41,22 @@ function mobile() {
     return false;
   }
 }
+//scroll btn
+document.addEventListener('click', (event)=>{
+  let $btn = event.target!==document?event.target.closest('[data-scroll]'):null;
+  if($btn) {
+    let target = $btn.getAttribute('data-scroll'), y;
+    if(target=='bottom') {
+      let $parent = $btn.closest('.section');
+      y = $parent.getBoundingClientRect().top + $parent.getBoundingClientRect().height + window.pageYOffset;
+    } else {
+      let $target = document.querySelector(target);
+      if($target) y = $target.getBoundingClientRect().top + window.pageYOffset;
+    }
+
+    Scroll.scrollTop(y+1, Speed);
+  }
+});
 
 window.onload = function () {
   lazySizes.init();
@@ -49,9 +67,11 @@ window.onload = function () {
   Header.init();
   Modal.init();
   Scroll.init();
-  Validation.init();
   onExitEvents();
+  //form
+  Validation.init();
   inputs();
+  autosize(document.querySelectorAll('textarea.input__element'));
   //
   if (window.innerWidth < brakepoints.sm) {
     mobileWindow.init();
@@ -62,6 +82,8 @@ window.onload = function () {
   //
   if(mobile()) {
     $body.classList.add('mobile');
+  } else {
+    new Rellax('.rellax');
   }
 }
 
@@ -275,13 +297,16 @@ const Theme = {
 
 const Header = {
   init: function () {
+    this.scrollY = 0;
     window.addEventListener('scroll', () => {
       this.check();
     })
     this.check();
   },
   check: function () {
-    let y = window.pageYOffset;
+    let y = window.pageYOffset,
+        h = window.innerHeight/2;
+
     if (y > 0 && !this.fixed) {
       this.fixed = true;
       $header.classList.add('header_fixed');
@@ -290,6 +315,15 @@ const Header = {
       $header.classList.remove('header_fixed');
     }
 
+    if(this.scrollY<y && this.scrollY>h && !this.hidden && !Nav.opened) {
+      this.hidden = true;
+      $header.classList.add('header_hidden');
+    } else if(this.scrollY>y && this.hidden) {
+      this.hidden = false;
+      $header.classList.remove('header_hidden');
+    }  
+
+    this.scrollY = y;
   }
 }
 
@@ -340,9 +374,11 @@ const Nav = {
       else this.close();
     })
 
-    this.swipes = SwipeListener($body);
-    $body.addEventListener('swipe', (event) => {
-      if(!event.detail.target.closest('.video-slider')) {
+    this.swipes = SwipeListener(document);
+    document.addEventListener('swipe', (event) => {
+      let slider = event.detail.target.closest('.video-slider'),
+          modal = Modal.$active;
+      if(!slider && !modal) {
         let dir = event.detail.directions;
         if (dir.left && !this.state) this.open();
         else if (dir.right && this.state) this.close();
@@ -374,7 +410,7 @@ const Nav = {
   close: function () {
     this.timeout = setTimeout(() => {
       $header.classList.remove('header_nav-opened');
-    }, Math.max(0, (this.animation.time() - 0.25) * 1000));
+    }, Math.max(0, (this.animation.time() - 0.3) * 1000));
     this.$nav.classList.remove('nav_opened');
     this.$toggle.classList.remove('active');
     this.state = false;
@@ -558,6 +594,11 @@ const Validation = {
     let $inputs = $form.querySelectorAll('input, textarea');
     $inputs.forEach(($input) => {
       $input.value = '';
+      //textarea
+      if($input.tagName=='TEXTAREA') {
+        $input.style.height = '45px';
+      }
+
       let $parent = $input.parentNode;
       if ($parent.classList.contains('focused')) {
         $parent.classList.remove('focused');
@@ -573,7 +614,7 @@ const Validation = {
   },
   submitEvent: function ($form) {
     let $submit = $form.querySelector('button'),
-      $inputs = $form.querySelectorAll('input, textarea');
+        $inputs = $form.querySelectorAll('input, textarea');
     $inputs.forEach(($input) => {
       $input.parentNode.classList.add('loading');
     })
@@ -585,6 +626,10 @@ const Validation = {
       })
       $submit.classList.remove('loading');
       this.reset($form);
+      Modal.open(document.querySelector('#succes'));
+      setTimeout(()=>{
+        Modal.close();
+      }, 3000)
     }, 2000)
   }
 }
@@ -615,23 +660,8 @@ const Modal = {
     gsap.registerEffect({
       name: "modal",
       effect: ($modal, $content) => {
-        let anim = gsap.timeline({
-            paused: true
-          })
-          .fromTo($modal, {
-            autoAlpha: 0
-          }, {
-            autoAlpha: 1,
-            duration: Speed / 2,
-            ease: 'power2.inOut'
-          })
-          .fromTo($content, {
-            y: 20
-          }, {
-            y: 0,
-            duration: Speed,
-            ease: 'power2.out'
-          }, `-=${Speed/2}`)
+        let anim = gsap.timeline({paused: true}).fromTo($modal, {autoAlpha: 0}, {autoAlpha: 1,duration: Speed / 2,ease: 'power2.inOut'})
+          .fromTo($content, {y: 20}, {y: 0,duration: Speed,ease: 'power2.out'}, `-=${Speed/2}`)
         return anim;
       },
       extendTimeline: true
@@ -651,13 +681,11 @@ const Modal = {
       }
       //close 
       else if ($close || (!$block && $wrap)) {
-        this.close(this.$active);
+        this.close();
       }
+
     })
 
-    window.addEventListener('exit', () => {
-      if (this.$active) this.close(this.$active);
-    })
 
   },
   open: function ($modal) {
@@ -670,13 +698,12 @@ const Modal = {
       this.animation.play();
     }
     if ($modal) {
-      if (this.$active) this.close(this.$active, play);
+      if (this.$active) this.close(play);
       else play();
     }
   },
-  close: function ($modal, callback) {
-    if ($modal && this.$active) {
-      delete this.$active;
+  close: function (callback) {
+    if(this.$active) {
       this.animation.timeScale(2).reverse().eventCallback('onReverseComplete', () => {
         $header.classList.remove('header_hidden');
         delete this.animation;
@@ -684,8 +711,10 @@ const Modal = {
         if (callback) callback();
       })
       //reset form
-      let $form = $modal.querySelector('form');
+      let $form = this.$active.querySelector('form');
       if ($form) Validation.reset($form);
+  
+      delete this.$active;
     }
   }
 }
@@ -743,14 +772,14 @@ class Video {
           t = this.$parent.getBoundingClientRect().top + pageYOffset;
 
       if (this.hhtimeout) clearTimeout(this.hhtimeout)
-      if(!Scroll.inScroll) {
-        if (h / 2 - y > 0 && h * 1.5 > window.innerHeight - y) {
+      if(!Scroll.inScroll && h==window.innerHeight) {
+        if (h/3 - y > 0 && h * 1.33 > window.innerHeight - y) {
           this.hhtimeout = setTimeout(() => {
-            $header.classList.add('header_hidden');
+            $header.classList.add('header_video-visible');
             Scroll.scrollTop(t, Speed);
           }, 100)
         } else {
-          $header.classList.remove('header_hidden');
+          $header.classList.remove('header_video-visible');
         }
       }
     }
@@ -823,11 +852,15 @@ class Video {
         .to(this.$index_value, {autoAlpha: 1,duration: time / 2,ease: 'power2.inOut'}, `-=${time/2}`)
     }
 
-
     let play = (video1, video2, point1, point2) => {
       video1.play();
-      if (video1 == vn) vn.style.display = 'block';
-      else vn.style.display = 'none';
+      if (video1 == vn) {
+        vn.style.display = 'block';
+        vr.style.display = 'none';
+      } else {
+        vr.style.display = 'block';
+        vn.style.display = 'none';
+      }
       video2.currentTime = point2;
       this.interval = setInterval(() => {
         if (video1.currentTime >= point1) {

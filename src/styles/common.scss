@@ -9,11 +9,11 @@
 /*========== Basic ==========*/
 @import "./components/basic";
 
+/*========== Typography ==========*/
+@import "./components/typography";
+
 /*========== Layout ==========*/
 @import "./components/layout";
-
-/*========== Modals ==========*/
-@import "./components/modals";
 
 /*========== Video ==========*/
 @import "./components/video";
@@ -21,17 +21,14 @@
 /*========== Components ==========*/
 @import "./components/components";
 
-/*========== Typography ==========*/
-@import "./components/typography";
-
-/*========== Helpers ==========*/
-@import 'components/helpers';
-
 /*========== Buttons ==========*/
 @import 'components/buttons';
 
 /*========== Form ==========*/
 @import "./components/form";
+
+/*========== Modals ==========*/
+@import "./components/modals";
 
 /*========== Blocks ==========*/
 @import 'components/blocks';
@@ -41,3 +38,6 @@
 
 /*========== Footer ==========*/
 @import 'components/footer';
+
+/*========== Helpers ==========*/
+@import 'components/helpers';

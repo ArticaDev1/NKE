@@ -9,12 +9,31 @@
     width: 100%;
     top: 0;
     left: 0;
+    overflow: hidden;
     .image {
       height: 100%;
       width: 100%;
       position: absolute;
       top: 0;
       left: 0;
+    }
+  }
+  &__scroll-btn {
+    position: absolute;
+    bottom: -30px;
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    background-color: var(--color-bg-accent);
+    color: var(--color-light);
+    display: flex;
+    left: 50%;
+    margin-left: -60px;
+    .icon {
+      margin: auto;
+      width: 16px;
+      height: 16px;
+      transform: rotate(90deg);
     }
   }
   &__container {
@@ -37,6 +56,9 @@
   }
   &__next {
     right: $container-padding-x;
+  }
+  &__title {
+    margin: 0;
   }
   &__text {
     margin: 0 !important;
@@ -77,17 +99,25 @@
     }
   }
   @include media-breakpoint-down(sm) {
-    min-height: 520px;
+    min-height: 560px;
     max-height: 700px;
     &__container {
-      padding: 160px 0 60px 0;
+      padding: 70px 0;
     }
     &__content {
-      max-height: 340px;
+      max-height: 100%;
       text-align: center;
     }
     &__nav {
       top: 95px;
+    }
+    &__title {
+      display: flex;
+      flex: 1 1 100%;
+      align-items: center;
+    }
+    &__text {
+      flex-shrink: 0;
     }
     &__next {
       right: $mobile-container-padding-x;
@@ -110,6 +140,9 @@
       flex-direction: column;
       justify-content: space-between;
     }
+  }
+  &__title {
+    margin: 0;
   }
   &__text {
     margin: 0 !important;
@@ -216,7 +249,7 @@
   }
   @include media-breakpoint-down(lg) {
     &__content {
-      padding: 150px 0 60px 0;
+      padding: 160px 0 70px 0;
     }
     &-item {
       padding-right: $grid-gutter-width/2;
@@ -259,7 +292,6 @@
     }
   }
   @include media-breakpoint-down(md) {
-    display: block;
     &__content {
       padding: 140px 0 50px 0;
     }
@@ -273,6 +305,15 @@
   @include media-breakpoint-down(sm) {
     max-height: initial;
     height: auto;
+    display: block;
+    &__title {
+      flex: 1 1 100%;
+      display: flex;
+      align-items: center;
+    }
+    &__text {
+      flex: 0 0 auto;
+    }
     &-more {
       &__content {
         text-align: center;
@@ -290,9 +331,9 @@
     }
     &__content {
       height: 100vh;
-      min-height: 520px;
+      min-height: 560px;
       max-height: 700px;
-      padding-top: 130px;
+      padding-top: 70px;
     }
     &-item {
       padding-top: 0;
@@ -308,14 +349,47 @@
 }
 
 .form-section {
+  &__label {
+    bottom: 0;
+    left: $container-padding-x;
+    &:after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 64px;
+      background-color: var(--color-bg-accent);
+      transition: background-color $trs2;
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      transform: translate(-50%, 10px);
+    }
+  }
   &__head {
     align-items: flex-start;
     margin-bottom: 80px;
   }
-  @include media-breakpoint-up(xl) {
+  @include media-breakpoint-up(lg) {
     &__title {
-      transform: translateY(-8px);
+      transform: translateY(-6px);
       margin: 0;
+    }
+    &__submit {
+      margin-top: 34px;
+    }
+  }
+  @include media-breakpoint-down(xxl) {
+    &__label {
+      bottom: 20px;
+    }
+  }
+  @include media-breakpoint-down(lg) {
+    &__label {
+      display: none;
+    }
+    &__head {
+      text-align: center;
+      margin-bottom: 40px;
     }
   }
 }
@@ -325,12 +399,17 @@
   &__head {
     padding-bottom: 120px;
   }
+  &__block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
   &__item {
-    display: block;
     position: relative;
     padding-left: 34px;
+    border: none !important;
     &:not(:last-child) {
-      margin-bottom: 8px;
+      margin-bottom: 12px;
     }
     .icon {
       height: 24px;
@@ -374,6 +453,9 @@
     &__block {
       transform: translateY(8px);
     }
+    &__title {
+      margin: 0;
+    }
   }
   @include media-breakpoint-down(xxl) {
     &__head {
@@ -381,6 +463,39 @@
     }
     &__map {
       height: 480px;
+    }
+  }
+  @include media-breakpoint-down(lg) {
+    &__head {
+      padding-bottom: 80px;
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    &__title {
+     margin-bottom: 40px;
+    }
+    &__map {
+      height: 400px;
+    }
+    &__head {
+      padding-bottom: 60px;
+      text-align: center;
+    }
+    &__block {
+      align-items: center;
+      &:not(:last-child) {
+        margin-bottom: 45px;
+      }
+    }
+    &__item {
+      padding: 34px 0 0 0;
+      &:not(:last-child) {
+        margin-bottom: 40px;
+      }
+      .icon {
+        left: 50%;
+        transform: translateX(-50%);
+      }
     }
   }
 }

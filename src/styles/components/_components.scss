@@ -111,3 +111,17 @@
     width: 90px;
   }
 }
+
+.v-text {
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  span {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, 50%) rotate(-90deg) translateX(50%);
+    display: block;
+  }
+}
+

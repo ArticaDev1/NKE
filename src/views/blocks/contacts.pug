@@ -1,21 +1,21 @@
 section.section.contacts
   .contacts__content
     .container
-      .row
+      .row.justify-content-center
         .col-10.col-sm-12
           .contacts__head.row
-            h2.h1.contacts__title.col-xl-3 Контакты
-            .contacts__block.col-xl-4
+            h2.h1.contacts__title.section__title.col-lg-4.col-xl-3 Контакты
+            .contacts__block.offset-md-1.offset-lg-0.col-sm-7.col-md-6.col-lg-4
               .contacts__item 
                 svg.icon
                   use(xlink:href='./img/icons/icons.svg#point')
                 | Московская обл, Ленинский р-н, Совхоз имени Ленина с/п, совхоза им. Ленина п, Восточная промзона тер, влд 3 стр 1, 501
-            .contacts__block.col-xl-4.offset-xl-1
-              a(href="tel:74951316972").contacts__item
+            .contacts__block.offset-lg-1.col-sm-5.col-md-4.col-lg-3.col-xl-4
+              a(href="tel:74951316972").contacts__item.link
                 svg.icon
                   use(xlink:href='./img/icons/icons.svg#phone')
                 | +7 (495) 131-69-72
-              a(href="mailto:office@nceurasia.com").contacts__item
+              a(href="mailto:office@nceurasia.com").contacts__item.link
                 svg.icon
                   use(xlink:href='./img/icons/icons.svg#envelope')
                 | office@nceurasia.com    

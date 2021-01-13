@@ -6,7 +6,7 @@ block content
   section.section.home-screen(data-mobile-window)
 
     .home-screen__background
-      .image.image_cover
+      .image.image_cover.rellax(data-rellax-speed="-3")
         img(src="./img/photo-1539186607619-df476afe6ff1 1.jpg", alt="image").lazyload
 
     .home-screen__container
@@ -19,4 +19,12 @@ block content
         .row
           h1.home-screen__title.col-xxl-8.col-xl-9 Производстводим продукцию для врезки под давлением и перекрытия полости магистральных и распределительных трубопроводов
           p.h6.home-screen__text.col-xl-3.col-lg-4.col-md-5 В рамках существующей программы импортозамещения 
+
+    button.home-screen__scroll-btn(aria-label='scroll bottom' data-scroll='bottom')
+      svg.icon
+        use(xlink:href='./img/icons/icons.svg#arrow')
+
+  
+  
+  
   include blocks/form-section
