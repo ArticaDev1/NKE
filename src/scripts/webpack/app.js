@@ -14,6 +14,7 @@ import SwipeListener from 'swipe-listener';
 import autosize from 'autosize';
 import Rellax from 'rellax';
 const validate = require("validate.js");
+import Splide from '@splidejs/splide';
 
 const brakepoints = {
   sm: 576,
@@ -79,7 +80,12 @@ window.onload = function () {
   //video
   let $video = document.querySelector('.video-slider');
   if ($video) new Video($video, {points: [2, 4, 5.9, 9.08, 11.5]}).init();
-  //
+  //work slider
+  let $work_slider = document.querySelector('.work-slider');
+  if($work_slider) new WorkSlider($work_slider).init();
+
+
+  //else
   if(mobile()) {
     $body.classList.add('mobile');
   } else {
@@ -137,8 +143,13 @@ const TouchHoverEvents = {
       this.touched = true;
       if (this.timeout) clearTimeout(this.timeout);
       if ($targets[0]) {
-        for (let $target of document.querySelectorAll(this.targets)) $target.classList.remove('touch');
-        for (let $target of $targets) $target.setAttribute('data-touch', '');
+        for (let $target of $targets) {
+          $target.setAttribute('data-touch', '');
+          //event
+          document.dispatchEvent(new CustomEvent('customTouchstart', {
+            detail: {target:$target}
+          }));
+        }
       }
     }
     //touchend
@@ -149,8 +160,11 @@ const TouchHoverEvents = {
       if ($targets[0]) {
         setTimeout(() => {
           for (let $target of $targets) {
-            $target.dispatchEvent(new CustomEvent("customTouchend"));
             $target.removeAttribute('data-touch');
+            //event
+            document.dispatchEvent(new CustomEvent('customTouchend', {
+              detail: {target:$target}
+            }));
           }
         }, this.touchEndDelay)
       }
@@ -159,11 +173,19 @@ const TouchHoverEvents = {
     //mouseenter
     if (event.type == 'mouseenter' && !this.touched && $targets[0] && $targets[0] == event.target) {
       $targets[0].setAttribute('data-hover', '');
+      //event
+      document.dispatchEvent(new CustomEvent('customMouseenter', {
+        detail: {target:$targets[0]}
+      }));
     }
     //mouseleave
     else if (event.type == 'mouseleave' && !this.touched && $targets[0] && $targets[0] == event.target) {
       $targets[0].removeAttribute('data-focus');
       $targets[0].removeAttribute('data-hover');
+      //event
+      document.dispatchEvent(new CustomEvent('customMouseleave', {
+        detail: {target:$targets[0]}
+      }));
     }
     //mousedown
     if (event.type == 'mousedown' && !this.touched && $targets[0]) {
@@ -376,7 +398,7 @@ const Nav = {
 
     this.swipes = SwipeListener(document);
     document.addEventListener('swipe', (event) => {
-      let slider = event.detail.target.closest('.video-slider'),
+      let slider = event.detail.target.closest('[data-slide-prevent]'),
           modal = Modal.$active;
       if(!slider && !modal) {
         let dir = event.detail.directions;
@@ -884,4 +906,62 @@ class Video {
     }
     this.index = index;
   }
+}
+
+class WorkSlider {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+
+  init() {
+    this.$slider = this.$parent.querySelector('.splide');
+    
+    this.slider = new Splide(this.$slider, {
+      type: 'loop',
+      perPage: 6,
+      arrows: false,
+      speed: Speed*500,
+    });
+
+    if(window.innerWidth<brakepoints.lg) {
+      this.slider.mount();
+    }
+
+
+
+    
+    let timeout1, timeout2, flag;
+
+    let Event = (event)=> {
+      if(window.innerWidth>=brakepoints.lg) {
+        let $target = event.detail.target !== document ? event.detail.target.closest('.work-slide') : null;
+        if((event.type=='customMouseenter' && event.detail.target==$target) || (event.type=='customTouchstart' && $target)) {
+          clearTimeout(timeout2)
+          if(!flag) {
+            flag=true;
+            $target.classList.add('active');
+          } else {
+            timeout1 = setTimeout(()=>{
+              $target.classList.add('active');
+            }, 200)
+          }
+          
+        } 
+        
+        else if((event.type=='customMouseleave' && event.detail.target==$target) || (event.type=='customTouchend' && $target)) {
+          clearTimeout(timeout1)
+          timeout2 = setTimeout(()=>{
+            flag = false;
+          }, 200)
+          $target.classList.remove('active');
+        }
+      }
+    }
+
+    document.addEventListener('customMouseenter', Event)
+    document.addEventListener('customMouseleave', Event)
+    document.addEventListener('customTouchstart', Event)
+    document.addEventListener('customTouchend', Event)
+  }
+  
 }
