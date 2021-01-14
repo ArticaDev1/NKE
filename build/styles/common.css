@@ -4491,8 +4491,8 @@ table:not([class]) {
     .work-slide:not(.active) .work-slide__image {
       transition: height 200ms ease-in-out, width 200ms ease-in-out, transform 200ms ease-in-out, box-shadow 200ms ease-in-out;
       height: 186px;
-      width: calc(100% + 2px);
-      transform: translate(-1px, 80px);
+      width: 100%;
+      transform: translate(0, 80px);
       box-shadow: none; }
     .work-slide:not(.active) .work-slide__index {
       transition: transform 200ms ease-in-out;
