@@ -507,25 +507,33 @@
     margin-top: -40px;
     position: relative;
     z-index: 2;
+    //padding: 0 70px;
   }
   @include media-breakpoint-up(lg) {
     &__title {
       margin: 0;
       transform: translateY(-6px);
     }
+  }
+  @include media-breakpoint-up(xl) {
     &__splide {
       visibility: visible !important;
     }
     &__splide-list {
       display: flex;
       width: 100% !important;
-      padding: 0 70px !important;
+    }
+    &__splide-track {
+      overflow: visible !important;
     }
   }
   @include media-breakpoint-down(xxl) {
     &__head {
       padding-bottom: 80px;
     }
+    /* &__content {
+      padding: 0 $container-padding-x;
+    } */
   }
   @include media-breakpoint-down(md) {
     &__head {
@@ -534,7 +542,7 @@
   }
 }
 
-.work-slide {
+/* .work-slide {
   position: relative;
   display: block;
   z-index: 2;
@@ -602,15 +610,25 @@
   @include media-breakpoint-up(lg) {
     flex: 1 1 100%;
   }
+
   @include media-breakpoint-down(xxl) {
     &__background {
       height: 320px;
     }
     &__image {
       height: 320px;
+      width: calc(100% + #{$container-padding-x * 2});
+      transform: translate(#{-$container-padding-x}, 0);
     }
     &__index {
-      transform: translate(-40px, 250px);
+      transform: translate(0, 250px);
+    }
+    &__title {
+      transform: translateX(0);
+    }
+    &__text {
+      transform: translateX(0);
+      width: 100%;
     }
     &:not(.active) {
       .work-slide {
@@ -625,6 +643,113 @@
         }
         &__text {
           transform: translate(40px, -100px);
+        }
+      }
+    }
+  }
+} */
+
+
+.work-slide {
+  position: relative;
+  display: block;
+  z-index: 2;
+  transition: z-index .2s step-start, transform $trs4;
+  &:first-child {
+    transform: translateX($container-padding-x);
+  }
+  &:last-child {
+    transition: z-index .2s step-start, transform $trs4in;
+    transform: translateX(#{-$container-padding-x});
+  }
+  &__background {
+    height: 400px;
+    margin-bottom: 20px;
+  }
+  &__image {
+    transition: height $trs4, width $trs4, transform $trs4, box-shadow $trs4;
+    height: 400px;
+    width: calc(100% + #{$container-padding-x * 2});
+    transform: translate(#{-$container-padding-x}, 0);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
+  }
+  &__title {
+    transition: transform $trs4;
+    margin: 0 0 14px 0 !important;
+    transform: translateX(0);
+  }
+  &__index {
+    transition: transform $trs4;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    transform: translateY(330px);
+    margin: 0 !important;
+  }
+  &__text {
+    transition: transform $trs4, opacity $trs4, visibility $trs4;
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &:not(.active) {
+    z-index: 1;
+    transition: z-index .2s step-end, transform $trs2;
+    transform: translate(0);
+    .work-slide {
+      &__image {
+        transition: height $trs2, width $trs2, transform $trs2, box-shadow $trs2;
+        height: 186px;
+        width: 100%;
+        transform: translate(0, 80px);
+        box-shadow: none;
+      }
+      &__index {
+        transition: transform $trs2;
+        transform: translate(50px, 210px);
+      }
+      &__title {
+        transition: transform $trs2;
+        transform: translate(50px, -134px);
+      }
+      &__text {
+        transition: transform $trs2, opacity $trs2, visibility $trs2;
+        transform: translate(50px, -134px);
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    flex: 1 1 100%;
+  }
+
+  @include media-breakpoint-down(xxl) {
+    &__background {
+      height: 320px;
+    }
+    &__image {
+      height: 320px;
+    }
+    &__index {
+      transform: translateY(250px);
+    }
+    &:not(.active) {
+      .work-slide {
+        &__image {
+          height: 140px;
+        }
+        &__index {
+          transform: translate(30px, 170px);
+        }
+        &__title {
+          transform: translate(30px, -100px);
+        }
+        &__text {
+          transform: translate(30px, -100px);
         }
       }
     }

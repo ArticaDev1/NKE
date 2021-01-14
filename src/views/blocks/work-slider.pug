@@ -8,11 +8,11 @@ section.section.bg-accent.bg-gradient.work-slider(data-slide-prevent)
     .splide.work-slider__splide
       .splide__track.work-slider__splide-track
         .splide__list.work-slider__splide-list
-          -var i = 0
+          //-var i = 0
           mixin slide(index, title, text, href, photo)
-            //-i++
+            -i++
             //slide
-            a(href=href class=i==3?'active':'').work-slide.splide__slide
+            a(href=href class=i==1?'active':'').work-slide.splide__slide
               .work-slide__background
                 .work-slide__image.image.image_cover
                   img(data-src=photo, alt="photo").lazyload
