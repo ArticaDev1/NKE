@@ -1,12 +1,6 @@
 import 'lazysizes';
 lazySizes.cfg.init = false;
 lazySizes.cfg.expand = 100;
-document.addEventListener('lazybeforeunveil', function (e) {
-  if (e.target.tagName !== 'IMG') {
-    let bg = e.target.getAttribute('data-src');
-    e.target.style.backgroundImage = `url('${bg}')`;
-  }
-});
 import {gsap} from "gsap";
 import {disablePageScroll, enablePageScroll} from 'scroll-lock';
 import Inputmask from "inputmask";
@@ -60,7 +54,6 @@ document.addEventListener('click', (event)=>{
 });
 
 window.onload = function () {
-  lazySizes.init();
   TouchHoverEvents.init();
   Theme.init();
   Nav.init();
@@ -91,6 +84,11 @@ window.onload = function () {
   } else {
     new Rellax('.rellax');
   }
+
+  //lazy
+  setTimeout(()=>{
+    lazySizes.init();
+  }, 500)
 }
 
 const TouchHoverEvents = {
@@ -918,12 +916,12 @@ class WorkSlider {
     
     this.slider = new Splide(this.$slider, {
       type: 'loop',
-      perPage: 6,
+      perPage: 3,
       arrows: false,
       speed: Speed*500,
     });
 
-    if(window.innerWidth<brakepoints.lg) {
+    if(window.innerWidth<brakepoints.xl) {
       this.slider.mount();
     }
 

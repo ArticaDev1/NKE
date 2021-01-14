@@ -38,7 +38,7 @@
     display: block;
     opacity: 0;
     visibility: hidden;
-    transition: opacity $trs3, visibility $trs3;
+    transition: opacity $trs10, visibility $trs10;
     &.lazyloaded {
       opacity: 1;
       visibility: visible;
@@ -56,7 +56,6 @@
   }
   &_cover {
     background-color: var(--color-bg-images);
-    overflow: hidden;
     img {
       object-fit: cover;
     }

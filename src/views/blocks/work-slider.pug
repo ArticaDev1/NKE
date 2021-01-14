@@ -8,17 +8,20 @@ section.section.bg-accent.bg-gradient.work-slider(data-slide-prevent)
     .splide.work-slider__splide
       .splide__track.work-slider__splide-track
         .splide__list.work-slider__splide-list
-          //-var i = 0
+          -var i = 0
           mixin slide(index, title, text, href, photo)
             -i++
             //slide
-            a(href=href class=i==1?'active':'').work-slide.splide__slide
-              .work-slide__background
-                .work-slide__image.image.image_cover
-                  img(data-src=photo, alt="photo").lazyload
-              span.work-slide__index.h2=index
-              h6.work-slide__title=title 
-              p.work-slide__text=text 
+            a(href=href class=i==3?'active':'').work-slide.splide__slide
+              .work-slide__container
+                .work-slide__wrap
+                  .work-slide__background
+                    .work-slide__image.image.image_cover
+                      img(data-src=photo, alt="photo").lazyload
+                  .work-slide__content
+                    span.work-slide__index.h2=index
+                    h6.work-slide__title=title 
+                    p.work-slide__text=text 
 
 
           +slide('01', 'Производство', 'Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями', proizvodstvo, './img/wslider/w1.jpg')

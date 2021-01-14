@@ -507,8 +507,9 @@
     margin-top: -40px;
     position: relative;
     z-index: 2;
-    //padding: 0 70px;
+    margin: -40px 0 0 0;
   }
+  
   @include media-breakpoint-up(lg) {
     &__title {
       margin: 0;
@@ -542,154 +543,64 @@
   }
 }
 
-/* .work-slide {
-  position: relative;
-  display: block;
-  z-index: 2;
-  transition: z-index .2s step-start;
-  &__background {
-    height: 400px;
-    margin-bottom: 20px;
-  }
-  &__image {
-    transition: height $trs4, width $trs4, transform $trs4, box-shadow $trs4;
-    height: 400px;
-    width: calc(100% + 30px);
-    transform: translate(-15px, 0);
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
-  }
-  &__title {
-    transition: transform $trs4;
-    margin: 0 0 14px 0 !important;
-    transform: translateX(-15px);
-  }
-  &__index {
-    transition: transform $trs4;
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    transform: translate(-40px, 330px);
-    margin: 0 !important;
-  }
-  &__text {
-    transition: transform $trs4, opacity $trs4, visibility $trs4;
-    transform: translateX(-15px);
-    opacity: 1;
-    visibility: visible;
-    width: calc(100% + 30px);
-  }
-
-  &:not(.active) {
-    z-index: 1;
-    transition: z-index .2s step-end;
-    .work-slide {
-      &__image {
-        transition: height $trs2, width $trs2, transform $trs2, box-shadow $trs2;
-        height: 186px;
-        width: 100%;
-        transform: translate(0, 80px);
-        box-shadow: none;
-      }
-      &__index {
-        transition: transform $trs2;
-        transform: translate(50px, 210px);
-      }
-      &__title {
-        transition: transform $trs2;
-        transform: translate(50px, -134px);
-      }
-      &__text {
-        transition: transform $trs2, opacity $trs2, visibility $trs2;
-        transform: translate(50px, -134px);
-        opacity: 0;
-        visibility: hidden;
-      }
-    }
-  }
-  @include media-breakpoint-up(lg) {
-    flex: 1 1 100%;
-  }
-
-  @include media-breakpoint-down(xxl) {
-    &__background {
-      height: 320px;
-    }
-    &__image {
-      height: 320px;
-      width: calc(100% + #{$container-padding-x * 2});
-      transform: translate(#{-$container-padding-x}, 0);
-    }
-    &__index {
-      transform: translate(0, 250px);
-    }
-    &__title {
-      transform: translateX(0);
-    }
-    &__text {
-      transform: translateX(0);
-      width: 100%;
-    }
-    &:not(.active) {
-      .work-slide {
-        &__image {
-          height: 140px;
-        }
-        &__index {
-          transform: translate(40px, 170px);
-        }
-        &__title {
-          transform: translate(40px, -100px);
-        }
-        &__text {
-          transform: translate(40px, -100px);
-        }
-      }
-    }
-  }
-} */
-
 
 .work-slide {
   position: relative;
   display: block;
   z-index: 2;
   transition: z-index .2s step-start, transform $trs4;
-  &:first-child {
-    transform: translateX($container-padding-x);
-  }
-  &:last-child {
-    transition: z-index .2s step-start, transform $trs4in;
+  &__container {
+    transition: width $trs4, transform $trs4;
+    height: 100%;
+    width: calc(100% + #{$container-padding-x * 2});
     transform: translateX(#{-$container-padding-x});
   }
+  &__wrap {
+    transition: width $trs4, transform $trs4;
+    width: 100%;
+    transform: translateX(0);
+    height: 100%;
+  }
   &__background {
-    height: 400px;
-    margin-bottom: 20px;
+    padding-top: 120%;
+    margin-bottom: 50px;
+    position: relative;
+    display: flex;
+    justify-content: center;
   }
   &__image {
-    transition: height $trs4, width $trs4, transform $trs4, box-shadow $trs4;
-    height: 400px;
-    width: calc(100% + #{$container-padding-x * 2});
-    transform: translate(#{-$container-padding-x}, 0);
+    transition: padding-top $trs4, box-shadow $trs4, transform $trs4, width $trs4;
+    position: absolute;
+    top: 0;
+    transform: translateY(0);
+    width: 100%;
+    padding-top: 120%;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
   }
-  &__title {
-    transition: transform $trs4;
-    margin: 0 0 14px 0 !important;
+
+  &__content {
+    transition: margin-top $trs4, padding-bottom $trs4, transform $trs4;
+    position: relative;
     transform: translateX(0);
+    padding-right: $container-padding-x;
+    padding-left: $container-padding-x;
+    top: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+  &__title {
+    margin: 0 0 14px 0 !important;
   }
   &__index {
     transition: transform $trs4;
     position: absolute;
     z-index: 2;
-    top: 0;
-    left: 0;
-    transform: translateY(330px);
+    bottom: 100%;
     margin: 0 !important;
+    transform: translateY(-30px);
   }
   &__text {
-    transition: transform $trs4, opacity $trs4, visibility $trs4;
-    transform: translateX(0);
+    transition: opacity $trs4, visibility $trs4;
     opacity: 1;
     visibility: visible;
   }
@@ -697,59 +608,69 @@
   &:not(.active) {
     z-index: 1;
     transition: z-index .2s step-end, transform $trs2;
-    transform: translate(0);
     .work-slide {
-      &__image {
-        transition: height $trs2, width $trs2, transform $trs2, box-shadow $trs2;
-        height: 186px;
+      &__container {
+        transition: width $trs2, transform $trs2;
         width: 100%;
-        transform: translate(0, 80px);
+        transform: translateX(0);
+      }
+      &__wrap {
+        transition: width $trs2, transform $trs2;
+        width: calc(100% + #{$container-padding-x * 2});
+        transform: translateX(#{-$container-padding-x});
+      }
+      &__image {
+        transition: padding-top $trs2, box-shadow $trs2, transform $trs2, width $trs2;
+        padding-top: 60%;
+        transform: translateY(80px);
         box-shadow: none;
+        width: calc(100% - #{$container-padding-x * 2});
       }
       &__index {
-        transition: transform $trs2;
-        transform: translate(50px, 210px);
+        transform: translateY(-34px);
       }
-      &__title {
-        transition: transform $trs2;
-        transform: translate(50px, -134px);
+      &__content {
+        transition: margin-top $trs2, padding-bottom $trs2, transform $trs2;
+        margin-top: calc(-60% + 50px);
+        padding-bottom: calc(60% - 50px);
+        transform: translateX(50px);
       }
       &__text {
-        transition: transform $trs2, opacity $trs2, visibility $trs2;
-        transform: translate(50px, -134px);
+        transition: opacity $trs2, visibility $trs2;
         opacity: 0;
         visibility: hidden;
       }
     }
   }
 
+  
   @include media-breakpoint-up(xl) {
     flex: 1 1 100%;
+    &:first-child, &:last-child {
+      .work-slide__image img {
+        width: calc(100% + 5px);
+      }
+    }
+    &:first-child {
+      transform: translateX($container-padding-x);
+      .work-slide__image img {
+        width: calc(100% + 5px);
+        transform: translateX(-5px);
+      }
+    }
+    &:last-child {
+      transform: translateX(#{-$container-padding-x});
+    }
+    &:not(.active) {
+      transform: translate(0);
+    }
   }
 
   @include media-breakpoint-down(xxl) {
-    &__background {
-      height: 320px;
-    }
-    &__image {
-      height: 320px;
-    }
-    &__index {
-      transform: translateY(250px);
-    }
     &:not(.active) {
       .work-slide {
-        &__image {
-          height: 140px;
-        }
-        &__index {
-          transform: translate(30px, 170px);
-        }
-        &__title {
-          transform: translate(30px, -100px);
-        }
-        &__text {
-          transform: translate(30px, -100px);
+        &__content {
+          transform: translateX(40px);
         }
       }
     }
