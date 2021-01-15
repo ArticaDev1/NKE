@@ -1,5 +1,6 @@
 import 'lazysizes';
 lazySizes.cfg.init = false;
+lazySizes.cfg.preloadAfterLoad = true;
 lazySizes.cfg.expand = 100;
 import {gsap} from "gsap";
 import {disablePageScroll, enablePageScroll} from 'scroll-lock';
@@ -913,53 +914,82 @@ class WorkSlider {
 
   init() {
     this.$slider = this.$parent.querySelector('.splide');
-    
-    this.slider = new Splide(this.$slider, {
-      type: 'loop',
-      perPage: 3,
-      arrows: false,
-      speed: Speed*500,
-    });
 
-    if(window.innerWidth<brakepoints.xl) {
-      this.slider.mount();
-    }
-
-
-
-    
     let timeout1, timeout2, flag;
-
     let Event = (event)=> {
-      if(window.innerWidth>=brakepoints.lg) {
-        let $target = event.detail.target !== document ? event.detail.target.closest('.work-slide') : null;
-        if((event.type=='customMouseenter' && event.detail.target==$target) || (event.type=='customTouchstart' && $target)) {
-          clearTimeout(timeout2)
-          if(!flag) {
-            flag=true;
-            $target.classList.add('active');
-          } else {
-            timeout1 = setTimeout(()=>{
-              $target.classList.add('active');
-            }, 200)
-          }
-          
-        } 
-        
-        else if((event.type=='customMouseleave' && event.detail.target==$target) || (event.type=='customTouchend' && $target)) {
-          clearTimeout(timeout1)
-          timeout2 = setTimeout(()=>{
-            flag = false;
+      let $target = event.detail.target !== document ? event.detail.target.closest('.work-slide') : null;
+      if((event.type=='customMouseenter' && event.detail.target==$target) || (event.type=='customTouchstart' && $target)) {
+        clearTimeout(timeout2)
+        if(!flag) {
+          flag=true;
+          $target.classList.add('is-active');
+        } else {
+          timeout1 = setTimeout(()=>{
+            $target.classList.add('is-active');
           }, 200)
-          $target.classList.remove('active');
         }
+        
+      } 
+      
+      else if((event.type=='customMouseleave' && event.detail.target==$target) || (event.type=='customTouchend' && $target)) {
+        clearTimeout(timeout1)
+        timeout2 = setTimeout(()=>{
+          flag = false;
+        }, 200)
+        $target.classList.remove('is-active');
       }
     }
+    
+    let check = ()=> {
+      if(window.innerWidth<brakepoints.xl && (!this.initialized || !this.flag)) {
+        this.flag = true;
+        //init
+        this.slider = new Splide(this.$slider, {
+          type: 'loop',
+          perPage: 5,
+          perMove: 1,
+          flickPower: 10,
+          updateOnMove: true,
+          focus: 'center',
+          arrows: false,
+          pagination: false,
+          speed: Speed*500,
+        });
+        this.slider.mount();
 
-    document.addEventListener('customMouseenter', Event)
-    document.addEventListener('customMouseleave', Event)
-    document.addEventListener('customTouchstart', Event)
-    document.addEventListener('customTouchend', Event)
+        //destroy
+        if(this.custom_events) {
+          delete this.custom_events;
+          document.removeEventListener('customMouseenter', Event)
+          document.removeEventListener('customMouseleave', Event)
+          document.removeEventListener('customTouchstart', Event)
+          document.removeEventListener('customTouchend',   Event)
+        }
+      } 
+      
+      else if(window.innerWidth>=brakepoints.xl && (!this.initialized || this.flag)) {
+        this.flag = false;
+        //init
+        this.custom_events = true;
+        document.addEventListener('customMouseenter', Event)
+        document.addEventListener('customMouseleave', Event)
+        document.addEventListener('customTouchstart', Event)
+        document.addEventListener('customTouchend',   Event)
+
+        //destroy
+        if(this.slider) {
+          this.slider.destroy();
+          delete this.slider;
+        }
+      }
+
+      this.initialized = true;
+    }
+    check();
+    window.addEventListener('resize', check);
+
+  
+    
   }
   
 }

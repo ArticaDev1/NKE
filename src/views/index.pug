@@ -37,7 +37,31 @@ block content
               span.h6 лет на рынке
             p Единственный преемник корпорации T.D. Williamson в России
 
+
   include blocks/video
+
+  section.section.about.bg-light
+    .container
+      .row
+        .about__head.col-xl-3.col-md-4
+          .row
+            .offset-1.offset-md-0.col-4.col-md-12
+              .about__photo.image.image_cover
+                img(data-src="./img/photo.jpeg", alt="photo").lazyload
+            .about__info.col-7.col-md-12
+              h6.about__title Парфенов<br> Егор Юрьевич
+              p.about__descr Генеральный директор Национальной компании Евразия
+        .offset-1.offset-md-0.offset-lg-1.col-xxl-6.col-lg-7.col-md-8.col-10
+          .about__content
+            svg.icon
+              use(xlink:href='./img/icons/icons.svg#quotes')
+            svg.icon-logo
+              use(xlink:href='./img/icons/icons.svg#logo')
+            .about__text
+              p Картина «Московский дворик» была представлена на московской части 6-й выставки Товарищества передвижных художественных выставок («передвижников»), открывшейся в мае 1878 года.<br> Она стала первым произведением Поленова, представленным на передвижных выставках. Прямо с выставки полотно было приобретено у автора Павлом Третьяковым.
+            svg.icon
+              use(xlink:href='./img/icons/icons.svg#quotes')
+
   include blocks/work-slider
   include blocks/form-section
   include blocks/contacts

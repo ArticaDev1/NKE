@@ -2,6 +2,10 @@
   --color-tt-dot: #fff;
   --color-tt-bg: #434BC3;
   --pos-tt: 24px;
+  --color-light: #fff;
+  --color-accent: #fff;
+  --color-muted: #C4C4C4;
+  --color-logo-transparent: #3E3E3E;
   --color-btn-accent: #fff;
   --color-btn-accent-hover: #C4C4C4;
   --color-btn-accent-click: #949494;
@@ -26,6 +30,7 @@
   --color-bg-images: rgba(255, 255, 255, 0.2);
   --color-gradient: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 45%, rgba(255, 255, 255, 0.1) 55%, rgba(255, 255, 255, 0) 100%);
   --color-gradient-skew: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 45%, rgba(255, 255, 255, 0) 55%, rgba(255, 255, 255, 0.1) 100%);
+  --color-quotes: #575757;
   --color-input-border: #949494;
   --color-input-border2: #252EB6;
   --color-input-border3: #CE4242;

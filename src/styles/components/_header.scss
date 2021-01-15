@@ -94,7 +94,7 @@
     display: inline-block;
     margin: 0 52px 0 0;
     text-decoration: none;
-    transition: opacity $trs2, color $trs1;
+    transition: opacity $trs2, color $trs2;
     color: var(--color-btn-light);
     &[data-touch], &[data-hover] {
       color: var(--color-btn-light-hover);
