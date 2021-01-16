@@ -38,7 +38,7 @@
     display: block;
     opacity: 0;
     visibility: hidden;
-    transition: opacity $trs10, visibility $trs10;
+    transition: opacity $trs5, visibility $trs5;
     &.lazyloaded {
       opacity: 1;
       visibility: visible;

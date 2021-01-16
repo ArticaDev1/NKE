@@ -1,6 +1,5 @@
 import 'lazysizes';
 lazySizes.cfg.init = false;
-lazySizes.cfg.preloadAfterLoad = true;
 lazySizes.cfg.expand = 100;
 import {gsap} from "gsap";
 import {disablePageScroll, enablePageScroll} from 'scroll-lock';
@@ -37,6 +36,7 @@ function mobile() {
     return false;
   }
 }
+
 //scroll btn
 document.addEventListener('click', (event)=>{
   let $btn = event.target!==document?event.target.closest('[data-scroll]'):null;
@@ -45,7 +45,12 @@ document.addEventListener('click', (event)=>{
     if(target=='bottom') {
       let $parent = $btn.closest('.section');
       y = $parent.getBoundingClientRect().top + $parent.getBoundingClientRect().height + window.pageYOffset;
-    } else {
+    } 
+    else if(target=='self') {
+      let $parent = $btn.closest('.section');
+      y = $parent.getBoundingClientRect().top + window.pageYOffset;
+    }
+    else {
       let $target = document.querySelector(target);
       if($target) y = $target.getBoundingClientRect().top + window.pageYOffset;
     }
@@ -77,6 +82,9 @@ window.onload = function () {
   //work slider
   let $work_slider = document.querySelector('.work-slider');
   if($work_slider) new WorkSlider($work_slider).init();
+  //vsection
+  let $vsection = document.querySelector('.v-section');
+  if($vsection) new VSection($vsection).init();
 
 
   //else
@@ -344,6 +352,23 @@ const Header = {
       $header.classList.remove('header_hidden');
     }  
 
+    //check
+    let count = 0;
+    document.querySelectorAll('[data-hide-header]').forEach(($element)=>{
+      let h = $element.getBoundingClientRect().height;
+      if(h==window.innerHeight) {
+        let t = $element.getBoundingClientRect().top;
+        if(t==0) {
+          count++;
+        }
+      }
+    })
+    if(count>0) {
+      $header.classList.add('header_content-hidden');
+    } else {
+      $header.classList.remove('header_content-hidden');
+    }
+
     this.scrollY = y;
   }
 }
@@ -394,17 +419,6 @@ const Nav = {
       if (!this.state) this.open();
       else this.close();
     })
-
-    this.swipes = SwipeListener(document);
-    document.addEventListener('swipe', (event) => {
-      let slider = event.detail.target.closest('[data-slide-prevent]'),
-          modal = Modal.$active;
-      if(!slider && !modal) {
-        let dir = event.detail.directions;
-        if (dir.left && !this.state) this.open();
-        else if (dir.right && this.state) this.close();
-      }
-    });
 
     this.setSize();
     window.addEventListener('resize', () => {
@@ -796,12 +810,9 @@ class Video {
       if(!Scroll.inScroll && h==window.innerHeight) {
         if (h/3 - y > 0 && h * 1.33 > window.innerHeight - y) {
           this.hhtimeout = setTimeout(() => {
-            $header.classList.add('header_video-visible');
             Scroll.scrollTop(t, Speed);
           }, 100)
-        } else {
-          $header.classList.remove('header_video-visible');
-        }
+        } 
       }
     }
 
@@ -992,4 +1003,80 @@ class WorkSlider {
     
   }
   
+}
+
+class VSection {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+
+  init() {
+    this.$content = this.$parent.querySelector('.v-section__content');
+    this.$inner = this.$parent.querySelector('.v-section__inner');
+    this.$button = this.$parent.querySelector('.v-section__btn');
+    this.$button_icon = this.$parent.querySelector('.v-section__btn .icon');
+
+    let setParams = ()=> {
+      let iw = this.$inner.getBoundingClientRect().width,
+          ch = this.$content.getBoundingClientRect().height,
+          ww = $wrapper.getBoundingClientRect().width,
+          scroll = window.pageYOffset,
+          bscroll = scroll+window.innerHeight,
+          scroll_width = iw - ww,
+          min_scroll = this.$parent.getBoundingClientRect().top + window.pageYOffset,
+          max_scroll = min_scroll+scroll_width;
+
+      this.$parent.style.height = `${ch+scroll_width}px`;
+
+      //
+      this.$button_icon.classList.remove('forward');
+      this.$button_icon.classList.remove('back');
+      
+      //до
+      if(scroll<min_scroll) {
+        this.$content.style.position = 'absolute';
+        this.$content.style.top = '0';
+        this.$inner.style.transform = `translate3d(0, 0, 0)`;
+        //btn
+        let v = Math.min(1, min_scroll/window.innerHeight),
+            factor = -(1-((bscroll-min_scroll)/ch))/v,
+            val = ((ch/2)+30)*factor;
+        this.$button.style.transform = `translate3d(0, ${val}px, 0)`;
+      } 
+
+      //фикс
+      else if(scroll>=min_scroll && scroll<=max_scroll) {
+        this.$content.style.position = 'fixed';
+        this.$content.style.top = '0';
+        this.$inner.style.transform = `translate3d(-${scroll-min_scroll}px, 0, 0)`;
+        //btn
+        if(this.old_scroll>scroll) {
+          this.$button_icon.classList.add('back')
+        } else {
+          this.$button_icon.classList.add('forward')
+        }
+      }
+
+      //после
+      else if(scroll>max_scroll) {
+        this.$content.style.position = 'absolute';
+        this.$content.style.top = `${scroll_width}px`;
+        this.$inner.style.transform = `translate3d(-${scroll_width}px, 0, 0)`;
+        //btn
+        let factor = (scroll-max_scroll)/ch,
+            val = ((ch/3))*factor;
+        this.$button.style.transform = `translate3d(0, ${val}px, 0)`;
+      } 
+
+      this.old_scroll = scroll;
+    }
+
+
+
+    setParams();
+    window.addEventListener('resize', setParams)
+    window.addEventListener('scroll', setParams)
+
+
+  }
 }

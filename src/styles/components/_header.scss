@@ -49,7 +49,7 @@
       opacity: 1;
     }
     &:not(.header_nav-opened) {
-      &.header_hidden, &.header_video-visible {
+      &.header_hidden, &.header_content-hidden {
         transform: translateY(-100%);
       }
       .header__container {
