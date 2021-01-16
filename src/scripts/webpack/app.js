@@ -786,6 +786,8 @@ class Video {
     //create timeline
     this.$time_item.style.width = `${100/(this.points.length)}%`;
 
+    
+
     this.resize = () => {
       let h = this.$wrapper.getBoundingClientRect().height,
         w = contentWidth(),
@@ -830,21 +832,21 @@ class Video {
     }
 
     this.$next.addEventListener('click', () => {
-      if (!this.played) this.slide('next');
+      if (!this.played && this.initialized) this.slide('next');
     })
     this.$prev.addEventListener('click', () => {
-      if (!this.played) this.slide('prev');
+      if (!this.played && this.initialized) this.slide('prev');
     })
     this.swipes = SwipeListener(this.$parent);
     this.$parent.addEventListener('swipe', (event) => {
       let dir = event.detail.directions;
-      if (dir.left && !this.played) this.slide('next');
-      else if (dir.right && !this.played) this.slide('prev');
+      if (dir.left && !this.played && this.initialized) this.slide('next');
+      else if (dir.right && !this.played && this.initialized) this.slide('prev');
     });
 
     document.addEventListener('keyup', (event) => {
-      if (event.code == 'ArrowRight' && !this.played) this.slide('next');
-      else if (event.code == 'ArrowLeft' && !this.played) this.slide('prev');
+      if (event.code == 'ArrowRight' && !this.played && this.initialized) this.slide('next');
+      else if (event.code == 'ArrowLeft' && !this.played && this.initialized) this.slide('prev');
     });
 
 
@@ -856,7 +858,30 @@ class Video {
     });
     window.addEventListener('resize', this.resize);
     if(!mobile()) window.addEventListener('scroll', this.checkHeader);
+
+
+    //final check
+    let loaded = 0;
+    [this.$video_reversed, this.$video_normal].forEach(($element)=>{
+      $element.addEventListener('play', ()=>{
+        if(!this.initialized) {
+          $element.pause();
+          loaded++;
+          if(loaded==2) {
+            this.initialized = true;
+            for(let el of [this.$video_reversed, this.$video_normal]) {
+              el.classList.add('loaded');
+              console.log('ok')
+            }
+
+          }
+        }
+      })
+      $element.play();
+    })
+
   }
+
 
   slide(direction) {
     this.played = true;
@@ -890,11 +915,11 @@ class Video {
     let play = (video1, video2, point1, point2) => {
       video1.play();
       if (video1 == vn) {
-        vn.style.display = 'block';
-        vr.style.display = 'none';
+        vn.style.zIndex = '2';
+        vr.style.zIndex = '1';
       } else {
-        vr.style.display = 'block';
-        vn.style.display = 'none';
+        vr.style.zIndex = '2';
+        vn.style.zIndex = '1';
       }
       video2.currentTime = point2;
       this.interval = setInterval(() => {

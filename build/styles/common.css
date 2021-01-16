@@ -3541,7 +3541,12 @@ table:not([class]) {
     display: block;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); }
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 500ms ease-in-out;
+    pointer-events: none; }
+    .video-slider__video.loaded {
+      opacity: 1; }
   .video-slider__content .container {
     position: relative;
     height: 100%; }
