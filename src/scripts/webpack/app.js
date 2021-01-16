@@ -916,8 +916,10 @@ class Video {
       video1.style.zIndex = '2';
       video2.style.zIndex = '1';
       video1.play();
-      video2.currentTime = point2-time;
-      video2.play();
+      setTimeout(()=>{
+        video2.currentTime = (point2-time)+0.5;
+        video2.play();
+      }, 500)
       this.interval = setInterval(() => {
         if (video1.currentTime >= point1) {
           video1.currentTime = point1;
