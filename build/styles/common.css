@@ -4679,6 +4679,8 @@ table:not([class]) {
       transform: rotate(0); }
     .v-section__btn .icon.back {
       transform: rotate(180deg); }
+    .v-section__btn .icon.top {
+      transform: rotate(270deg); }
   .v-section__content {
     padding-top: inherit;
     padding-bottom: inherit;

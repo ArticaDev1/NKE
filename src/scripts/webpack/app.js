@@ -1031,6 +1031,7 @@ class VSection {
       //
       this.$button_icon.classList.remove('forward');
       this.$button_icon.classList.remove('back');
+      this.$button_icon.classList.remove('top');
       
       //до
       if(scroll<min_scroll) {
@@ -1042,6 +1043,7 @@ class VSection {
             factor = -(1-((bscroll-min_scroll)/ch))/v,
             val = ((ch/2)+30)*factor;
         this.$button.style.transform = `translate3d(0, ${val}px, 0)`;
+        if(this.old_scroll>scroll && scroll>0) this.$button_icon.classList.add('top')
       } 
 
       //фикс
@@ -1066,6 +1068,7 @@ class VSection {
         let factor = (scroll-max_scroll)/ch,
             val = ((ch/3))*factor;
         this.$button.style.transform = `translate3d(0, ${val}px, 0)`;
+        if(this.old_scroll>scroll) this.$button_icon.classList.add('top')
       } 
 
       this.old_scroll = scroll;
