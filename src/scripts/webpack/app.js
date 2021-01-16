@@ -833,13 +833,11 @@ class Video {
 
     this.$next.addEventListener('click', () => {
       if (!this.played && this.initialized) {
-        document.querySelector('.consol').insertAdjacentHTML('beforeend', '<span>nextclick </span>')
         this.slide('next');
       }
     })
     this.$prev.addEventListener('click', () => {
       if (!this.played && this.initialized) {
-        document.querySelector('.consol').insertAdjacentHTML('beforeend', '<span>prevclick </span>')
         this.slide('prev');
       }
     })
@@ -919,7 +917,6 @@ class Video {
     }
 
     let play = (video1, video2, point1, point2) => {
-      document.querySelector('.consol').insertAdjacentHTML('beforeend', '<span>start </span>')
       video1.style.zIndex = '2';
       video2.style.zIndex = '1';
       video1.play();
@@ -929,14 +926,13 @@ class Video {
       }, 500)
       this.interval = setInterval(() => {
         if (video1.currentTime >= point1) {
-          document.querySelector('.consol').insertAdjacentHTML('beforeend', '<span>stop </span>')
+          clearInterval(this.interval);
           video1.currentTime = point1;
           video2.currentTime = point2;
           video1.pause();
           video2.pause();
           this.played = false;
           this.$content.classList.remove('disabled');
-          clearInterval(this.interval);
         }
       }, 50)
     }
