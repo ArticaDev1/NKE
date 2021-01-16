@@ -680,13 +680,14 @@ const mobileWindow = {
     let $window = document.querySelector('[data-mobile-window]');
     if ($window) {
       $window.style.height = `${this.h}px`;
+      let wh = $window.getBoundingClientRect().height;
       if ($window.closest('.home')) {
         let $block = document.querySelector('.home-more'),
             $bg = document.querySelector('.home-screen__background'),
           h = $block.getBoundingClientRect().height;
         $window.style.paddingBottom = `${h+50}px`;
         $block.style.marginTop = `${-h}px`;
-        $bg.style.height = `${this.h-h}px`;
+        $bg.style.height = `${wh-h}px`;
       }
     }
   }
