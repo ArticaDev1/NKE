@@ -913,22 +913,20 @@ class Video {
     }
 
     let play = (video1, video2, point1, point2) => {
+      video1.style.zIndex = '2';
+      video2.style.zIndex = '1';
       video1.play();
-      if (video1 == vn) {
-        vn.style.zIndex = '2';
-        vr.style.zIndex = '1';
-      } else {
-        vr.style.zIndex = '2';
-        vn.style.zIndex = '1';
-      }
-      video2.currentTime = point2;
+      video2.currentTime = point2-time;
+      video2.play();
       this.interval = setInterval(() => {
         if (video1.currentTime >= point1) {
           video1.currentTime = point1;
+          video2.currentTime = point2;
           video1.pause();
-          clearInterval(this.interval);
+          video2.pause();
           this.played = false;
           this.$content.classList.remove('disabled');
+          clearInterval(this.interval);
         }
       }, 50)
     }

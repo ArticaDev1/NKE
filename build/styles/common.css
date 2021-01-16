@@ -3546,7 +3546,7 @@ table:not([class]) {
     transition: opacity 500ms ease-in-out;
     pointer-events: none; }
     .video-slider__video.loaded {
-      opacity: 1; }
+      opacity: 0.9; }
   .video-slider__content .container {
     position: relative;
     height: 100%; }
