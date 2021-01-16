@@ -1,4 +1,6 @@
 :root {
+  --opacity-light: 0;
+  --opacity-dark: 1;
   --color-tt-dot: #fff;
   --color-tt-bg: #434BC3;
   --pos-tt: 24px;
