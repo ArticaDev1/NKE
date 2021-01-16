@@ -445,7 +445,7 @@ const Nav = {
   close: function () {
     this.timeout = setTimeout(() => {
       $header.classList.remove('header_nav-opened');
-    }, Math.max(0, (this.animation.time() - 0.3) * 1000));
+    }, Math.max(0, (this.animation.time() - 0.2) * 1000));
     this.$nav.classList.remove('nav_opened');
     this.$toggle.classList.remove('active');
     this.state = false;

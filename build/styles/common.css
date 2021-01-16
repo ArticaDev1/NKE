@@ -4742,7 +4742,7 @@ table:not([class]) {
     width: 100%;
     height: 100%;
     background-color: var(--color-bg-light);
-    transition: background-color 200ms ease-in-out, opacity 200ms ease-in-out;
+    transition: background-color 200ms ease-in-out, opacity 300ms ease-in-out;
     pointer-events: none;
     z-index: 0;
     top: 0;
@@ -4754,8 +4754,6 @@ table:not([class]) {
   .header_fixed .nav-toggle__burger > span span,
   .header_fixed .nav-toggle__close span:before {
     background-color: var(--color-btn-dark); }
-  .header_nav-opened .header__phone {
-    opacity: 0; }
   .header_nav-opened .nav-toggle[data-touch] .nav-toggle__close span:before, .header_nav-opened .nav-toggle[data-hover] .nav-toggle__close span:before {
     background-color: var(--color-btn-dark-hover); }
   .header_nav-opened .nav-toggle[data-focus] .nav-toggle__close span:before {
@@ -4775,9 +4773,7 @@ table:not([class]) {
     .header_fixed .header__container {
       border-color: transparent; }
     .header_fixed .header__phone {
-      color: var(--color-btn-dark);
-      position: relative;
-      z-index: 2; }
+      color: var(--color-btn-dark); }
       .header_fixed .header__phone[data-touch], .header_fixed .header__phone[data-hover] {
         color: var(--color-btn-dark-hover); }
       .header_fixed .header__phone[data-focus] {
@@ -4790,13 +4786,15 @@ table:not([class]) {
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid var(--color-text-light);
-    transition: height 200ms ease-in-out, border-color 200ms ease-in-out; }
+    transition: height 300ms ease-in-out, border-color 300ms ease-in-out; }
   .header__phone {
     display: inline-block;
     margin: 0 52px 0 0;
     text-decoration: none;
-    transition: opacity 200ms ease-in-out, color 200ms ease-in-out;
-    color: var(--color-btn-light); }
+    transition: opacity 200ms ease-in-out, color 100ms ease-in-out;
+    color: var(--color-btn-light);
+    position: relative;
+    z-index: 2; }
     .header__phone[data-touch], .header__phone[data-hover] {
       color: var(--color-btn-light-hover); }
     .header__phone[data-focus] {
@@ -4809,10 +4807,10 @@ table:not([class]) {
     z-index: 2; }
   .header__logo {
     height: 46px;
-    transition: height 200ms ease-in-out;
+    transition: height 300ms ease-in-out;
     color: inherit; }
     .header__logo .logo-words {
-      transition: opacity 200ms ease-in-out; }
+      transition: opacity 300ms ease-in-out; }
   @media (max-width: 1599.98px) {
     .header__container {
       height: 90px; } }
