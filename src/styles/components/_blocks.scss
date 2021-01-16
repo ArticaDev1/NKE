@@ -586,6 +586,10 @@
     width: calc(100% + #{$container-padding-x * 2});
     padding-top: 140%;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
+    img {
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
   }
   &__content {
     transition: margin-top $trs4, padding-bottom $trs4, transform $trs4;
@@ -745,6 +749,9 @@
       content: '';
       display: block;
       padding-top: 100%;
+    }
+    img {
+      border-radius: 100%;
     }
   }
   &__info {
