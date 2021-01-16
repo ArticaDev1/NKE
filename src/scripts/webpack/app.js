@@ -97,7 +97,7 @@ window.onload = function () {
   //lazy
   setTimeout(()=>{
     lazySizes.init();
-  }, 500)
+  }, 250)
 }
 
 const TouchHoverEvents = {
