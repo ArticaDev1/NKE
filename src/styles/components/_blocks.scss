@@ -973,6 +973,11 @@
     }
   }
   @include media-breakpoint-down(xl) {
+    &__splide {
+      width: 1280px;
+      margin-left: 50%;
+      transform: translateX(-50%);
+    }
     &__head {
       padding-bottom: 40px;
       border-bottom: none;
@@ -984,8 +989,6 @@
   @include media-breakpoint-down(lg) {
     &__splide {
       width: 1000px;
-      margin-left: 50%;
-      transform: translateX(-50%);
     }
   }
   @include media-breakpoint-down(md) {
@@ -1115,9 +1118,23 @@
       }
     }
   }
+
   @include media-breakpoint-down(xl) {
     &__background {
       margin-bottom: 22px;
+      height: 320px;
+    }
+    &__image {
+      top: 15px;
+      height: 290px;
+      width: 100%;
+      transform: scale(1.18);
+      overflow: hidden;
+      img {
+        height: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+      }
     }
     &__index {
       transform: translate(-50%, -38px);
@@ -1131,65 +1148,32 @@
       .wwork-slide {
         &__image {
           transform: translateY(40px);
+          height: 180px;
         }
         &__index {
           opacity: 0;
         }
         &__content {
-          transform: translate(30px, calc(-14em + 40px));
+          transform: translate(30px, -100px);
         }
       }
     }
   }
   @include media-breakpoint-down(lg) {
     opacity: 1;
-    &__background {
-      height: 34em;
-    }
-    &__image {
-      height: 34em;
-    }
     &:not(.is-active) {
       opacity: 0.6;
-      .wwork-slide {
-        &__image {
-          height: 14em;
-        }
-        &__content {
-          transform: translate(30px, calc(-20em + 40px));
-        }
-      }
     }
   }
   @include media-breakpoint-down(sm) {
     &__title {
       opacity: 1;
     }
-    &__text {
-      font-size: 0.875rem;
-    }
-    &__background {
-      height: 70em;
-    }
-    &__image {
-      height: 70em;
-      overflow: hidden;
-      img {
-        height: 70em;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-    }
+    
     &:not(.is-active) {
       .wwork-slide {
         &__title {
           opacity: 0;
-        }
-        &__image {
-          height: 30em;
-        }
-        &__content {
-          transform: translate(30px, calc(-40em + 40px));
         }
       }
     }
