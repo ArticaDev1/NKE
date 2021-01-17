@@ -22,7 +22,7 @@ const $wrapper = document.querySelector('.wrapper');
 const $header = document.querySelector('.header');
 const Speed = 1;
 
-const dev = true;
+const dev = false;
 
 //get width
 const contentWidth = () => {
@@ -777,12 +777,33 @@ class Video {
     this.$title = this.$parent.querySelectorAll('.video-slider__title');
     this.$text = this.$parent.querySelectorAll('.video-slider__text-item');
 
-    this.points_normal = this.points;
-    this.points_normal.unshift(0);
-    this.points_normal.push(this.$video_normal.duration);
-    this.points_reversed = [];
-    for (let point of this.points_normal) {
-      this.points_reversed.push(this.$video_normal.duration - point);
+    //load videos
+    let loaded = 0;
+    [this.$video_reversed, this.$video_normal].forEach(($element)=>{
+      let $src = $element.querySelector('source'),
+          src = $src.getAttribute('data-src');
+      $src.removeAttribute('data-src');
+      $src.setAttribute('src', src);
+      $element.addEventListener('canplaythrough', (event)=>{
+        loaded++;
+        if(loaded==2) this.loaded();
+      })
+      $element.load();
+    })
+
+    this.loaded = ()=> {
+      this.points_normal = this.points;
+      this.points_normal.unshift(0);
+      this.points_normal.push(this.$video_normal.duration);
+      this.points_reversed = [];
+      for (let point of this.points_normal) {
+        this.points_reversed.push(this.$video_normal.duration - point);
+      }
+      this.$video_normal.classList.add('loaded');
+      setTimeout(()=>{
+        this.$video_reversed.classList.add('loaded');
+      })
+      this.initialized = true;
     }
 
     //create timeline
@@ -861,13 +882,16 @@ class Video {
     this.swipes = SwipeListener(this.$parent);
     this.$parent.addEventListener('swipe', (event) => {
       let dir = event.detail.directions;
-      if (dir.left && !this.played && this.initialized) this.slide('next');
-      else if (dir.right && !this.played && this.initialized) this.slide('prev');
+      if(!this.played && this.initialized) {
+        if (dir.left) this.slide('next');
+        else if (dir.right) this.slide('prev');
+      }
     });
-
     document.addEventListener('keyup', (event) => {
-      if (event.code == 'ArrowRight' && !this.played && this.initialized) this.slide('next');
-      else if (event.code == 'ArrowLeft' && !this.played && this.initialized) this.slide('prev');
+      if(!this.played && this.initialized) {
+        if (event.code == 'ArrowRight') this.slide('next');
+        else if (event.code == 'ArrowLeft') this.slide('prev');
+      }
     });
 
     
@@ -881,25 +905,6 @@ class Video {
     //autoscroll
     this.autoScroll();
     window.addEventListener('scroll', this.autoScroll);
-
-    //final check
-    let loaded = 0;
-    [this.$video_reversed, this.$video_normal].forEach(($element)=>{
-      $element.addEventListener('play', ()=>{
-        if(!this.initialized) {
-          $element.pause();
-          loaded++;
-          if(loaded==2) {
-            this.initialized = true;
-            for(let el of [this.$video_reversed, this.$video_normal]) {
-              el.classList.add('loaded');
-            }
-
-          }
-        }
-      })
-      $element.play();
-    })
   }
 
 
@@ -946,8 +951,8 @@ class Video {
     }
 
     let play = (video1, video2, point1, point2) => {
-      video1.style.zIndex = '2';
-      video2.style.zIndex = '1';
+      video1.style.zIndex = '3';
+      video2.style.zIndex = '2';
       video1.play();
       setTimeout(()=>{
         video2.currentTime = point2;
