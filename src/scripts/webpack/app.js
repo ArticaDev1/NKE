@@ -22,7 +22,7 @@ const $wrapper = document.querySelector('.wrapper');
 const $header = document.querySelector('.header');
 const Speed = 1;
 
-const dev = false;
+const dev = true;
 
 //get width
 const contentWidth = () => {
