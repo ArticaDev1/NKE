@@ -4905,7 +4905,12 @@ table:not([class]) {
     .wwork-slide__background {
       height: 70em; }
     .wwork-slide__image {
-      height: 70em; }
+      height: 70em;
+      overflow: hidden; }
+      .wwork-slide__image img {
+        height: 70em;
+        top: 50%;
+        transform: translateY(-50%); }
     .wwork-slide:not(.is-active) .wwork-slide__title {
       opacity: 0; }
     .wwork-slide:not(.is-active) .wwork-slide__image {

@@ -1173,6 +1173,12 @@
     }
     &__image {
       height: 70em;
+      overflow: hidden;
+      img {
+        height: 70em;
+        top: 50%;
+        transform: translateY(-50%);
+      }
     }
     &:not(.is-active) {
       .wwork-slide {
