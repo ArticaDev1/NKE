@@ -22,7 +22,7 @@ const $wrapper = document.querySelector('.wrapper');
 const $header = document.querySelector('.header');
 const Speed = 1;
 
-const dev = true;
+const dev = false;
 
 //get width
 const contentWidth = () => {
@@ -464,13 +464,13 @@ function inputs() {
 
     $input.addEventListener('blur', () => {
       let value = $input.value;
-      if (validate.single(value, {
-          presence: {
-            allowEmpty: false
-          }
-        }) !== undefined) {
+      if (validate.single(value, {presence: {allowEmpty: false}}) !== undefined) {
         $input.value = '';
         $input.parentNode.classList.remove('focused');
+        //textarea
+        if($input.tagName=='TEXTAREA') {
+          $input.style.height = '45px';
+        }
       }
     })
 
@@ -774,6 +774,8 @@ class Video {
     this.$index_value = this.$parent.querySelector('.video-slider__timeline-item span');
     this.$next = this.$parent.querySelector('.video-slider__next');
     this.$prev = this.$parent.querySelector('.video-slider__prev');
+    this.$title = this.$parent.querySelectorAll('.video-slider__title');
+    this.$text = this.$parent.querySelectorAll('.video-slider__text-item');
 
     this.points_normal = this.points;
     this.points_normal.unshift(0);
@@ -785,8 +787,12 @@ class Video {
 
     //create timeline
     this.$time_item.style.width = `${100/(this.points.length)}%`;
+    //
+    this.$index_value.textContent = '01';
+    gsap.set(this.$title[0], {autoAlpha:1})
+    gsap.set(this.$text[0], {autoAlpha:1})
 
-    
+
 
     this.resize = () => {
       let h = this.$wrapper.getBoundingClientRect().height,
@@ -804,17 +810,28 @@ class Video {
           $video.style.height = `${h}px`;
         })
       }
-    }
 
-    this.checkHeader = () => {
-      let h = this.$parent.getBoundingClientRect().height,
-          y = this.$parent.getBoundingClientRect().top,
-          t = this.$parent.getBoundingClientRect().top + pageYOffset;
+      //content
+      let h1 = [], h2 = [];
+      this.$title.forEach(($element, index)=>{
+        h1[index] = $element.getBoundingClientRect().height;
+      })
+      this.$text.forEach(($element, index)=>{
+        h2[index] = $element.getBoundingClientRect().height;
+      })
+      let v1 = Math.max(...h1), v2 = Math.max(...h2);
+      this.$title[0].parentNode.style.height = `${v1}px`;
+      this.$text[0].parentNode.style.height = `${v2}px`;
+    } 
 
-      if (this.hhtimeout) clearTimeout(this.hhtimeout)
+    this.autoScroll = () => {
+      if (this.autoscroll_timeout) clearTimeout(this.autoscroll_timeout);
+      let h = this.$parent.getBoundingClientRect().height;
       if(!Scroll.inScroll && h==window.innerHeight) {
+        let y = this.$parent.getBoundingClientRect().top,
+            t = this.$parent.getBoundingClientRect().top + pageYOffset;
         if (h/3 - y > 0 && h * 1.33 > window.innerHeight - y) {
-          this.hhtimeout = setTimeout(() => {
+          this.autoscroll_timeout = setTimeout(() => {
             Scroll.scrollTop(t, Speed);
           }, 100)
         } 
@@ -853,16 +870,17 @@ class Video {
       else if (event.code == 'ArrowLeft' && !this.played && this.initialized) this.slide('prev');
     });
 
-
-    this.resize();
-    if(!mobile()) this.checkHeader();
-    this.checkButtons(this.index);
+    
+    this.checkButtons(0);
     window.addEventListener('wheel', ()=>{
       if(Scroll.inScroll) Scroll.stop();
     });
+    //resize
+    this.resize();
     window.addEventListener('resize', this.resize);
-    if(!mobile()) window.addEventListener('scroll', this.checkHeader);
-
+    //autoscroll
+    this.autoScroll();
+    window.addEventListener('scroll', this.autoScroll);
 
     //final check
     let loaded = 0;
@@ -875,7 +893,6 @@ class Video {
             this.initialized = true;
             for(let el of [this.$video_reversed, this.$video_normal]) {
               el.classList.add('loaded');
-              console.log('ok')
             }
 
           }
@@ -883,7 +900,6 @@ class Video {
       })
       $element.play();
     })
-
   }
 
 
@@ -901,7 +917,20 @@ class Video {
         pr = this.points_reversed[index],
         time = Math.abs(pn - this.points_normal[this.index]);
 
-    gsap.to(this.$time_item, {xPercent: 100 * index, duration: time, ease: 'power2.inOut'})
+    gsap.to(this.$time_item, {xPercent: 100 * index, duration: time, ease: 'power2.inOut'});
+
+    //change text
+    let $items_old = [this.$title[this.index], this.$text[this.index]],
+        $items_new = [this.$title[index], this.$text[index]],
+        x, y;
+    if(window.innerWidth>=brakepoints.xl) {x=0;y=40;}
+    else {y=40;y=0;}
+    let animation_start = gsap.timeline({paused:true})
+      .to($items_old, {autoAlpha:0, duration:Speed*0.5, ease:'power2.inOut', stagger:{amount:Speed*0.1}})
+      .to($items_old, {y:-y, x:-x, duration:Speed*0.5, ease:'power2.in', stagger:{amount:Speed*0.1}}, `-=${Speed*0.6}`)
+    let animation_finish = gsap.timeline({paused:true})
+      .fromTo($items_new, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.5, ease:'power2.inOut', stagger:{amount:Speed*0.1}})
+      .fromTo($items_new, {y:y, x:x}, {y:0, x:0, duration:Speed*0.5, ease:'power2.out', stagger:{amount:Speed*0.1}}, `-=${Speed*0.6}`)
 
     let changeIndex = (time, x) => {
       gsap.timeline()
@@ -931,14 +960,17 @@ class Video {
           video2.currentTime = point2;
           video1.pause();
           video2.pause();
-          this.played = false;
-          this.$content.classList.remove('disabled');
+          this.$parent.classList.remove('disabled');
+          animation_finish.play().eventCallback('onComplete', ()=>{
+            this.played = false;
+          });
         }
       }, 50)
     }
 
     this.checkButtons(index);
-    this.$content.classList.add('disabled');
+    this.$parent.classList.add('disabled');
+    animation_start.play();
     if (direction == 'next') {
       play(vn, vr, pn, pr);
       changeIndex(time, 15);
@@ -971,7 +1003,6 @@ class WorkSlider {
             $target.parentNode.classList.add('is-active');
           }, 200)
         }
-        
       } 
       
       else if((event.type=='customMouseleave' && event.detail.target==$target) || (event.type=='customTouchend' && $target)) {
@@ -982,7 +1013,29 @@ class WorkSlider {
         $target.parentNode.classList.remove('is-active');
       }
     }
-    
+
+    let Click = (event)=> {
+      let $target = event.target!==document?event.target.closest('.work-slide'):false,
+          slide_index,
+          next_index;
+
+      if($target) {
+        this.$slider.querySelectorAll('.work-slide').forEach(($this, index)=>{
+          if($this.classList.contains('is-active')) {
+            slide_index = index;
+          }
+          if($this==$target) {
+            next_index = index;
+          }
+        })
+        let val = next_index-slide_index;
+        if(val!==0) {
+          if(val>0) val = '+'+val;
+          this.slider.go(val, false)
+        }
+      }
+    }
+
     let check = ()=> {
       if(window.innerWidth<brakepoints.xl && (!this.initialized || !this.flag)) {
         this.flag = true;
@@ -999,6 +1052,7 @@ class WorkSlider {
           speed: Speed*500,
         });
         this.slider.mount();
+        document.addEventListener('click', Click);
 
         //destroy
         if(this.custom_events) {
@@ -1018,23 +1072,19 @@ class WorkSlider {
         document.addEventListener('customMouseleave', Event)
         document.addEventListener('customTouchstart', Event)
         document.addEventListener('customTouchend',   Event)
-
         //destroy
         if(this.slider) {
           this.slider.destroy();
+          document.removeEventListener('click', Click);
           delete this.slider;
         }
       }
-
       this.initialized = true;
     }
+
     check();
     window.addEventListener('resize', check);
-
-  
-    
   }
-  
 }
 
 class VSection {

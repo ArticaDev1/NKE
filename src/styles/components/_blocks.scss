@@ -157,12 +157,6 @@
   &-item {
     padding-top: 50px;
     padding-bottom: 80px;
-    &__index {
-      font-size: 2.125rem;
-      font-size: 1.875rem;
-      line-height: 1.33;
-      font-weight: 700;
-    }
     &__head {
       margin: 0 0 5px 0;
     }
@@ -312,6 +306,7 @@
       flex: 1 1 100%;
       display: flex;
       align-items: center;
+      justify-content: center;
     }
     &__text {
       flex: 0 0 auto;
@@ -327,8 +322,9 @@
         margin-bottom: 8px;
       }
       &__index {
-        margin-bottom: 3px;
+        margin-bottom: 4px;
         font-size: 1.75rem;
+        display: block;
       }
     }
     &__content {
@@ -620,7 +616,7 @@
     }
     &__background {
       padding-top: 140%;
-      margin-bottom: 50px;
+      margin-bottom: 52px;
       position: relative;
       display: flex;
       justify-content: center;
@@ -706,7 +702,7 @@
     &__index {
       transition: opacity $trs4;
       bottom: 100%;
-      transform: translate(-50%, -25px);
+      transform: translate(-50%, -27px);
     }
     &__title {
       transition: opacity $trs4;
@@ -756,6 +752,9 @@
     &__image {
       height: 270px;
     }
+    &__index {
+      transform: translate(-50%, -25px);
+    }
     &__content {
       width: calc(100% + 66px);
       transform: translate(-33px, 0);
@@ -784,7 +783,8 @@
       padding-top: 20px;
     }
     &__index {
-      transform: translate(-50%, -13px);
+      transform: translate(-50%, -14px);
+      font-size: 1.75rem;
     }
     &:not(.is-active) {
       .work-slide {
