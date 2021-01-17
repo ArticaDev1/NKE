@@ -26,3 +26,33 @@ section.section.bg-accent.bg-gradient.work-slider
           +slide('', '04', 'Ремонт', 'Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями', remont, './img/wslider/w4.jpg')
           +slide('', '05', 'Обучение', 'Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями', education, './img/wslider/w5.jpg')
           +slide('', '06', 'Проектирование', 'Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями', engineering, './img/wslider/w6.jpg')
+
+
+section.section.bg-accent.bg-gradient.wwork-slider
+  .container
+    .wwork-slider__head
+      .row
+        h2.h1.wwork-slider__title.section__title.col-xl-6.col-lg-7 Направления деятельности
+        p.offset-xxl-1.offset-xl-2.offset-lg-1.offset-md-6.offset-1.col-lg-4.col-md-6.col-10 Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями и способом бурения.
+  .wwork-slider__content
+    .splide.wwork-slider__splide
+      .splide__track.wwork-slider__splide-track
+        .splide__list.wwork-slider__splide-list
+          mixin slide(c, index, title, text, href, photo)
+            //slide
+            a(href=href class=c).wwork-slide.splide__slide
+              .wwork-slide__background
+                .wwork-slide__image.image.image_cover
+                  img(src=photo, alt="photo")
+              .wwork-slide__content
+                span.wwork-slide__index.h2=index
+                h6.wwork-slide__title=title 
+                p.wwork-slide__text=text
+
+
+          +slide('', '01', 'Производство', 'Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями', proizvodstvo, './img/wslider/w1.jpg')
+          +slide('', '02', 'Аренда', 'Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями', arenda, './img/wslider/w2.jpg')
+          +slide('is-active', '03', 'Сервис', 'Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями', servis, './img/wslider/w3.jpg')
+          +slide('', '04', 'Ремонт', 'Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями', remont, './img/wslider/w4.jpg')
+          +slide('', '05', 'Обучение', 'Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями', education, './img/wslider/w5.jpg')
+          +slide('', '06', 'Проектирование', 'Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями', engineering, './img/wslider/w6.jpg')

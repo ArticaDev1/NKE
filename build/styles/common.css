@@ -4737,6 +4737,182 @@ table:not([class]) {
       padding-right: calc((100% - 1200px)/2);
       padding-left: calc((100% - 1200px)/2); } }
 
+.wwork-slider__head {
+  padding-bottom: 100px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
+
+.wwork-slider__content {
+  position: relative;
+  z-index: 2;
+  margin: -40px 0 0 0;
+  overflow: hidden; }
+
+@media (min-width: 1024px) {
+  .wwork-slider__title {
+    margin: 0;
+    transform: translateY(-6px); } }
+
+@media (min-width: 1280px) {
+  .wwork-slider__splide {
+    visibility: visible !important; }
+  .wwork-slider__splide-list {
+    display: flex;
+    width: 100% !important; }
+  .wwork-slider__splide-track {
+    overflow: visible !important; } }
+
+@media (max-width: 1599.98px) {
+  .wwork-slider__head {
+    padding-bottom: 80px; } }
+
+@media (max-width: 1279.98px) {
+  .wwork-slider__head {
+    padding-bottom: 40px;
+    border-bottom: none; }
+  .wwork-slider__content {
+    margin: 0; } }
+
+@media (max-width: 1023.98px) {
+  .wwork-slider__splide {
+    width: 1000px;
+    margin-left: 50%;
+    transform: translateX(-50%); } }
+
+@media (max-width: 767.98px) {
+  .wwork-slider__head {
+    text-align: center; } }
+
+@media (max-width: 575.98px) {
+  .wwork-slider__splide {
+    width: 880px; } }
+
+.wwork-slide {
+  position: relative;
+  display: block;
+  z-index: 2;
+  transition: z-index 0.2s step-start, transform 400ms ease-in-out, opacity 400ms ease-in-out;
+  font-size: 1vw; }
+  .wwork-slide__background {
+    height: 24em;
+    margin-bottom: 50px;
+    position: relative;
+    display: flex;
+    justify-content: center; }
+  .wwork-slide__image {
+    transition: box-shadow 400ms ease-in-out, transform 400ms ease-in-out, width 400ms ease-in-out, height 400ms ease-in-out;
+    position: absolute;
+    top: 0;
+    width: calc(100% + 48px);
+    transform: translate(0);
+    height: 24em;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15); }
+    .wwork-slide__image img {
+      opacity: 1 !important;
+      visibility: visible !important;
+      max-width: initial !important; }
+  .wwork-slide__content {
+    transition: margin-top 400ms ease-in-out, padding-bottom 400ms ease-in-out, transform 400ms ease-in-out;
+    position: relative;
+    transform: translateX(0);
+    top: 0;
+    margin-top: 0;
+    padding-bottom: 0; }
+  .wwork-slide__title {
+    transition: opacity 400ms ease-in-out; }
+  .wwork-slide__index {
+    transition: transform 400ms ease-in-out, opacity 400ms ease-in-out, visibility 400ms ease-in-out;
+    position: absolute;
+    z-index: 2;
+    bottom: 100%;
+    margin: 0 !important;
+    transform: translateY(-30px); }
+  .wwork-slide__text {
+    transition: opacity 400ms ease-in-out, visibility 400ms ease-in-out;
+    opacity: 1;
+    visibility: visible;
+    font-size: 1rem; }
+  .wwork-slide:not(.is-active) {
+    z-index: 1;
+    transition: z-index 0.2s step-end, transform 200ms ease-in-out, opacity 200ms ease-in-out; }
+    .wwork-slide:not(.is-active) .wwork-slide__image {
+      transition: box-shadow 200ms ease-in-out, transform 200ms ease-in-out, width 200ms ease-in-out, height 200ms ease-in-out;
+      transform: translateY(80px);
+      box-shadow: none;
+      width: 100%;
+      height: 10em; }
+    .wwork-slide:not(.is-active) .wwork-slide__title {
+      transition: opacity 200ms ease-in-out; }
+    .wwork-slide:not(.is-active) .wwork-slide__index {
+      transition: transform 200ms ease-in-out, opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+      transform: translateY(-34px); }
+    .wwork-slide:not(.is-active) .wwork-slide__content {
+      transition: margin-top 200ms ease-in-out, padding-bottom 200ms ease-in-out, transform 200ms ease-in-out;
+      transform: translate(50px, calc(-14em + 50px)); }
+    .wwork-slide:not(.is-active) .wwork-slide__text {
+      transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out;
+      opacity: 0;
+      visibility: hidden; }
+  @media (min-width: 1280px) {
+    .wwork-slide {
+      flex: 1 1 100%; }
+      .wwork-slide:first-child .wwork-slide__image img, .wwork-slide:last-child .wwork-slide__image img {
+        width: calc(100% + 5px); }
+      .wwork-slide:first-child {
+        transform: translateX(24px); }
+        .wwork-slide:first-child .wwork-slide__image img {
+          width: calc(100% + 5px);
+          transform: translateX(-5px); }
+      .wwork-slide:last-child {
+        transform: translateX(-24px); }
+      .wwork-slide:not(.is-active) {
+        transform: translate(0); } }
+  @media (max-width: 1599.98px) {
+    .wwork-slide:not(.is-active) .wwork-slide__content {
+      transform: translate(30px, calc(-14em + 50px)); } }
+  @media (max-width: 1279.98px) {
+    .wwork-slide__background {
+      margin-bottom: 22px; }
+    .wwork-slide__index {
+      transform: translate(-50%, -38px);
+      opacity: 1; }
+    .wwork-slide__content {
+      width: calc(100% + 48px);
+      transform: translateX(-24px); }
+    .wwork-slide:not(.is-active) .wwork-slide__image {
+      transform: translateY(40px); }
+    .wwork-slide:not(.is-active) .wwork-slide__index {
+      opacity: 0; }
+    .wwork-slide:not(.is-active) .wwork-slide__content {
+      transform: translate(30px, calc(-14em + 40px)); } }
+  @media (max-width: 1023.98px) {
+    .wwork-slide {
+      opacity: 1; }
+      .wwork-slide__background {
+        height: 34em; }
+      .wwork-slide__image {
+        height: 34em; }
+      .wwork-slide:not(.is-active) {
+        opacity: 0.6; }
+        .wwork-slide:not(.is-active) .wwork-slide__image {
+          height: 14em; }
+        .wwork-slide:not(.is-active) .wwork-slide__content {
+          transform: translate(30px, calc(-20em + 40px)); } }
+  @media (max-width: 575.98px) {
+    .wwork-slide__title {
+      opacity: 1; }
+    .wwork-slide__text {
+      font-size: 0.875rem; }
+    .wwork-slide__background {
+      height: 70em; }
+    .wwork-slide__image {
+      height: 70em; }
+    .wwork-slide:not(.is-active) .wwork-slide__title {
+      opacity: 0; }
+    .wwork-slide:not(.is-active) .wwork-slide__image {
+      height: 30em; }
+    .wwork-slide:not(.is-active) .wwork-slide__content {
+      transform: translate(30px, calc(-40em + 40px)); } }
+
 /*========== Header ==========*/
 .header {
   flex-shrink: 0;
