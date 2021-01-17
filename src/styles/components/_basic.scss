@@ -9,6 +9,7 @@ body {
   min-width: 320px;
   transition: color $trs2, background-color $trs2;
   position: relative;
+  text-rendering: geometricPrecision;
   &.mobile {
     background-color: var(--color-bg-accent);
   }

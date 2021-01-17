@@ -926,11 +926,11 @@ class Video {
     if(window.innerWidth>=brakepoints.xl) {x=0;y=40;}
     else {y=40;y=0;}
     let animation_start = gsap.timeline({paused:true})
-      .to($items_old, {autoAlpha:0, duration:Speed*0.5, ease:'power2.inOut', stagger:{amount:Speed*0.1}})
-      .to($items_old, {y:-y, x:-x, duration:Speed*0.5, ease:'power2.in', stagger:{amount:Speed*0.1}}, `-=${Speed*0.6}`)
+      .to($items_old, {autoAlpha:0, duration:Speed*0.5, ease:'power2.inOut', stagger:{amount:Speed*0.05}})
+      .to($items_old, {y:-y, x:-x, duration:Speed*0.5, ease:'power2.in', stagger:{amount:Speed*0.05}}, `-=${Speed*0.55}`)
     let animation_finish = gsap.timeline({paused:true})
-      .fromTo($items_new, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.5, ease:'power2.inOut', stagger:{amount:Speed*0.1}})
-      .fromTo($items_new, {y:y, x:x}, {y:0, x:0, duration:Speed*0.5, ease:'power2.out', stagger:{amount:Speed*0.1}}, `-=${Speed*0.6}`)
+      .fromTo($items_new, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.5, ease:'power2.inOut', stagger:{amount:Speed*0.05}})
+      .fromTo($items_new, {y:y, x:x}, {y:0, x:0, duration:Speed*0.5, ease:'power2.out', stagger:{amount:Speed*0.05}}, `-=${Speed*0.55}`)
 
     let changeIndex = (time, x) => {
       gsap.timeline()
@@ -950,16 +950,13 @@ class Video {
       video2.style.zIndex = '1';
       video1.play();
       setTimeout(()=>{
-        video2.currentTime = (point2-time)+0.5;
-        video2.play();
-      }, 500)
+        video2.currentTime = point2;
+      }, 100)
       this.interval = setInterval(() => {
         if (video1.currentTime >= point1) {
           clearInterval(this.interval);
           video1.currentTime = point1;
-          video2.currentTime = point2;
           video1.pause();
-          video2.pause();
           this.$parent.classList.remove('disabled');
           animation_finish.play().eventCallback('onComplete', ()=>{
             this.played = false;
@@ -975,7 +972,7 @@ class Video {
       play(vn, vr, pn, pr);
       changeIndex(time, 15);
     } else if (direction == 'prev') {
-      play(vr, vn, pr, pn)
+      play(vr, vn, pr, pn);
       changeIndex(time, -15);
     }
     this.index = index;
