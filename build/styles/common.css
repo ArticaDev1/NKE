@@ -4882,7 +4882,7 @@ table:not([class]) {
       transform: scale(1.18);
       overflow: hidden; }
       .wwork-slide__image img {
-        height: 100%;
+        height: 290px;
         top: 50%;
         transform: translateY(-50%); }
     .wwork-slide__index {
