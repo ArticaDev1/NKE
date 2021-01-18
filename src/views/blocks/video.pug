@@ -15,25 +15,36 @@ section.section.video-slider(data-hide-header)
         source(data-src='./videos/analizer_reverse.mp4' type='video/mp4')
       video.video-slider__video.video-slider__video_normal(muted playsinline)
         source(data-src='./videos/analizer.mp4' type='video/mp4')
-
-
   .video-slider__content
     .container
       .video-slider__nav
-        button.video-slider__control.video-slider__prev назад
-        button.video-slider__control.video-slider__next вперед
+        button.video-slider__control.video-slider__prev
+          svg.icon
+            use(xlink:href='./img/icons/icons.svg#arrow')
+        button.video-slider__control.video-slider__next
+          svg.icon
+            use(xlink:href='./img/icons/icons.svg#arrow')
+        span.video-slider__control-round
       .row.video-slider__items
-        .video-slider__label.col-12.h6 Что мы делаем
-        .video-slider__titles.col-xl-4
-          h2.video-slider__title Эталон в газовой влагометрии
-          h2.video-slider__title Анализатор HIGROVISION-MINI
-          h2.video-slider__title Возможность визуального контроля измерений
+        .video-slider__label.h6.order-md-1.col-lg-12.col-md-4 Что мы делаем
+
+        //titles
+        .video-slider__titles.order-md-3.order-lg-2.col-xl-4.col-lg-7.col-md-7
+          h2.video-slider__title Эталон<br> в газовой влагометрии
+          h2.video-slider__title Анализатор<br> HIGROVISION-MINI
+          h2.video-slider__title Визуальный<br> контроль
           h2.video-slider__title Легкое<br> управление
-          h2.video-slider__title Длительная автономная работа
+          h2.video-slider__title Длительная<br> автономная работа
           h2.video-slider__title Удобное<br> использование
           h2.video-slider__title Компактные<br> габариты
 
-        .video-slider__text.col-xl-4
+        .video-slider__timeline.order-md-4.order-lg-4.col-lg-4.col-xl-3.offset-lg-1.col-md-5
+          .video-slider__timeline-line  
+            .video-slider__timeline-item
+              span 
+
+        //text
+        .video-slider__text.order-md-2.order-lg-3.col-xl-4.col-lg-7.col-md-8
           p.video-slider__text-item Анализаторы НПО Вымпел — инновационные средства измерения точки росы, температуры конденсации углеводородов с лазерной системой регистрации сигнала.
           p.video-slider__text-item Компактный, переносной, конденсационный газоанализатор с электронным охлаждением зеркала — лучший вариант для оперативного контроля точки росы по воде и углеводородам.
           p.video-slider__text-item Запатентованная двухканальная оптическая система наблюдения поверхности охлаждаемого зеркала с 40-кратным увеличением (микроскоп).
@@ -42,7 +53,5 @@ section.section.video-slider(data-hide-header)
           p.video-slider__text-item Конструкция гигрометра предусматривает возможность его монтажа на стандартный штатив(тренога для фото-видеосъемки); также прибор может быть установлен на любую плоскую поверхность.
           p.video-slider__text-item Небольшой вес гигрометра (не более 5 кг) и компактные габариты упрощают его применение для оперативного измерения и контроля параметров.
 
-        .video-slider__timeline.col-xl-3.offset-xl-1
-          .video-slider__timeline-line  
-            .video-slider__timeline-item
-              span 
+        
+        

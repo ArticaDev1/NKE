@@ -16,7 +16,7 @@
 
   //buttons
   --color-btn-accent: #252EB6;
-  --color-btn-accent-hover: #3562FF;
+  --color-btn-accent-hover: #434BC3;
   --color-btn-accent-click: #575757;
   --color-btn-light: #fff;
   --color-btn-light-hover: #C4C4C4;
@@ -24,10 +24,12 @@
   --color-btn-dark: #393939;
   --color-btn-dark-hover: #575757;
   --color-btn-dark-click: #252EB6;
+  --color-arrow-hover: #fff;
+
 
   //text
   --color-text-light: #fff;
-  --color-text-accent: #252EB6;
+  --color-text-accent: #434BC3;
   --color-text-dark: #393939;
   --color-text-gray: #575757;
   --color-text-muted: #949494;
@@ -36,14 +38,14 @@
   --color-bg-none: transparent;
   --color-bg-accent: #434BC3;
   --color-bg-light: #F2F3F7;
-  --color-bg-gray: #6F7A8E;
+  --color-bg-gray: #76818B;
   --color-bg-images: #99A2B5;
-  --color-bg-transparent: rgba(0, 0, 0, 0.4);
+  --color-bg-transparent: rgba(39, 25, 25, 0.4);
   --color-bg-overlay: rgba(0, 0, 0, 0.2);
   --color-bg-images: rgba(255, 255, 255, 0.2);
   --color-gradient: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 45%, rgba(255, 255, 255, 0.05) 55%, rgba(255, 255, 255, 0) 100%);
   --color-gradient-skew: linear-gradient(45deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.14) 45%, rgba(255, 255, 255, 0.14) 55%, rgba(255, 255, 255, 0) 100%);
-  --color-quotes: #434BC3;
+  --color-signature: #203485;
 
   //inputs
   --color-input-border: #949494;

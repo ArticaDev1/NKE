@@ -840,7 +840,7 @@
       position: absolute;
       width: 30px;
       height: 24px;
-      color: var(--color-quotes);
+      color: var(--color-bg-accent);
       transition: color $trs2;
       &:first-child {
         top: 0;
@@ -852,15 +852,50 @@
       }
     }
   }
+  &__container {
+    position: relative;
+  }
+  &__signature {
+    position: absolute;
+    width: 280px;
+    height: 85px;
+    right: $container-padding-x;
+    bottom: 0;
+    color: var(--color-signature);
+    transition: color $trs2;
+  }
   &__text {
     position: relative;
     z-index: 2;
+  }
+  @include media-breakpoint-down(xl) {
+    &__container {
+      padding-bottom: 80px;
+    }
+    &__content {
+      .icon-logo {
+        left: 70px;
+      }
+    }
   }
   @include media-breakpoint-down(lg) {
     &__photo {
       width: 100px;
     }
+    &__container {
+      padding-bottom: 60px;
+    }
+    &__signature {
+      width: 190px;
+      height: 52px;
+      right: 110px;
+    }
     &__content {
+      .icon {
+        &:last-child {
+          right: 0;
+        }
+      }
       .icon-logo {
         width: 220px;
         height: 220px;
@@ -876,6 +911,12 @@
     &__photo {
       width: 100%;
       margin: 0;
+    }
+    &__signature {
+      left: 66px;
+      right: auto;
+      width: 163px;
+      height: 61px;
     }
     &__info {
       text-align: left;
@@ -895,10 +936,12 @@
       .icon {
         width: 23px;
         height: 18px;
-        &:last-child {
-          right: 0;
-        }
       }
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    &__signature {
+      left: calc(8.33% + #{$mobile-container-padding-x});
     }
   }
 }

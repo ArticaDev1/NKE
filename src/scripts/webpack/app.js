@@ -777,6 +777,12 @@ class Video {
     this.$title = this.$parent.querySelectorAll('.video-slider__title');
     this.$text = this.$parent.querySelectorAll('.video-slider__text-item');
 
+    //create timeline
+    this.$time_item.style.width = `${100/(this.points.length+2)}%`;
+    this.$index_value.textContent = '01';
+    gsap.set(this.$title[0], {autoAlpha:1})
+    gsap.set(this.$text[0], {autoAlpha:1})
+
     //load videos
     let loaded = 0;
     [this.$video_reversed, this.$video_normal].forEach(($element)=>{
@@ -790,30 +796,6 @@ class Video {
       })
       $element.load();
     })
-
-    this.loaded = ()=> {
-      this.points_normal = this.points;
-      this.points_normal.unshift(0);
-      this.points_normal.push(this.$video_normal.duration);
-      this.points_reversed = [];
-      for (let point of this.points_normal) {
-        this.points_reversed.push(this.$video_normal.duration - point);
-      }
-      this.$video_normal.classList.add('loaded');
-      setTimeout(()=>{
-        this.$video_reversed.classList.add('loaded');
-      })
-      this.initialized = true;
-    }
-
-    //create timeline
-    this.$time_item.style.width = `${100/(this.points.length)}%`;
-    //
-    this.$index_value.textContent = '01';
-    gsap.set(this.$title[0], {autoAlpha:1})
-    gsap.set(this.$text[0], {autoAlpha:1})
-
-
 
     this.resize = () => {
       let h = this.$wrapper.getBoundingClientRect().height,
@@ -847,63 +829,85 @@ class Video {
 
     this.autoScroll = () => {
       if (this.autoscroll_timeout) clearTimeout(this.autoscroll_timeout);
-      let h = this.$parent.getBoundingClientRect().height;
-      if(!Scroll.inScroll && h==window.innerHeight) {
-        let y = this.$parent.getBoundingClientRect().top,
-            t = this.$parent.getBoundingClientRect().top + pageYOffset;
-        if (h/3 - y > 0 && h * 1.33 > window.innerHeight - y) {
-          this.autoscroll_timeout = setTimeout(() => {
-            Scroll.scrollTop(t, Speed);
-          }, 100)
+      if(!mobile()) {
+        let h = this.$parent.getBoundingClientRect().height;
+        if(!Scroll.inScroll && h==window.innerHeight) {
+          let y = this.$parent.getBoundingClientRect().top,
+              t = this.$parent.getBoundingClientRect().top + pageYOffset;
+          if (h/3 - y > 0 && h * 1.33 > window.innerHeight - y) {
+            this.autoscroll_timeout = setTimeout(() => {
+              Scroll.scrollTop(t, Speed);
+            }, 100)
+          } 
         } 
       }
     }
 
-    this.checkButtons = (index) => {
-      this.$prev.classList.remove('disabled');
+    this.checkInfo = ()=> {
+      if(this.index==0) this.first_slide=true;
+      else this.first_slide=false;
+      if(this.index==this.points_normal.length-1) this.last_slide=true;
+      else this.last_slide=false;
+    }
+
+    this.checkButtons = () => {
+      this.$prev.classList.remove('disabled', 'last');
       this.$next.classList.remove('disabled');
-      if (index == 0) {
+      if(this.first_slide) {
         this.$prev.classList.add('disabled');
-      } else if (index == this.points.length - 1) {
+      } else if (this.last_slide) {
         this.$next.classList.add('disabled');
+        this.$prev.classList.add('last');
       }
     }
 
+    //controls events
     this.$next.addEventListener('click', () => {
-      if (!this.played && this.initialized) {
-        this.slide('next');
-      }
+      if (!this.played && this.initialized && !this.last_slide) this.slide('next');
     })
     this.$prev.addEventListener('click', () => {
-      if (!this.played && this.initialized) {
-        this.slide('prev');
-      }
+      if (!this.played && this.initialized && !this.first_slide) this.slide('prev');
     })
     this.swipes = SwipeListener(this.$parent);
     this.$parent.addEventListener('swipe', (event) => {
-      let dir = event.detail.directions;
       if(!this.played && this.initialized) {
-        if (dir.left) this.slide('next');
-        else if (dir.right) this.slide('prev');
+        if (event.detail.directions.left && !this.last_slide) this.slide('next');
+        else if (event.detail.directions.right && !this.first_slide) this.slide('prev');
       }
     });
     document.addEventListener('keyup', (event) => {
       if(!this.played && this.initialized) {
-        if (event.code == 'ArrowRight') this.slide('next');
-        else if (event.code == 'ArrowLeft') this.slide('prev');
+        if (event.code == 'ArrowRight' && !this.last_slide) this.slide('next');
+        else if (event.code == 'ArrowLeft' && !this.first_slide) this.slide('prev');
       }
     });
 
-    
-    this.checkButtons(0);
+    //after videos loaded
+    this.loaded = ()=> {
+      this.points_normal = this.points;
+      this.points_normal.unshift(0);
+      this.points_normal.push(this.$video_normal.duration);
+      this.points_reversed = [];
+      for (let point of this.points_normal) {
+        this.points_reversed.push(this.$video_normal.duration - point);
+      }
+      this.$video_normal.classList.add('loaded');
+      setTimeout(()=>{
+        this.$video_reversed.classList.add('loaded');
+      }, 500)
+      this.checkInfo();
+      this.checkButtons();
+      this.initialized = true;
+    }
+
+    //wheel
     window.addEventListener('wheel', ()=>{
       if(Scroll.inScroll) Scroll.stop();
     });
     //resize
     this.resize();
     window.addEventListener('resize', this.resize);
-    //autoscroll
-    this.autoScroll();
+    //scroll
     window.addEventListener('scroll', this.autoScroll);
   }
 
@@ -917,25 +921,25 @@ class Video {
 
     if (direction == 'next') index = this.index + 1;
     else index = this.index - 1;
-
+    //
     let pn = this.points_normal[index],
         pr = this.points_reversed[index],
         time = Math.abs(pn - this.points_normal[this.index]);
 
     gsap.to(this.$time_item, {xPercent: 100 * index, duration: time, ease: 'power2.inOut'});
 
-    //change text
+    //change text animations
     let $items_old = [this.$title[this.index], this.$text[this.index]],
         $items_new = [this.$title[index], this.$text[index]],
         x, y;
-    if(window.innerWidth>=brakepoints.xl) {x=0;y=40;}
-    else {y=40;y=0;}
+    if(window.innerWidth>=brakepoints.lg) {x=0;y=40;}
+    else {x=60;y=0;}
     let animation_start = gsap.timeline({paused:true})
-      .to($items_old, {autoAlpha:0, duration:Speed*0.5, ease:'power2.inOut', stagger:{amount:Speed*0.05}})
-      .to($items_old, {y:-y, x:-x, duration:Speed*0.5, ease:'power2.in', stagger:{amount:Speed*0.05}}, `-=${Speed*0.55}`)
+      .to($items_old, {autoAlpha:0, duration:Speed*0.5, ease:'power2.inOut', stagger:{amount:Speed*0.1}})
+      .to($items_old, {y:-y, x:-x, duration:Speed*0.5, ease:'power2.in', stagger:{amount:Speed*0.1}}, `-=${Speed*0.6}`)
     let animation_finish = gsap.timeline({paused:true})
-      .fromTo($items_new, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.5, ease:'power2.inOut', stagger:{amount:Speed*0.05}})
-      .fromTo($items_new, {y:y, x:x}, {y:0, x:0, duration:Speed*0.5, ease:'power2.out', stagger:{amount:Speed*0.05}}, `-=${Speed*0.55}`)
+      .fromTo($items_new, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.5, ease:'power2.inOut', stagger:{amount:Speed*0.1}})
+      .fromTo($items_new, {y:y, x:x}, {y:0, x:0, duration:Speed*0.5, ease:'power2.out', stagger:{amount:Speed*0.1}}, `-=${Speed*0.6}`)
 
     let changeIndex = (time, x) => {
       gsap.timeline()
@@ -963,16 +967,30 @@ class Video {
           video1.currentTime = point1;
           video1.pause();
           this.$parent.classList.remove('disabled');
-          animation_finish.play().eventCallback('onComplete', ()=>{
+          if(window.innerWidth>=brakepoints.lg) {
+            animation_finish.play().eventCallback('onComplete', ()=>{
+              this.played = false;
+            });
+          } else {
             this.played = false;
-          });
+          }
         }
       }, 50)
     }
 
-    this.checkButtons(index);
+    this.index = index;
+    this.checkInfo();
+    this.checkButtons();
     this.$parent.classList.add('disabled');
-    animation_start.play();
+
+    if(window.innerWidth<brakepoints.lg) {
+      animation_start.play().eventCallback('onComplete', ()=>{
+        animation_finish.play();
+      })
+    } else {
+      animation_start.play();
+    }
+
     if (direction == 'next') {
       play(vn, vr, pn, pr);
       changeIndex(time, 15);
@@ -980,7 +998,7 @@ class Video {
       play(vr, vn, pr, pn);
       changeIndex(time, -15);
     }
-    this.index = index;
+
   }
 }
 

@@ -37,11 +37,10 @@ block content
               span.h6 лет на рынке
             p Единственный преемник корпорации T.D. Williamson в России
 
-
   include blocks/video
 
   section.section.about.bg-light
-    .container
+    .container.about__container
       .row
         .about__head.col-xl-3.col-md-4
           .row
@@ -61,9 +60,10 @@ block content
               p Картина «Московский дворик» была представлена на московской части 6-й выставки Товарищества передвижных художественных выставок («передвижников»), открывшейся в мае 1878 года.<br> Она стала первым произведением Поленова, представленным на передвижных выставках. Прямо с выставки полотно было приобретено у автора Павлом Третьяковым.
             svg.icon
               use(xlink:href='./img/icons/icons.svg#quotes')
+      svg.about__signature
+        use(xlink:href='./img/icons/icons.svg#signature')   
 
   include blocks/work-slider
-  
   include blocks/form-section
   include blocks/contacts
 
