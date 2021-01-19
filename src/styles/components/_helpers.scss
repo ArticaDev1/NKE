@@ -37,7 +37,7 @@
   color: var(--color-text-accent);
 }
 
-.image-size-1, .image-size-2, .image-size-3, .image-size-4 {
+.image-size-1, .image-size-2, .image-size-3, .image-size-4, .image-size-5 {
   &::before {
     content: '';
     display: block;
@@ -71,6 +71,16 @@
 .image-size-4 {
   &::before {
     padding-top: 70%;
+  }
+}
+.image-size-5 {
+  &::before {
+    padding-top: 120%;
+  }
+  @include media-breakpoint-down(sm) {
+    &::before {
+      padding-top: 60%;
+    }
   }
 }
 
