@@ -37,69 +37,40 @@
   color: var(--color-text-accent);
 }
 
-.image-size-50, .image-size-60, .image-size-70, 
-.image-size-80, .image-size-90, .image-size-100, 
-.image-size-110, .image-size-120, .image-size-130, 
-.image-size-140, .image-size-150 {
+.image-size-1, .image-size-2, .image-size-3, .image-size-4 {
   &::before {
     content: '';
     display: block;
   }
 }
-
-.image-size-50 {
-  &::before {
-    padding-top: 50%;
-  }
-}
-.image-size-60 {
-  &::before {
-    padding-top: 60%;
-  }
-}
-.image-size-70 {
-  &::before {
-    padding-top: 70%;
-  }
-}
-.image-size-80 {
-  &::before {
-    padding-top: 80%;
-  }
-}
-.image-size-90 {
-  &::before {
-    padding-top: 90%;
-  }
-}
-.image-size-100 {
-  &::before {
-    padding-top: 100%;
-  }
-}
-.image-size-110 {
-  &::before {
-    padding-top: 110%;
-  }
-}
-.image-size-120 {
+.image-size-1 {
   &::before {
     padding-top: 120%;
   }
 }
-.image-size-130 {
+.image-size-2 {
   &::before {
-    padding-top: 130%;
+    padding-top: 50%;
+  }
+  @include media-breakpoint-down(lg) {
+    &::before {
+      padding-top: 60%;
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    &::before {
+      padding-top: 70%;
+    }
   }
 }
-.image-size-140 {
+.image-size-3 {
   &::before {
-    padding-top: 140%;
+    padding-top: 60%;
   }
 }
-.image-size-150 {
+.image-size-4 {
   &::before {
-    padding-top: 150%;
+    padding-top: 70%;
   }
 }
 

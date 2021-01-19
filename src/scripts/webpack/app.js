@@ -85,6 +85,9 @@ window.onload = function () {
   //vsection
   let $vsection = document.querySelector('.v-section');
   if($vsection) new VSection($vsection).init();
+  //bgvideo
+  let $bgvideo = document.querySelector('.background-video');
+  if($bgvideo) new BGVideo($bgvideo).init();
 
 
   //else
@@ -1183,5 +1186,44 @@ class VSection {
     window.addEventListener('scroll', setParams)
 
 
+  }
+}
+
+class BGVideo {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+
+  init() {
+    this.$video = this.$parent.querySelector('.background-video__element');
+    this.$source = this.$video.querySelector('source');
+    this.source = this.$source.getAttribute('data-src');
+
+    this.$source.removeAttribute('data-src');
+    this.$source.setAttribute('src', this.source);
+
+    this.$video.addEventListener('canplaythrough', (event)=>{
+      this.$video.play();
+      this.$video.classList.add('loaded');
+    })
+
+    this.$video.load();
+
+    this.resize = () => {
+      let h = this.$parent.getBoundingClientRect().height,
+          w = contentWidth(),
+          res = 0.5625;
+      if (h / w < res) {
+        this.$video.style.width = `${w}px`;
+        this.$video.style.height = `auto`;
+      } else {
+        this.$video.style.width = `auto`;
+        this.$video.style.height = `${h}px`;
+      }
+    } 
+
+    //resize
+    this.resize();
+    window.addEventListener('resize', this.resize);
   }
 }
