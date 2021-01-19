@@ -8,7 +8,7 @@
 .bg-gray {
   background-color: var(--color-bg-gray);
 }
-.bg-gradient, .bg-skew-gradient {
+.bg-gradient, .bg-gradient-skew {
   position: relative;
   &::before {
     content: '';
@@ -35,4 +35,126 @@
 .color-accent {
   transition: color $trs2;
   color: var(--color-text-accent);
+}
+
+.image-size-50, .image-size-60, .image-size-70, 
+.image-size-80, .image-size-90, .image-size-100, 
+.image-size-110, .image-size-120, .image-size-130, 
+.image-size-140, .image-size-150 {
+  &::before {
+    content: '';
+    display: block;
+  }
+}
+
+.image-size-50 {
+  &::before {
+    padding-top: 50%;
+  }
+}
+.image-size-60 {
+  &::before {
+    padding-top: 60%;
+  }
+}
+.image-size-70 {
+  &::before {
+    padding-top: 70%;
+  }
+}
+.image-size-80 {
+  &::before {
+    padding-top: 80%;
+  }
+}
+.image-size-90 {
+  &::before {
+    padding-top: 90%;
+  }
+}
+.image-size-100 {
+  &::before {
+    padding-top: 100%;
+  }
+}
+.image-size-110 {
+  &::before {
+    padding-top: 110%;
+  }
+}
+.image-size-120 {
+  &::before {
+    padding-top: 120%;
+  }
+}
+.image-size-130 {
+  &::before {
+    padding-top: 130%;
+  }
+}
+.image-size-140 {
+  &::before {
+    padding-top: 140%;
+  }
+}
+.image-size-150 {
+  &::before {
+    padding-top: 150%;
+  }
+}
+
+
+
+
+@include media-breakpoint-down(sm) {
+  .image-align-right, .image-align-left, .sm-image-align-left, .sm-image-align-right {
+    width: calc(100% + #{$mobile-container-padding-x});
+  }
+  .image-align-left, .sm-image-align-left {
+    transform: translateX(#{-$mobile-container-padding-x});
+  }
+  .image-stretch {
+    width: 100vw;
+    transform: translateX(#{-$mobile-container-padding-x});
+  }
+}
+@include media-breakpoint-up(sm) {
+  .sm-image-align-left, .sm-image-align-right {
+    width: calc(100% + #{$sm-field});
+  }
+  .sm-image-align-left {
+    transform: translateX(#{$sm-field-negative});
+  }
+}
+@include media-breakpoint-up(md) {
+  .sm-image-align-left, .sm-image-align-right {
+    width: calc(100% + #{$md-field});
+  }
+  .sm-image-align-left {
+    transform: translateX(#{$md-field-negative});
+  }
+}
+@include media-breakpoint-up(lg) {
+  .sm-image-align-left, .sm-image-align-right {
+    width: calc(100% + #{$lg-field});
+  }
+  .sm-image-align-left {
+    transform: translateX(#{$lg-field-negative});
+  }
+}
+@include media-breakpoint-up(xl) {
+  .sm-image-align-left, .sm-image-align-right {
+    width: calc(100% + #{$xl-field});
+  }
+  .sm-image-align-left {
+    transform: translateX(#{$xl-field-negative});
+  }
+}
+@include media-breakpoint-up(xxl) {
+  .sm-image-align-left, .sm-image-align-right {
+    width: calc(100% + #{$xxl-field});
+  }
+  .sm-image-align-left {
+    transform: translateX(#{$xxl-field-negative});
+  }
 }

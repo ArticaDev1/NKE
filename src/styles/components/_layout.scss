@@ -41,7 +41,7 @@
     }
   }
   @include media-breakpoint-down(lg) {
-    &:not(.home-screen) {
+    &:not(.home-screen):not(.content-section) {
       padding: 80px 0;
     }
     &__title {
@@ -50,8 +50,10 @@
     }
   }
   @include media-breakpoint-down(sm) {
-    &:not(.home-screen) {
+    &:not(.home-screen):not(.content-section) {
       padding: 60px 0;
+    }
+    &:not(.home-screen) {
       &:first-child {
         padding-top: 120px;
       }
@@ -59,6 +61,12 @@
     &__title {
       margin-bottom: 22px;
     }
+  }
+}
+
+.content-section {
+  @include media-breakpoint-down(sm) {
+    padding: 80px 0;
   }
 }
 
