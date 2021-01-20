@@ -89,14 +89,12 @@ window.onload = function () {
     mobileWindow.init();
     $body.classList.add('mobile');
   } else {
-    
+    //parralax
+    new Rellax('.rellax');
     //bgvideo
     let $bgvideo = document.querySelector('.background-video');
     if($bgvideo) new BGVideo($bgvideo).init();
   }
-
-  //parralax
-  new Rellax('.rellax');
 
   //lazy
   setTimeout(()=>{
