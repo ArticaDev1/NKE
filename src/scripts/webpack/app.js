@@ -2,7 +2,9 @@ import 'lazysizes';
 lazySizes.cfg.init = false;
 lazySizes.cfg.expand = 100;
 import {gsap} from "gsap";
-import {disablePageScroll, enablePageScroll} from 'scroll-lock';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+import {disablePageScroll, enablePageScroll, getPageScrollBarWidth} from 'scroll-lock';
 import Inputmask from "inputmask";
 import SwipeListener from 'swipe-listener';
 import autosize from 'autosize';
@@ -81,7 +83,7 @@ window.onload = function () {
   if($work_slider) new WorkSlider($work_slider).init();
   //vsection
   let $vsection = document.querySelector('.v-section');
-  if($vsection) new VSection($vsection).init();
+  if($vsection) new VSection2($vsection).init();
 
 
   //arrow
@@ -1286,5 +1288,157 @@ class BGVideo {
     //resize
     this.resize();
     window.addEventListener('resize', this.resize);
+  }
+}
+
+class VSection2 {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+
+  init() {
+    this.$swrapper = this.$parent.querySelector('.v-section__size-wrapper');
+    this.$container = this.$parent.querySelector('.v-section__outer');
+    this.$wrapper = this.$parent.querySelector('.v-section__wrapper');
+    this.$content = this.$parent.querySelector('.v-section__content');
+    this.$button = this.$parent.querySelector('.v-section__btn');
+    this.$button_icon = this.$parent.querySelector('.v-section__btn .icon');
+    this.$blocks = this.$parent.querySelectorAll('.content-block');
+
+    let setParams = ()=> {
+      let content_width = this.$content.getBoundingClientRect().width,
+          wrapper_width = this.$wrapper.getBoundingClientRect().width,
+          container_height = this.$container.getBoundingClientRect().height,
+          scroll = window.pageYOffset,
+          bscroll = scroll+window.innerHeight,
+          scroll_width = content_width - wrapper_width,
+          min_scroll = this.$swrapper.getBoundingClientRect().top + window.pageYOffset,
+          max_scroll = min_scroll+scroll_width;
+
+      this.$swrapper.style.height = `${container_height+scroll_width}px`;
+
+      //
+      this.$button_icon.classList.remove('forward');
+      this.$button_icon.classList.remove('back');
+      this.$button_icon.classList.remove('top');
+      
+      //до
+      if(scroll<min_scroll) {
+        this.$container.classList.remove('fixed');
+        this.$container.style.top = '0';
+        this.$wrapper.style.transform = `translate3d(0, 0, 0)`;
+        //btn
+        let v = Math.min(min_scroll/window.innerHeight),
+            factor = -(1-((bscroll-min_scroll)/container_height))/v,
+            val = (((container_height+60)/2)+30)*factor;
+        this.$button.style.transform = `translate3d(0, ${val}px, 0)`;
+        if(this.old_scroll>scroll && scroll>0) this.$button_icon.classList.add('top');
+      } 
+
+      //фикс
+      else if(scroll>=min_scroll && scroll<=max_scroll) {
+        this.$container.classList.add('fixed');
+        this.$container.style.top = '0';
+        this.$wrapper.style.transform = `translate3d(-${scroll-min_scroll}px, 0, 0)`;
+        //btn
+        if(this.old_scroll>scroll) {
+          this.$button_icon.classList.add('back')
+        } else {
+          this.$button_icon.classList.add('forward')
+        }
+      }
+
+      //после
+      else if(scroll>max_scroll) {
+        this.$container.classList.remove('fixed');
+        this.$container.style.top = `${scroll_width}px`;
+        this.$wrapper.style.transform = `translate3d(-${scroll_width}px, 0, 0)`;
+        //btn
+        let factor = (scroll-max_scroll)/container_height,
+            val = (container_height/3)*factor;
+        this.$button.style.transform = `translate3d(0, ${val}px, 0)`;
+        if(this.old_scroll>scroll) this.$button_icon.classList.add('top')
+      } 
+
+      this.old_scroll = scroll;
+    }
+
+    let updateParams = ()=> {
+      let content_width = this.$content.getBoundingClientRect().width,
+          wrapper_width = this.$wrapper.getBoundingClientRect().width;
+      this.scrollWidth = content_width - wrapper_width;
+      this.$container.style.paddingRight = `${getPageScrollBarWidth()}px`;
+    }
+    updateParams();
+    window.addEventListener('resize', updateParams);
+
+    let animation = gsap.timeline({paused:true})
+      .fromTo(this.$wrapper, {y:30}, {y:0, duration:1, ease:'power2.out'})
+      .to(this.$wrapper, {x:-this.scrollWidth, duration:4, ease:'power1.inOut'}, '-=1')
+      .fromTo(this.$wrapper, {y:0}, {y:-30, duration:1, ease:'power2.in'}, '-=1')
+
+    let tr = ScrollTrigger.create({
+      trigger: this.$container,
+      start: "top top",
+      end: ()=>{
+        return `+=${this.scrollWidth}`;
+      },
+      pin: true,
+      anticipatePin: 1,
+      animation: animation,
+      scrub: true,
+      onSnapComplete: self => {
+        console.log('ok')
+      },
+      onUpdate: self => {
+        
+      }
+    });
+
+    setTimeout(()=>{
+
+      let animation = gsap.timeline({paused:true})
+        .fromTo(this.$blocks, {autoAlpha:0, y:100, scale:0.9}, {autoAlpha:1, y:0, scale:1, duration:1, ease:'power2.inOut', stagger:{each:0.5}})
+      
+      ScrollTrigger.create({
+        trigger: tr.spacer,
+        start: "top bottom",
+        end: "bottom bottom",
+        scrub: true,
+        animation: animation,
+        onToggle: self => {
+  
+        },
+        onUpdate: self => {
+          console.log('test')
+        }
+      });
+
+
+    }, 1000)
+
+    
+
+    /* this.$blocks.forEach(($element, index)=>{
+      let anim = gsap.timeline({paused:true})
+        .fromTo($element, {autoAlpha:0, scale:0.9}, {autoAlpha:1, scale:1, ease:'power2.inOut'})
+
+
+        ScrollTrigger.create({
+          trigger: $element,
+          start: "top bottom",
+          end: "center center",
+          animation: anim,
+          scrub: true,
+          onToggle: self => {
+    
+          },
+          onUpdate: self => {
+            console.log('ok')
+          }
+        });
+    }) */
+
+    
   }
 }
