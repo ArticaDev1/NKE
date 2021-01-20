@@ -825,6 +825,10 @@
 
 .about {
   overflow: hidden;
+  &__head {
+    position: relative;
+    z-index: 2;
+  }
   &__photo {
     max-width: 220px;
     width: 100%;

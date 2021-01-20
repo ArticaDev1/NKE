@@ -4858,6 +4858,9 @@ table:not([class]) {
 
 .about {
   overflow: hidden; }
+  .about__head {
+    position: relative;
+    z-index: 2; }
   .about__photo {
     max-width: 220px;
     width: 100%;
