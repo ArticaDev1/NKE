@@ -125,7 +125,7 @@
     }
   }
   @include media-breakpoint-down(sm) {
-    min-height: 560px;
+    min-height: 540px;
     max-height: 700px;
     &__container {
       padding: 70px 0;
@@ -1023,6 +1023,18 @@
 
 .v-section {
   z-index: 2;
+  &__wrapper {
+    position: relative;
+    z-index: 2;
+  }
+  &__btn {
+    z-index: 1;
+    .icon {
+      &.top {
+        transform: rotate(270deg);
+      }
+    }
+  }
   @include media-breakpoint-up(xl) {
     &__btn {
       position: absolute;
@@ -1030,16 +1042,12 @@
       left: 713px;
       margin-left: -60px;
       margin-top: -60px;
-      z-index: 1;
       .icon {
         &.forward {
           transform: rotate(0);
         }
         &.back {
           transform: rotate(180deg);
-        }
-        &.top {
-          transform: rotate(270deg);
         }
       }
     }
@@ -1062,8 +1070,6 @@
     &__wrapper {
       height: 100%;
       width: 100%;
-      position: relative;
-      z-index: 2;
     }
     &__content {
       position: absolute;
@@ -1177,7 +1183,7 @@
   @include media-breakpoint-down(xl) {
     &__btn {
       left: 50%;
-      transform: translateX(-50%) !important;
+      transform: translateX(-50%);
       top: -180px;
     }
     &__title {

@@ -116,7 +116,7 @@
     transition: height $trs3;
     color: inherit;
     .logo-words {
-      transition: opacity $trs3;
+      transition: opacity $trs2;
     }
   }
   @include media-breakpoint-down(xxl) {

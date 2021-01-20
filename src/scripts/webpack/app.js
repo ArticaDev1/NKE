@@ -72,10 +72,7 @@ window.onload = function () {
   Validation.init();
   inputs();
   autosize(document.querySelectorAll('textarea.input__element'));
-  //
-  if (window.innerWidth < brakepoints.sm) {
-    mobileWindow.init();
-  }
+
   //video
   let $video = document.querySelector('.video-slider');
   if ($video) new Video($video, {points: [2, 4, 5.9, 9.08, 11.5]}).init();
@@ -85,17 +82,21 @@ window.onload = function () {
   //vsection
   let $vsection = document.querySelector('.v-section');
   if($vsection) new VSection($vsection).init();
-  //bgvideo
-  let $bgvideo = document.querySelector('.background-video');
-  if($bgvideo) new BGVideo($bgvideo).init();
 
 
   //else
   if(mobile()) {
+    mobileWindow.init();
     $body.classList.add('mobile');
   } else {
-    new Rellax('.rellax');
+    
+    //bgvideo
+    let $bgvideo = document.querySelector('.background-video');
+    if($bgvideo) new BGVideo($bgvideo).init();
   }
+
+  //parralax
+  new Rellax('.rellax');
 
   //lazy
   setTimeout(()=>{
@@ -1123,66 +1124,76 @@ class VSection {
     this.$button_icon = this.$parent.querySelector('.v-section__btn .icon');
 
     let setParams = ()=> {
+      let content_width = this.$content.getBoundingClientRect().width,
+          wrapper_width = this.$wrapper.getBoundingClientRect().width,
+          container_height = this.$container.getBoundingClientRect().height,
+          scroll = window.pageYOffset,
+          bscroll = scroll+window.innerHeight,
+          scroll_width = content_width - wrapper_width,
+          min_scroll = this.$parent.getBoundingClientRect().top + window.pageYOffset,
+          max_scroll = min_scroll+scroll_width;
 
-      if(window.innerWidth>brakepoints.xl) {
-        let content_width = this.$content.getBoundingClientRect().width,
-            wrapper_width = this.$wrapper.getBoundingClientRect().width,
-            container_height = this.$container.getBoundingClientRect().height,
-            scroll = window.pageYOffset,
-            bscroll = scroll+window.innerHeight,
-            scroll_width = content_width - wrapper_width,
-            min_scroll = this.$parent.getBoundingClientRect().top + window.pageYOffset,
-            max_scroll = min_scroll+scroll_width;
+      this.$parent.style.height = `${container_height+scroll_width}px`;
 
-        this.$parent.style.height = `${container_height+scroll_width}px`;
+      //
+      this.$button_icon.classList.remove('forward');
+      this.$button_icon.classList.remove('back');
+      this.$button_icon.classList.remove('top');
+      
+      //до
+      if(scroll<min_scroll) {
+        this.$container.classList.remove('fixed');
+        this.$container.style.top = '0';
+        this.$wrapper.style.transform = `translate3d(0, 0, 0)`;
+        //btn
+        let v = Math.min(1, min_scroll/window.innerHeight),
+            factor = -(1-((bscroll-min_scroll)/container_height))/v,
+            val = ((container_height/2)+30)*factor;
+        this.$button.style.transform = `translate3d(0, ${val}px, 0)`;
+        if(this.old_scroll>scroll && scroll>0) this.$button_icon.classList.add('top')
+      } 
 
-        //
-        this.$button_icon.classList.remove('forward');
-        this.$button_icon.classList.remove('back');
-        this.$button_icon.classList.remove('top');
-        
-        //до
-        if(scroll<min_scroll) {
-          this.$container.classList.remove('fixed');
-          this.$container.style.top = '0';
-          this.$wrapper.style.transform = `translate3d(0, 0, 0)`;
-          //btn
-          let v = Math.min(1, min_scroll/window.innerHeight),
-              factor = -(1-((bscroll-min_scroll)/container_height))/v,
-              val = ((container_height/2)+30)*factor;
-          this.$button.style.transform = `translate3d(0, ${val}px, 0)`;
-          if(this.old_scroll>scroll && scroll>0) this.$button_icon.classList.add('top')
-        } 
-
-        //фикс
-        else if(scroll>=min_scroll && scroll<=max_scroll) {
-          this.$container.classList.add('fixed');
-          this.$container.style.top = '0';
-          this.$wrapper.style.transform = `translate3d(-${scroll-min_scroll}px, 0, 0)`;
-          //btn
-          if(this.old_scroll>scroll) {
-            this.$button_icon.classList.add('back')
-          } else {
-            this.$button_icon.classList.add('forward')
-          }
+      //фикс
+      else if(scroll>=min_scroll && scroll<=max_scroll) {
+        this.$container.classList.add('fixed');
+        this.$container.style.top = '0';
+        this.$wrapper.style.transform = `translate3d(-${scroll-min_scroll}px, 0, 0)`;
+        //btn
+        if(this.old_scroll>scroll) {
+          this.$button_icon.classList.add('back')
+        } else {
+          this.$button_icon.classList.add('forward')
         }
-
-        //после
-        else if(scroll>max_scroll) {
-          this.$container.classList.remove('fixed');
-          this.$container.style.top = `${scroll_width}px`;
-          this.$wrapper.style.transform = `translate3d(-${scroll_width}px, 0, 0)`;
-          //btn
-          let factor = (scroll-max_scroll)/container_height,
-              val = (container_height/3)*factor;
-          this.$button.style.transform = `translate3d(0, ${val}px, 0)`;
-          if(this.old_scroll>scroll) this.$button_icon.classList.add('top')
-        } 
-
-        this.old_scroll = scroll;
-      } else {
-        this.$parent.style.height = 'initial';
       }
+
+      //после
+      else if(scroll>max_scroll) {
+        this.$container.classList.remove('fixed');
+        this.$container.style.top = `${scroll_width}px`;
+        this.$wrapper.style.transform = `translate3d(-${scroll_width}px, 0, 0)`;
+        //btn
+        let factor = (scroll-max_scroll)/container_height,
+            val = (container_height/3)*factor;
+        this.$button.style.transform = `translate3d(0, ${val}px, 0)`;
+        if(this.old_scroll>scroll) this.$button_icon.classList.add('top')
+      } 
+
+      this.old_scroll = scroll;
+    }
+
+    let mobileParralax = ()=> {
+      let scroll = window.pageYOffset;
+
+      //btn
+      if(this.old_scroll>scroll && scroll>0) {
+        this.$button_icon.classList.add('top');
+      } else {
+        this.$button_icon.classList.remove('top');
+      }
+
+      this.$button.style.transform = `translate3d(-50%, ${scroll/3}px, 0)`;
+
+      this.old_scroll = scroll;
     }
 
     let check = ()=> {
@@ -1191,10 +1202,17 @@ class VSection {
         window.addEventListener('resize', setParams);
         window.addEventListener('scroll', setParams);
 
+        if(!this.flag) {
+          window.removeEventListener('scroll', mobileParralax);
+        }
+
         this.flag = true;
       } 
       
       else if(window.innerWidth<brakepoints.xl && (!this.initialized || this.flag)) {
+        mobileParralax();
+        window.addEventListener('scroll', mobileParralax);
+
         if(this.flag) {
           window.removeEventListener('resize', setParams);
           window.removeEventListener('scroll', setParams);
