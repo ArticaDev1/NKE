@@ -84,6 +84,10 @@ window.onload = function () {
   if($vsection) new VSection($vsection).init();
 
 
+  //arrow
+  let $btn = document.querySelector('.home-screen__scroll');
+  if($btn) new ScrollBtn($btn).init();
+
   //else
   if(mobile()) {
     mobileWindow.init();
@@ -1115,6 +1119,7 @@ class VSection {
   }
 
   init() {
+    this.$swrapper = this.$parent.querySelector('.v-section__size-wrapper');
     this.$container = this.$parent.querySelector('.v-section__outer');
     this.$wrapper = this.$parent.querySelector('.v-section__wrapper');
     this.$content = this.$parent.querySelector('.v-section__content');
@@ -1128,10 +1133,10 @@ class VSection {
           scroll = window.pageYOffset,
           bscroll = scroll+window.innerHeight,
           scroll_width = content_width - wrapper_width,
-          min_scroll = this.$parent.getBoundingClientRect().top + window.pageYOffset,
+          min_scroll = this.$swrapper.getBoundingClientRect().top + window.pageYOffset,
           max_scroll = min_scroll+scroll_width;
 
-      this.$parent.style.height = `${container_height+scroll_width}px`;
+      this.$swrapper.style.height = `${container_height+scroll_width}px`;
 
       //
       this.$button_icon.classList.remove('forward');
@@ -1144,11 +1149,11 @@ class VSection {
         this.$container.style.top = '0';
         this.$wrapper.style.transform = `translate3d(0, 0, 0)`;
         //btn
-        let v = Math.min(1, min_scroll/window.innerHeight),
+        let v = Math.min(min_scroll/window.innerHeight),
             factor = -(1-((bscroll-min_scroll)/container_height))/v,
-            val = ((container_height/2)+30)*factor;
+            val = (((container_height+60)/2)+30)*factor;
         this.$button.style.transform = `translate3d(0, ${val}px, 0)`;
-        if(this.old_scroll>scroll && scroll>0) this.$button_icon.classList.add('top')
+        if(this.old_scroll>scroll && scroll>0) this.$button_icon.classList.add('top');
       } 
 
       //фикс
@@ -1179,51 +1184,24 @@ class VSection {
       this.old_scroll = scroll;
     }
 
-    let mobileParralax = ()=> {
-      let scroll = window.pageYOffset;
-
-      //btn
-      if(this.old_scroll>scroll && scroll>0) {
-        this.$button_icon.classList.add('top');
-      } else {
-        this.$button_icon.classList.remove('top');
-      }
-
-      this.$button.style.transform = `translate3d(-50%, ${scroll/3}px, 0)`;
-
-      this.old_scroll = scroll;
-    }
+    
 
     let check = ()=> {
       if(window.innerWidth>=brakepoints.xl && (!this.initialized || !this.flag)) {
         setParams();
         window.addEventListener('resize', setParams);
         window.addEventListener('scroll', setParams);
-
-        if(!this.flag) {
-          window.removeEventListener('scroll', mobileParralax);
-        }
-
         this.flag = true;
       } 
-      
       else if(window.innerWidth<brakepoints.xl && (!this.initialized || this.flag)) {
-        mobileParralax();
-        window.addEventListener('scroll', mobileParralax);
-
         if(this.flag) {
           window.removeEventListener('resize', setParams);
           window.removeEventListener('scroll', setParams);
-          this.$parent.style.height = 'initial';
-          this.$button_icon.classList.remove('forward');
-          this.$button_icon.classList.remove('back');
-          this.$button_icon.classList.remove('top');
+          this.$swrapper.style.height = 'initial';
+          this.$wrapper.style.transform = 'initial';
           this.$container.classList.remove('fixed');
-          this.$container.style.top = 'initial';
-          this.$wrapper.style.transform = `0`;
-          this.$button.style.transform = `initial`;
+          console.log('sss')
         }
-
         this.flag = false;
       }
       this.initialized = true;
@@ -1232,6 +1210,43 @@ class VSection {
 
     check();
     window.addEventListener('resize', check);
+  }
+}
+
+class ScrollBtn {
+  constructor($button) {
+    this.$button = $button;
+  }
+  init() {
+    this.$button_icon = this.$button.querySelector('.icon');
+
+    let mobileParralax = ()=> {
+      let scroll = window.pageYOffset,
+          factor, val;
+      //btn
+      if(this.old_scroll>scroll && scroll>0) {
+        this.$button_icon.classList.add('top');
+      } else {
+        this.$button_icon.classList.remove('top');
+      }
+
+
+      if(window.innerWidth<brakepoints.sm) {
+        factor = Math.min(scroll/(window.innerHeight/2), 1);
+        val = 40*factor;
+      }
+      else {
+        factor = Math.min(scroll/(window.innerHeight + 90), 1);
+        val = 60*factor;
+      }
+
+      this.$button.style.transform = `translateY(${val}px)`;
+
+      this.old_scroll = scroll;
+    }
+
+    mobileParralax();
+    window.addEventListener('scroll', mobileParralax); 
   }
 }
 

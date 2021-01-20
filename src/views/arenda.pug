@@ -3,12 +3,12 @@ block variables
   -var title = sitename+' - Аренда'
   -var n2 = true;
 block content
-  section.section.home-screen(data-mobile-window)
+  include blocks/blocks
 
+  section.home-screen(data-mobile-window)
     .home-screen__background
       .image.image_cover
         img(src="./img/kdkkd.jpeg", alt="image").lazyload
-
     .home-screen__container
       .container.home-screen__nav
         a(href=proizvodstvo).button-text.home-screen__prev
@@ -23,36 +23,33 @@ block content
         .row
           h1.home-screen__title.col-xxl-6.col-xl-7.col-lg-8 Предоставляем в аренду имеющееся оборудование
           p.h6.home-screen__text.col-xxl-3.col-lg-4.col-md-7.col-sm-8 В рамках программы научно-исследовательских и опытно-конструкторских работ (НИОКР)
+        
+    button.scroll-btn.home-screen__scroll(aria-label='scroll bottom' data-scroll='bottom')
+      svg.icon
+        use(xlink:href='./img/icons/icons.svg#arrow')
 
-  section.section.content-section.bg-gray.bg-gradient-skew
+  section.arenda-info.bg-accent.bg-gradient
     .container
+      h3.arenda-info__title В пользовании общества находится более
+        span 200
+        | единиц оборудования
+      h6.arenda-info__text предназначенного для выполнения работ по врезке и перекрытию трубопроводов под давлением, диметром от Ду 50 до Ду 1420
 
-      //block1
-      .content-block
-        .content-block__container.row
-          .content-block__image.offset-md-1.offset-lg-0.col-11.col-sm-10.col-md-8.col-lg-6.col-xl-5
-            .image.image_cover.image-size-5.image-stretch
-              img(data-src="https://placehold.co/1000x1200/fff/393939?font=montserrat&text=Картинка", alt="image").lazyload
-          .content-block__container.offset-md-1.offset-lg-1.col-sm-10.col-md-8.col-lg-5
-            .row
-              .content-block__head
-                span.content-block__index 01
-                h5 Аренда по всей стране
-              .content-block__content
-                p Все оборудование на сегодняшний день активно используется арендаторами по всей территории Российские Федерации.
-
-      //block4
-      .content-block
-        .content-block__container.row
-          .content-block__image.order-lg-2.offset-1.offset-sm-2.offset-md-3.offset-lg-1.col-11.col-sm-10.col-md-8.col-lg-6
-            .image.image_cover.image-size-4.image-align-right
-              img(data-src="https://placehold.co/1000x700/fff/393939?font=montserrat&text=Картинка", alt="image").lazyload
-          .content-block__container.order-lg-1.offset-sm-2.offset-md-3.offset-lg-0.col-sm-10.col-md-8.col-lg-5
-            .row
-              .content-block__head
-                span.content-block__index 02
-                h5 Оборудование проходит осмотр и ремонт
-              .content-block__content
-                p После каждого использования весь комплект оборудования проходит плановый технический осмотр и при необходимости ремонт, согласно нормативам завода-изготовителя.
-
+  section.content-section.bg-gray.bg-gradient-skew
+    .container
+      +block1(
+        '01', 
+        'Аренда по всей стране', 
+        'Все оборудование на сегодняшний день активно используется арендаторами по всей территории Российские Федерации.',
+        'https://placehold.co/1000x1000/fff/393939?font=montserrat&text=Картинка',
+        false
+      )
+      +block4(
+        '02', 
+        'Оборудование проходит осмотр и ремонт', 
+        'После каждого использования весь комплект оборудования проходит плановый технический осмотр и при необходимости ремонт, согласно нормативам завода-изготовителя.',
+        'https://placehold.co/1000x1000/fff/393939?font=montserrat&text=Картинка',
+        false
+      )
+      
   include blocks/form-section

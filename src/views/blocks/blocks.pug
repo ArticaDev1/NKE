@@ -1,0 +1,163 @@
+mixin block1(index, title, text, image, button)
+  //block1
+  .content-block
+    .content-block__container.row
+      .content-block__image.offset-md-1.offset-lg-0.col-11.col-sm-10.col-md-8.col-lg-6.col-xl-5
+        .image.image_cover.image-size-1.image-align-left
+          img(data-src=image, alt="image").lazyload
+      .content-block__text.offset-md-1.offset-lg-1.col-sm-10.col-md-8.col-lg-5
+        .row
+          .content-block__head
+            span.content-block__index=index
+            h5=title
+          .content-block__content
+            p=text
+            if button
+              a(href='#modal-form' data-modal='open').button-text
+                span Подробнее
+                svg.icon
+                  use(xlink:href='./img/icons/icons.svg#arrow')
+
+mixin block2(index, title, text, image, button)
+  //block2
+  .content-block
+    .content-block__container.row
+      .content-block__image.order-lg-2.offset-2.offset-sm-3.offset-md-5.offset-lg-1.col-10.col-sm-9.col-md-7.col-lg-5.col-xl-6
+        .image.image_cover.image-size-2.sm-image-align-right
+          img(data-src=image, alt="image").lazyload
+      .content-block__text.order-lg-1.offset-sm-3.offset-md-5.offset-lg-0.col-sm-9.col-md-7.col-lg-6.col-xl-5
+        .row
+          .content-block__head
+            span.content-block__index=index
+            h5=title
+          .content-block__content
+            p=text
+            if button
+              a(href='#modal-form' data-modal='open').button-text
+                span Подробнее
+                svg.icon
+                  use(xlink:href='./img/icons/icons.svg#arrow')
+
+mixin block3(index, title, text, image, button)
+  //block3
+  .content-block
+    .content-block__container.row
+      .content-block__image.col-sm-9.col-md-7.col-lg-5.col-xl-5
+        .image.image_cover.image-size-3.image-stretch.sm-image-align-left
+          img(data-src=image, alt="image").lazyload
+      .content-block__text.offset-lg-1.col-sm-9.col-md-7.col-lg-6.col-xl-5
+        .row
+          .content-block__head
+            span.content-block__index=index
+            h5=title
+          .content-block__content
+            p=text
+            if button
+              a(href='#modal-form' data-modal='open').button-text
+                span Подробнее
+                svg.icon
+                  use(xlink:href='./img/icons/icons.svg#arrow')
+
+mixin block4(index, title, text, image, button)     
+  //block4       
+  .content-block
+    .content-block__container.row
+      .content-block__image.order-lg-2.offset-1.offset-sm-2.offset-md-3.offset-lg-1.col-11.col-sm-10.col-md-8.col-lg-6
+        .image.image_cover.image-size-4.image-align-right
+          img(data-src=image, alt="image").lazyload
+      .content-block__text.order-lg-1.offset-sm-2.offset-md-3.offset-lg-0.col-sm-10.col-md-8.col-lg-5
+        .row
+          .content-block__head
+            span.content-block__index=index
+            h5=title
+          .content-block__content
+            p=text
+            if button
+              a(href='#modal-form' data-modal='open').button-text
+                span Подробнее
+                svg.icon
+                  use(xlink:href='./img/icons/icons.svg#arrow')
+
+mixin block5(index, title, text, image, button, vtext)  
+  //block5
+  .content-block
+    .content-block__container.row
+      .vertical-text.vertical-text_left
+        .vertical-text__container=vtext
+      .content-block__image.offset-md-1.col-11.col-sm-10.col-md-8.col-lg-5.col-xl-4
+        .image.image_cover.image-size-1.image-align-left
+          img(data-src=image, alt="image").lazyload
+      .content-block__text.offset-md-1.offset-lg-1.col-sm-10.col-md-8.col-lg-5.col-xl-5
+        .row
+          .content-block__head
+            span.content-block__index=index
+            h5=title
+          .content-block__content
+            p=text
+            if button
+              a(href='#modal-form' data-modal='open').button-text
+                span Подробнее
+                svg.icon
+                  use(xlink:href='./img/icons/icons.svg#arrow')
+
+mixin block6(index, title, text, image, button, vtext)  
+  //block6
+  .content-block
+    .content-block__container.row
+      .vertical-text.vertical-text_right
+        .vertical-text__container=vtext
+      .content-block__image.order-lg-2.offset-1.offset-sm-2.offset-md-3.offset-lg-1.col-11.col-sm-10.col-md-8.col-lg-5
+        .image.image_cover.image-size-4.image-align-right
+          img(data-src=image, alt="image").lazyload
+      .content-block__text.order-lg-1.offset-sm-2.offset-md-3.offset-lg-0.col-sm-10.col-md-8.col-lg-5
+        .row
+          .content-block__head
+            span.content-block__index=index
+            h5=title
+          .content-block__content
+            p=text
+            if button
+              a(href='#modal-form' data-modal='open').button-text
+                span Подробнее
+                svg.icon
+                  use(xlink:href='./img/icons/icons.svg#arrow')
+
+mixin block7(index, title, text, image, button)  
+  //block7
+  .content-block
+    .content-block__container.row
+      .content-block__image.offset-md-1.offset-lg-0.col-11.col-sm-10.col-md-8.col-lg-6
+        .image.image_cover.image-size-4.image-align-left
+          img(data-src=image, alt="image").lazyload
+      .content-block__text.offset-md-1.offset-lg-1.col-sm-10.col-md-8.col-lg-5
+        .row
+          .content-block__head
+            span.content-block__index=index
+            h5=title
+          .content-block__content
+            p=text
+            if button
+              a(href='#modal-form' data-modal='open').button-text
+                span Подробнее
+                svg.icon
+                  use(xlink:href='./img/icons/icons.svg#arrow')
+
+mixin block8(index, title, text, image, button) 
+  //block8
+  .content-block
+    .content-block__container.row
+      .content-block__image.order-lg-2.offset-sm-2.offset-md-5.offset-lg-1.col-sm-10.col-md-6.col-lg-6.col-xl-5
+        .image.image_cover.image-size-5.image-stretch
+          img(data-src=image, alt="image").lazyload
+      .content-block__text.order-lg-1.offset-sm-2.offset-md-5.offset-lg-0.col-sm-10.col-md-6.col-lg-5.offset-xl-1
+        .row
+          .content-block__head
+            span.content-block__index=index
+            h5=title
+          .content-block__content
+            p=text
+            if button
+              a(href='#modal-form' data-modal='open').button-text
+                span Подробнее
+                svg.icon
+                  use(xlink:href='./img/icons/icons.svg#arrow')
