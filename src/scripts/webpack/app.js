@@ -69,7 +69,6 @@ window.onload = function () {
   Modal.init();
   Scroll.init();
   onExitEvents();
-  Animation.init();
   //form
   Validation.init();
   inputs();
@@ -78,17 +77,118 @@ window.onload = function () {
   //video
   let $video = document.querySelector('.video-slider');
   if ($video) new Video($video, {points: [2, 4, 5.9, 9.08, 11.5]}).init();
+
   //work slider
   let $work_slider = document.querySelector('.work-slider');
   if($work_slider) new WorkSlider($work_slider).init();
+  
   //vsection
   let $vsection = document.querySelector('.v-section');
-  if($vsection) new VSection2($vsection).init();
+  if($vsection) {
+    let instance;
+    let check = ()=>{
+      if(window.innerWidth>=brakepoints.xl && !instance) {
+        instance = new VSection($vsection);
+        instance.init();
+      } 
+      else if(window.innerWidth<brakepoints.xl && instance) {
+        instance.destroy();
+        instance = false;
+      }
+    }
+    check();
+    window.addEventListener('resize', check);
+  }
 
+  //animations
+  let $anim_top = document.querySelectorAll('.js-animate-top');
+  if($anim_top.length) {
+    let animations = [];
+    let check=()=>{
+      if(window.innerWidth>=brakepoints.xl && !animations.length) {
+        $anim_top.forEach(($block, index)=>{
+          animations[index] = new TopAnimation($block);
+          animations[index].init();
+        })
+      } 
+      else if(window.innerWidth<brakepoints.xl && animations.length) {
+        for(let animation of animations) {
+          animation.destroy();
+        }
+        animations = [];
+      }
+    }
+    check();
+    window.addEventListener('resize', check);
+  }
+  let $anim_fade = document.querySelectorAll('.js-animate-fade');
+  if($anim_fade.length) {
+    let animations = [];
+    let check=()=>{
+      if(window.innerWidth>=brakepoints.xl && !animations.length) {
+        $anim_fade.forEach(($block, index)=>{
+          animations[index] = new FadeAnimation($block);
+          animations[index].init();
+        })
+      } 
+      else if(window.innerWidth<brakepoints.xl && animations.length) {
+        for(let animation of animations) {
+          animation.destroy();
+        }
+        animations = [];
+      }
+    }
+    check();
+    window.addEventListener('resize', check);
+  }
 
   //arrow
   let $btn = document.querySelector('.home-screen__scroll');
   if($btn) new ScrollBtn($btn).init();
+
+  //bgvideo
+  let $bgvideos = document.querySelectorAll('.background-video');
+  if($bgvideos.length) {
+    let videos = [];
+    let check=()=>{
+      if(!mobile() && window.innerWidth>=brakepoints.lg && !videos.length) {
+        $bgvideos.forEach(($video, index)=>{
+          videos[index] = new BGVideo($video);
+          videos[index].init();
+        })
+      } 
+      else if((mobile() || window.innerWidth<brakepoints.lg) && videos.length) {
+        for(let video of videos) {
+          video.destroy();
+        }
+        videos = [];
+      }
+    }
+    check();
+    window.addEventListener('resize', check);
+  }
+
+  //bgsections
+  let $bgsections = document.querySelectorAll('.js-bg-animate');
+  if($bgsections.length) {
+    let instances = [];
+    let check=()=>{
+      if(window.innerWidth>=brakepoints.xl && !instances.length) {
+        $bgsections.forEach(($block, index)=>{
+          instances[index] = new BGSection($block);
+          instances[index].init();
+        })
+      } 
+      else if(window.innerWidth<brakepoints.xl && instances.length) {
+        for(let instance of instances) {
+          instance.destroy();
+        }
+        instances = [];
+      }
+    }
+    check();
+    window.addEventListener('resize', check);
+  }
 
   //else
   if(mobile()) {
@@ -97,15 +197,10 @@ window.onload = function () {
   } else {
     //parralax
     new Rellax('.rellax');
-    //bgvideo
-    let $bgvideo = document.querySelector('.background-video');
-    if($bgvideo) new BGVideo($bgvideo).init();
   }
 
   //lazy
-  setTimeout(()=>{
-    lazySizes.init();
-  }, 250)
+  lazySizes.init();
 }
 
 const TouchHoverEvents = {
@@ -362,15 +457,16 @@ const Header = {
 
     //check
     let count = 0;
-    document.querySelectorAll('[data-hide-header]').forEach(($element)=>{
+    document.querySelectorAll('[data-hide-header]').forEach(($element, index)=>{
       let h = $element.getBoundingClientRect().height;
       if(h==window.innerHeight) {
         let t = $element.getBoundingClientRect().top;
-        if(t==0) {
+        if(t<1 && t>-1) {
           count++;
         }
       }
     })
+
     if(count>0) {
       $header.classList.add('header_content-hidden');
     } else {
@@ -1115,106 +1211,6 @@ class WorkSlider {
   }
 }
 
-class VSection {
-  constructor($parent) {
-    this.$parent = $parent;
-  }
-
-  init() {
-    this.$swrapper = this.$parent.querySelector('.v-section__size-wrapper');
-    this.$container = this.$parent.querySelector('.v-section__outer');
-    this.$wrapper = this.$parent.querySelector('.v-section__wrapper');
-    this.$content = this.$parent.querySelector('.v-section__content');
-    this.$button = this.$parent.querySelector('.v-section__btn');
-    this.$button_icon = this.$parent.querySelector('.v-section__btn .icon');
-
-    let setParams = ()=> {
-      let content_width = this.$content.getBoundingClientRect().width,
-          wrapper_width = this.$wrapper.getBoundingClientRect().width,
-          container_height = this.$container.getBoundingClientRect().height,
-          scroll = window.pageYOffset,
-          bscroll = scroll+window.innerHeight,
-          scroll_width = content_width - wrapper_width,
-          min_scroll = this.$swrapper.getBoundingClientRect().top + window.pageYOffset,
-          max_scroll = min_scroll+scroll_width;
-
-      this.$swrapper.style.height = `${container_height+scroll_width}px`;
-
-      //
-      this.$button_icon.classList.remove('forward');
-      this.$button_icon.classList.remove('back');
-      this.$button_icon.classList.remove('top');
-      
-      //до
-      if(scroll<min_scroll) {
-        this.$container.classList.remove('fixed');
-        this.$container.style.top = '0';
-        this.$wrapper.style.transform = `translate3d(0, 0, 0)`;
-        //btn
-        let v = Math.min(min_scroll/window.innerHeight),
-            factor = -(1-((bscroll-min_scroll)/container_height))/v,
-            val = (((container_height+60)/2)+30)*factor;
-        this.$button.style.transform = `translate3d(0, ${val}px, 0)`;
-        if(this.old_scroll>scroll && scroll>0) this.$button_icon.classList.add('top');
-      } 
-
-      //фикс
-      else if(scroll>=min_scroll && scroll<=max_scroll) {
-        this.$container.classList.add('fixed');
-        this.$container.style.top = '0';
-        this.$wrapper.style.transform = `translate3d(-${scroll-min_scroll}px, 0, 0)`;
-        //btn
-        if(this.old_scroll>scroll) {
-          this.$button_icon.classList.add('back')
-        } else {
-          this.$button_icon.classList.add('forward')
-        }
-      }
-
-      //после
-      else if(scroll>max_scroll) {
-        this.$container.classList.remove('fixed');
-        this.$container.style.top = `${scroll_width}px`;
-        this.$wrapper.style.transform = `translate3d(-${scroll_width}px, 0, 0)`;
-        //btn
-        let factor = (scroll-max_scroll)/container_height,
-            val = (container_height/3)*factor;
-        this.$button.style.transform = `translate3d(0, ${val}px, 0)`;
-        if(this.old_scroll>scroll) this.$button_icon.classList.add('top')
-      } 
-
-      this.old_scroll = scroll;
-    }
-
-    
-
-    let check = ()=> {
-      if(window.innerWidth>=brakepoints.xl && (!this.initialized || !this.flag)) {
-        setParams();
-        window.addEventListener('resize', setParams);
-        window.addEventListener('scroll', setParams);
-        this.flag = true;
-      } 
-      else if(window.innerWidth<brakepoints.xl && (!this.initialized || this.flag)) {
-        if(this.flag) {
-          window.removeEventListener('resize', setParams);
-          window.removeEventListener('scroll', setParams);
-          this.$swrapper.style.height = 'initial';
-          this.$wrapper.style.transform = 'initial';
-          this.$container.classList.remove('fixed');
-          console.log('sss')
-        }
-        this.flag = false;
-      }
-      this.initialized = true;
-    }
-
-
-    check();
-    window.addEventListener('resize', check);
-  }
-}
-
 class ScrollBtn {
   constructor($button) {
     this.$button = $button;
@@ -1258,19 +1254,17 @@ class BGVideo {
   }
 
   init() {
+    this.source = this.$parent.getAttribute('data-src');
+    //create video
+    this.$parent.insertAdjacentHTML('afterbegin', `
+      <video class="background-video__element" muted>
+        <source src=${this.source} type="video/mp4" />
+      </video>
+    `)
     this.$video = this.$parent.querySelector('.background-video__element');
-    this.$source = this.$video.querySelector('source');
-    this.source = this.$source.getAttribute('data-src');
 
-    this.$source.removeAttribute('data-src');
-    this.$source.setAttribute('src', this.source);
-
-    this.$video.addEventListener('canplaythrough', (event)=>{
-      this.$video.play();
-      this.$video.classList.add('loaded');
-    })
-
-    this.$video.load();
+    this.animation = gsap.timeline({paused:true})
+      .fromTo(this.$video, {autoAlpha:0}, {autoAlpha:1, duration:Speed, ease:'power2.inOut'})
 
     this.resize = () => {
       let h = this.$parent.getBoundingClientRect().height,
@@ -1285,13 +1279,44 @@ class BGVideo {
       }
     } 
 
+    this.load = ()=> {
+      let check = ()=> {
+        this.$video.play();
+        this.animation.play();
+        this.check_interval = setInterval(()=>{
+          if(Math.ceil(this.$video.currentTime)+Speed > this.$video.duration) {
+            clearInterval(this.check_interval);
+            this.animation.reverse().eventCallback('onReverseComplete', ()=>{
+              this.$video.pause();
+              this.$video.currentTime = 0;
+              check();
+            });
+          }
+        }, 1000)
+      }
+      check();
+    }
+
+
+    this.$video.addEventListener('canplaythrough', this.load);
     //resize
     this.resize();
     window.addEventListener('resize', this.resize);
+    //load
+    this.$video.load();
+  }
+
+  destroy() {
+    window.removeEventListener('resize', this.resize);
+    if(this.check_interval) clearInterval(this.check_interval);
+    this.$video.remove();
+    for(let child in this) {
+      delete this[child];
+    }
   }
 }
 
-class VSection2 {
+class VSection {
   constructor($parent) {
     this.$parent = $parent;
   }
@@ -1305,32 +1330,34 @@ class VSection2 {
     this.$button_icon = this.$parent.querySelector('.v-section__btn .icon');
     this.$blocks = this.$parent.querySelectorAll('.content-block');
     this.$images = this.$parent.querySelectorAll('.content-block .image');
-
-
-    let sw, vanim, anim;
-    let updateParams = ()=> {
+    
+    this.updateParams = ()=> {
       this.$container.style.paddingRight = `${getPageScrollBarWidth()}px`;
       let content_width = this.$content.getBoundingClientRect().width,
           wrapper_width = this.$wrapper.getBoundingClientRect().width;
-      sw = content_width - wrapper_width;
-      vanim = gsap.timeline({paused:true})
+      this.sw = content_width - wrapper_width;
+      //animations
+      this.v_animation = gsap.timeline({paused:true})
         .fromTo(this.$wrapper, {y:30}, {y:0, duration:1, ease:'power2.out'})
-        .fromTo(this.$wrapper, {x:0}, {x:-sw, duration:4, ease:'power1.inOut'}, '-=1')
+        .fromTo(this.$wrapper, {x:0}, {x:-this.sw, duration:4, ease:'power1.inOut'}, '-=1')
         .fromTo(this.$wrapper, {y:0}, {y:-30, duration:1, ease:'power2.in'}, '-=1')
-      anim = gsap.timeline({paused:true})
+      this.animation = gsap.timeline({paused:true})
         .fromTo(this.$blocks, {autoAlpha:0, y:50}, {autoAlpha:1, y:0, duration:1, ease:'power2.inOut', stagger:{each:0.5}})
     }
-    updateParams();
-    window.addEventListener('resize', updateParams);
 
-    let tr = ScrollTrigger.create({
+    this.updateParams();
+    window.addEventListener('resize', this.updateParams);
+
+    this.st = [];
+
+    this.st[0] = ScrollTrigger.create({
       trigger: this.$container,
       start: "top top",
-      end: `+=${sw}`,
+      end: `+=${this.sw}`,
       pin: true,
       scrub: true,
       onUpdate: self => {
-        vanim.progress(self.progress);
+        this.v_animation.progress(self.progress);
         this.$button_icon.classList.remove('back', 'forward', 'top');
         if(self.direction>0) {
           this.$button_icon.classList.add('forward');
@@ -1340,18 +1367,18 @@ class VSection2 {
       }
     });
 
-    ScrollTrigger.create({
-      trigger: tr.spacer,
+    this.st[1] = ScrollTrigger.create({
+      trigger: this.st[0].spacer,
       start: "top bottom",
       end: "bottom bottom",
       scrub: true,
       onUpdate: self => {
-        anim.progress(self.progress);
+        this.animation.progress(self.progress);
       }
     });
 
-    ScrollTrigger.create({
-      trigger: tr.spacer,
+    this.st[2] = ScrollTrigger.create({
+      trigger: this.st[0].spacer,
       start: "top bottom",
       end: "top top",
       scrub: true,
@@ -1366,8 +1393,8 @@ class VSection2 {
       }
     });
     
-    ScrollTrigger.create({
-      trigger: tr.spacer,
+    this.st[3] = ScrollTrigger.create({
+      trigger: this.st[0].spacer,
       start: "bottom bottom",
       end: "bottom top",
       scrub: true,
@@ -1381,34 +1408,112 @@ class VSection2 {
         this.$button.style.transform = `translate3d(0, ${val}px, 0)`;
       }
     }); 
+    
+  }
 
+  destroy() {
+    window.removeEventListener('resize', this.updateParams);
+    this.v_animation.kill();
+    this.animation.kill();
+    for(let child of this.st) {
+      child.kill();
+    }
+    gsap.set(this.$blocks, {autoAlpha:1, y:0})
+    for(let child in this) {
+      delete this[child];
+    }
+  }
+
+}
+
+class BGSection {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+  init() {
+    this.$bg = this.$parent.querySelector('.js-bg-animate__bg');
+    this.$mask = this.$parent.querySelector('.js-bg-animate__mask');
+    this.$content = this.$parent.querySelector('.js-bg-animate__content');
+    this.$container = this.$parent.querySelector('.js-bg-animate__container');
+
+    if(this.$mask) {
+      //animation
+      this.animation = gsap.timeline({paused:true})
+        .fromTo(this.$bg, {scale:1.1}, {scale:1, duration:1, ease:'power2.inOut'})
+        .fromTo(this.$mask, {autoAlpha:0}, {autoAlpha:1, duration:1, ease:'power2.inOut'}, '-=1')
+        .fromTo(this.$content, {autoAlpha:0}, {autoAlpha:1, duration:1, ease:'power2.inOut'}, '-=1')
+        .fromTo(this.$content, {y:100}, {y:0, duration:1, ease:'power2.out'}, '-=1')
+    } 
+
+
+    this.trigger = ScrollTrigger.create({
+      trigger: this.$parent,
+      start: "center center",
+      end: `+=${window.innerHeight}`,
+      pin: true,
+      anticipatePin: 1,
+      scrub: true,
+      animation: this.animation
+    });
+  }
+
+  destroy() {
+    this.trigger.kill();
+    gsap.set(this.$bg, {scale:1})
+    gsap.set(this.$content, {autoAlpha:1, y:0})
+    gsap.set(this.$mask, {autoAlpha:1})
   }
 }
 
-const Animation = {
-  init: function() {
-    let $top = document.querySelectorAll('.js-animate-top');
+class TopAnimation {
+  constructor($block) {
+    this.$block = $block;
+  }
 
+  init() {
+    this.$child = this.$block.children[0];
+    this.animation = gsap.timeline({paused:true})
+      .fromTo(this.$block, {autoAlpha:0}, {autoAlpha:1, duration:1, ease:'power2.inOut'})
+      .fromTo(this.$child, {y:100}, {y:0, duration:1, ease:'power2.out'}, '-=1')
 
-    $top.forEach(($el, index)=>{
+    this.trigger = ScrollTrigger.create({
+      trigger: this.$block,
+      start: "top bottom",
+      end: "center center",
+      scrub: true,
+      animation: this.animation
+    });
+  }
 
-      let anim = gsap.timeline({paused:true})
-        .fromTo($el, {autoAlpha:0}, {autoAlpha:1, duration:1, ease:'power2.inOut'})
-        .fromTo($el, {y:100}, {y:0, duration:1, ease:'power2.out'}, '-=1')
+  destroy() {
+    this.trigger.kill();
+    this.animation.kill();
+    gsap.set(this.$block, {autoAlpha:1});
+    gsap.set(this.$child, {y:0});
+  }
+}
 
-      ScrollTrigger.create({
-        trigger: $el,
-        start: "top bottom",
-        end: "bottom bottom",
-        scrub: true,
-        animation: anim,
-        onUpdate: self => {
-          console.log('update')
-        }
-      });
-    })
+class FadeAnimation {
+  constructor($block) {
+    this.$block = $block;
+  }
+  init() {
+    this.animation = gsap.timeline({paused:true})
+      .fromTo(this.$block, {autoAlpha:0}, {autoAlpha:1, duration:1, ease:'power2.inOut'})
+      .fromTo(this.$block, {scale:0.7}, {scale:1, duration:1, ease:'power2.out'}, '-=1')
 
-    
+    this.trigger = ScrollTrigger.create({
+      trigger: this.$block,
+      start: "top bottom",
+      end: "center center",
+      scrub: true,
+      animation: this.animation
+    });
+  }
 
+  destroy() {
+    this.trigger.kill();
+    this.animation.kill();
+    gsap.set(this.$block, {autoAlpha:1, scale:1});
   }
 }

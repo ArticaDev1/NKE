@@ -228,7 +228,8 @@
                 <ul class="nav__list">
                   <li class="nav__item"> <a class="active nav__link h4" href="./proizvodstvo.html">Производство </a></li>
                   <li class="nav__item"><a class="nav__link h4" href="./arenda.html">Аренда</a></li>
-                  <li class="nav__item"><a class="nav__link h4" href="./servis.html">Сервис</a></li>
+                  <!--li.nav__itema(href=servis class=n3?'active':'').nav__link.h4 Сервис
+                  -->
                   <li class="nav__item"><a class="nav__link h4" href="./remont.html">Ремонт</a></li>
                   <li class="nav__item"><a class="nav__link h4" href="./education.html">Обучение</a></li>
                   <li class="nav__item"><a class="nav__link h4" href="./engineering.html">Проектирование</a></li>
@@ -273,12 +274,8 @@
       <main class="main">
         <section class="home-screen" data-mobile-window>
           <div class="home-screen__background">
-            <div class="image image_cover"><img class="lazyload" data-src="./img/photo-1539186607619-df476afe6ff1 1.jpg" alt="image"></div>
-            <div class="background-video">
-              <video class="background-video__element" muted loop>
-                <source data-src="./videos/IMG_6534.mp4" type="video/mp4">
-              </video>
-            </div>
+            <div class="image image_cover rellax" data-rellax-speed="-3"><img class="lazyload" data-src="./img/photo-1539186607619-df476afe6ff1 1.jpg" alt="image"></div>
+            <div class="background-video rellax" data-src="./videos/IMG_2780.mp4" data-rellax-speed="-3"></div>
           </div>
           <div class="home-screen__container">
             <div class="container home-screen__nav"><a class="button-text home-screen__next" href="./arenda.html"><span>Аренда</span>
@@ -538,7 +535,9 @@
         </div>
         <!--section-->
         <div class="helper__section"><span class="helper__section-title">Страницы:</span>
-          <div class="helper__section-content"><a class="helper__section-button" href="./index.html">Главная</a><a class="helper__section-button" href="./proizvodstvo.html">Производство </a><a class="helper__section-button" href="./arenda.html">Аренда</a><a class="helper__section-button" href="./servis.html">Сервис</a><a class="helper__section-button" href="./remont.html">Ремонт</a><a class="helper__section-button" href="./education.html">Обучение</a><a class="helper__section-button" href="./engineering.html">Проектирование</a><a class="helper__section-button" href="./contacts.html">Контакты</a></div>
+          <div class="helper__section-content"><a class="helper__section-button" href="./index.html">Главная</a><a class="helper__section-button" href="./proizvodstvo.html">Производство </a><a class="helper__section-button" href="./arenda.html">Аренда</a>
+            <!--a(href=servis).helper__section-button Сервис--><a class="helper__section-button" href="./remont.html">Ремонт</a><a class="helper__section-button" href="./education.html">Обучение</a><a class="helper__section-button" href="./engineering.html">Проектирование</a><a class="helper__section-button" href="./contacts.html">Контакты</a>
+          </div>
         </div>
         <!--section-->
         <div class="helper__section"><span class="helper__section-title">Прочее:</span>

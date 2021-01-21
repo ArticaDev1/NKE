@@ -228,7 +228,8 @@
                 <ul class="nav__list">
                   <li class="nav__item"> <a class="nav__link h4" href="./proizvodstvo.html">Производство </a></li>
                   <li class="nav__item"><a class="nav__link h4" href="./arenda.html">Аренда</a></li>
-                  <li class="nav__item"><a class="nav__link h4" href="./servis.html">Сервис</a></li>
+                  <!--li.nav__itema(href=servis class=n3?'active':'').nav__link.h4 Сервис
+                  -->
                   <li class="nav__item"><a class="active nav__link h4" href="./remont.html">Ремонт</a></li>
                   <li class="nav__item"><a class="nav__link h4" href="./education.html">Обучение</a></li>
                   <li class="nav__item"><a class="nav__link h4" href="./engineering.html">Проектирование</a></li>
@@ -271,15 +272,15 @@
         </nav>
       </header>
       <main class="main">
-        <section class="section home-screen" data-mobile-window>
+        <section class="home-screen" data-mobile-window>
           <div class="home-screen__background">
-            <div class="image image_cover"><img class="lazyload" src="./img/ddkdkdkd.jpg" alt="image"></div>
+            <div class="image image_cover rellax" data-rellax-speed="-3"><img class="lazyload" src="./img/ddddd.jpg" alt="image"></div>
           </div>
           <div class="home-screen__container">
-            <div class="container home-screen__nav"><a class="button-text home-screen__prev" href="./servis.html">
+            <div class="container home-screen__nav"><a class="button-text home-screen__prev" href="./arenda.html">
                 <svg class="icon">
                   <use xlink:href="./img/icons/icons.svg#arrow"></use>
-                </svg><span>Сервис</span></a><a class="button-text home-screen__next" href="./education.html"><span>Обучение</span>
+                </svg><span>Аренда</span></a><a class="button-text home-screen__next" href="./education.html"><span>Обучение</span>
                 <svg class="icon">
                   <use xlink:href="./img/icons/icons.svg#arrow"></use>
                 </svg></a></div>
@@ -290,58 +291,163 @@
               </div>
             </div>
           </div>
+          <button class="scroll-btn home-screen__scroll d-xl-none" aria-label="scroll bottom" data-scroll="bottom">
+            <svg class="icon">
+              <use xlink:href="./img/icons/icons.svg#arrow"></use>
+            </svg>
+          </button>
         </section>
-        <section class="section content-section bg-gray bg-gradient-skew">
+        <section class="v-section v-section_type-2 bg-accent bg-gradient">
+          <div class="v-section__size-wrapper">
+            <div class="v-section__outer" data-hide-header>
+              <div class="v-section__container container">
+                <button class="scroll-btn v-section__btn" aria-label="scroll bottom" data-scroll="self">
+                  <svg class="icon">
+                    <use xlink:href="./img/icons/icons.svg#arrow"></use>
+                  </svg>
+                </button>
+                <div class="v-section__wrapper">
+                  <h2 class="v-section__title">Виды ремонта</h2>
+                  <div class="v-section__content">
+                            <!--block1-->
+                            <div class="content-block">
+                              <div class="content-block__container row">
+                                <div class="content-block__image offset-md-1 offset-lg-0 col-11 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+                                  <div class="image image_cover image-size-1 image-align-left"><img class="lazyload" data-src="https://placehold.co/1000x1000/fff/393939?font=montserrat&amp;text=Картинка" alt="image"></div>
+                                </div>
+                                <div class="content-block__text offset-md-1 offset-lg-1 col-sm-10 col-md-8 col-lg-5">
+                                  <div class="row">
+                                    <div class="content-block__head"><span class="content-block__index">01</span>
+                                      <h5>Техническое обслуживание</h5>
+                                    </div>
+                                    <div class="content-block__content">
+                                      <p>Помощь при проектировании подраздела Технологические Решения (ТХ) стадии «П» и стадии «Р».</p><a class="button-text" href="#modal-form" data-modal="open"><span>Подробнее</span>
+                                        <svg class="icon">
+                                          <use xlink:href="./img/icons/icons.svg#arrow"></use>
+                                        </svg></a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!--block2-->
+                            <div class="content-block">
+                              <div class="content-block__container row">
+                                <div class="content-block__image order-lg-2 offset-2 offset-sm-3 offset-md-5 offset-lg-1 col-10 col-sm-9 col-md-7 col-lg-5 col-xl-6">
+                                  <div class="image image_cover image-size-2 sm-image-align-right"><img class="lazyload" data-src="https://placehold.co/1000x1000/fff/393939?font=montserrat&amp;text=Картинка" alt="image"></div>
+                                </div>
+                                <div class="content-block__text order-lg-1 offset-sm-3 offset-md-5 offset-lg-0 col-sm-9 col-md-7 col-lg-6 col-xl-5">
+                                  <div class="row">
+                                    <div class="content-block__head"><span class="content-block__index">02</span>
+                                      <h5>Текущей ремонт (ТР)</h5>
+                                    </div>
+                                    <div class="content-block__content">
+                                      <p>(ведомственных, региональных, федеральных) на специально-строительные и технологические работы, в соответствии с основной деятельностью предприятия.</p><a class="button-text" href="#modal-form" data-modal="open"><span>Подробнее</span>
+                                        <svg class="icon">
+                                          <use xlink:href="./img/icons/icons.svg#arrow"></use>
+                                        </svg></a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!--block7-->
+                            <div class="content-block">
+                              <div class="content-block__container row">
+                                <div class="content-block__image offset-md-1 offset-lg-0 col-11 col-sm-10 col-md-8 col-lg-6">
+                                  <div class="image image_cover image-size-4 image-align-left"><img class="lazyload" data-src="https://placehold.co/1000x1000/fff/393939?font=montserrat&amp;text=Картинка" alt="image"></div>
+                                </div>
+                                <div class="content-block__text offset-md-1 offset-lg-1 col-sm-10 col-md-8 col-lg-5">
+                                  <div class="row">
+                                    <div class="content-block__head"><span class="content-block__index">03</span>
+                                      <h5>Капитальный ремонт (КР)</h5>
+                                    </div>
+                                    <div class="content-block__content">
+                                      <p>Для выполнения специально-строительных и технологических работ, в соответствии с основной деятельностью предприятия.</p><a class="button-text" href="#modal-form" data-modal="open"><span>Подробнее</span>
+                                        <svg class="icon">
+                                          <use xlink:href="./img/icons/icons.svg#arrow"></use>
+                                        </svg></a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="content-section bg-gray bg-gradient-skew">
           <div class="container">
-            <!--block4-->
-            <div class="content-block">
+                    <!--block4       -->
+                    <div class="content-block js-animate-top">
+                      <div class="content-block__container row">
+                        <div class="content-block__image order-lg-2 offset-1 offset-sm-2 offset-md-3 offset-lg-1 col-11 col-sm-10 col-md-8 col-lg-6">
+                          <div class="image image_cover image-size-4 image-align-right"><img class="lazyload" data-src="https://placehold.co/1000x1000/fff/393939?font=montserrat&amp;text=Картинка" alt="image"></div>
+                        </div>
+                        <div class="content-block__text order-lg-1 offset-sm-2 offset-md-3 offset-lg-0 col-sm-10 col-md-8 col-lg-5">
+                          <div class="row">
+                            <div class="content-block__head"><span class="content-block__index">01</span>
+                              <h5>Специализированные оборудованные сервисные центры в Московской и Самарской областях</h5>
+                            </div>
+                            <div class="content-block__content">
+                              <p>Объединенных в Отдел главного механика (ОГМ) и обученных по специальности «слесарь-ремонтник 6 разряда по ремонту специализированного оборудования для врезки и перекрытия полости трубопроводов», имеющих опыт по специальности свыше 5 (пяти) лет.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--block3-->
+                    <div class="content-block js-animate-top">
+                      <div class="content-block__container row">
+                        <div class="content-block__image col-sm-9 col-md-7 col-lg-5 col-xl-5">
+                          <div class="image image_cover image-size-3 image-stretch sm-image-align-left"><img class="lazyload" data-src="https://placehold.co/1000x1000/fff/393939?font=montserrat&amp;text=Картинка" alt="image"></div>
+                        </div>
+                        <div class="content-block__text offset-lg-1 col-sm-9 col-md-7 col-lg-6 col-xl-5">
+                          <div class="row">
+                            <div class="content-block__head"><span class="content-block__index">02</span>
+                              <h5>Специализированное оригинальное оборудование и ручной инструмент</h5>
+                            </div>
+                            <div class="content-block__content">
+                              <p>Объединенных в Отдел главного механика (ОГМ) и обученных по специальности «слесарь-ремонтник 6 разряда по ремонту специализированного оборудования для врезки и перекрытия полости трубопроводов», имеющих опыт по специальности свыше 5 (пяти) лет.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--block6-->
+                    <div class="content-block js-animate-top">
+                      <div class="content-block__container row">
+                        <div class="vertical-text vertical-text_right">
+                          <div class="vertical-text__container">Объединенных в Отдел</div>
+                        </div>
+                        <div class="content-block__image order-lg-2 offset-1 offset-sm-2 offset-md-3 offset-lg-1 col-11 col-sm-10 col-md-8 col-lg-5">
+                          <div class="image image_cover image-size-4 image-align-right"><img class="lazyload" data-src="https://placehold.co/1000x1000/fff/393939?font=montserrat&amp;text=Картинка" alt="image"></div>
+                        </div>
+                        <div class="content-block__text order-lg-1 offset-sm-2 offset-md-3 offset-lg-0 col-sm-10 col-md-8 col-lg-5">
+                          <div class="row">
+                            <div class="content-block__head"><span class="content-block__index">03</span>
+                              <h5>Годовой запас частей импортного и отечественного производства</h5>
+                            </div>
+                            <div class="content-block__content">
+                              <p>Объединенных в Отдел главного механика (ОГМ) и обученных по специальности «слесарь-ремонтник 6 разряда по ремонту специализированного оборудования для врезки и перекрытия полости трубопроводов», имеющих опыт по специальности свыше 5 (пяти) лет.</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+            <!--block7-->
+            <div class="content-block content-block-bg js-bg-animate">
               <div class="content-block__container row">
-                <div class="content-block__image order-lg-2 offset-1 offset-sm-2 offset-md-3 offset-lg-1 col-11 col-sm-10 col-md-8 col-lg-6">
-                  <div class="image image_cover image-size-4 image-align-right"><img class="lazyload" data-src="https://placehold.co/1000x700/fff/393939?font=montserrat&amp;text=Картинка" alt="image"></div>
+                <div class="content-block__image col-sm-10 col-md-12">
+                  <div class="image image_cover image-size-1 image-stretch js-bg-animate__bg"><img class="lazyload" data-src="./img/ldldsss.jpg" alt="image"></div>
+                  <div class="content-block-bg__mask js-bg-animate__mask"></div>
                 </div>
-                <div class="content-block__container order-lg-1 offset-sm-2 offset-md-3 offset-lg-0 col-sm-10 col-md-8 col-lg-5">
+                <div class="content-block__text js-bg-animate__content offset-md-4 offset-xl-6 offset-xxl-7 col-sm-10 col-md-8 col-xl-6 col-xxl-5">
                   <div class="row">
-                    <div class="content-block__head"><span class="content-block__index">01</span>
-                      <h5>Специализированные оборудованные сервисные центры в Московской и Самарской областях</h5>
-                    </div>
-                    <div class="content-block__content">
-                      <p>Объединенных в Отдел главного механика (ОГМ) и обученных по специальности «слесарь-ремонтник 6 разряда по ремонту специализированного оборудования для врезки и перекрытия полости трубопроводов», имеющих опыт по специальности свыше 5 (пяти) лет.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!--block3-->
-            <div class="content-block">
-              <div class="content-block__container row">
-                <div class="content-block__image col-sm-9 col-md-7 col-lg-5 col-xl-5">
-                  <div class="image image_cover image-size-3 image-stretch sm-image-align-left"><img class="lazyload" data-src="https://placehold.co/1000x600/fff/393939?font=montserrat&amp;text=Картинка" alt="image"></div>
-                </div>
-                <div class="content-block__container offset-lg-1 col-sm-9 col-md-7 col-lg-6 col-xl-5">
-                  <div class="row">
-                    <div class="content-block__head"><span class="content-block__index">02</span>
-                      <h5>Специализированное оригинальное оборудование и ручной инструмент</h5>
-                    </div>
-                    <div class="content-block__content">
-                      <p>Объединенных в Отдел главного механика (ОГМ) и обученных по специальности «слесарь-ремонтник 6 разряда по ремонту специализированного оборудования для врезки и перекрытия полости трубопроводов», имеющих опыт по специальности свыше 5 (пяти) лет.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!--block6-->
-            <div class="content-block">
-              <div class="content-block__container row">
-                <div class="vertical-text vertical-text_right">
-                  <div class="vertical-text__container">Объединенных в Отдел</div>
-                </div>
-                <div class="content-block__image order-lg-2 offset-1 offset-sm-2 offset-md-3 offset-lg-1 col-11 col-sm-10 col-md-8 col-lg-5">
-                  <div class="image image_cover image-size-4 image-align-right"><img class="lazyload" data-src="https://placehold.co/1000x700/fff/393939?font=montserrat&amp;text=Картинка" alt="image"></div>
-                </div>
-                <div class="content-block__container order-lg-1 offset-sm-2 offset-md-3 offset-lg-0 col-sm-10 col-md-8 col-lg-5">
-                  <div class="row">
-                    <div class="content-block__head"><span class="content-block__index">03</span>
-                      <h5>Годовой запас частей импортного и отечественного производства</h5>
+                    <div class="content-block__head"><span class="content-block__index">04</span>
+                      <h5>Большой штат высококвалифицированных инженеров-механиков</h5>
                     </div>
                     <div class="content-block__content">
                       <p>Объединенных в Отдел главного механика (ОГМ) и обученных по специальности «слесарь-ремонтник 6 разряда по ремонту специализированного оборудования для врезки и перекрытия полости трубопроводов», имеющих опыт по специальности свыше 5 (пяти) лет.</p>
@@ -471,7 +577,9 @@
         </div>
         <!--section-->
         <div class="helper__section"><span class="helper__section-title">Страницы:</span>
-          <div class="helper__section-content"><a class="helper__section-button" href="./index.html">Главная</a><a class="helper__section-button" href="./proizvodstvo.html">Производство </a><a class="helper__section-button" href="./arenda.html">Аренда</a><a class="helper__section-button" href="./servis.html">Сервис</a><a class="helper__section-button" href="./remont.html">Ремонт</a><a class="helper__section-button" href="./education.html">Обучение</a><a class="helper__section-button" href="./engineering.html">Проектирование</a><a class="helper__section-button" href="./contacts.html">Контакты</a></div>
+          <div class="helper__section-content"><a class="helper__section-button" href="./index.html">Главная</a><a class="helper__section-button" href="./proizvodstvo.html">Производство </a><a class="helper__section-button" href="./arenda.html">Аренда</a>
+            <!--a(href=servis).helper__section-button Сервис--><a class="helper__section-button" href="./remont.html">Ремонт</a><a class="helper__section-button" href="./education.html">Обучение</a><a class="helper__section-button" href="./engineering.html">Проектирование</a><a class="helper__section-button" href="./contacts.html">Контакты</a>
+          </div>
         </div>
         <!--section-->
         <div class="helper__section"><span class="helper__section-title">Прочее:</span>

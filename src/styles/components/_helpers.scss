@@ -87,6 +87,7 @@
 
 
 
+
 @include media-breakpoint-down(sm) {
   .image-align-right, .image-align-left, .sm-image-align-left, .sm-image-align-right {
     width: calc(100% + #{$mobile-container-padding-x});

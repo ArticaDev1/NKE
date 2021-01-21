@@ -3,18 +3,18 @@ block variables
   -var title = sitename+' - Ремонт'
   -var n4 = true;
 block content
-  section.section.home-screen(data-mobile-window)
+  include blocks/blocks
 
+  section.home-screen(data-mobile-window)
     .home-screen__background
-      .image.image_cover
-        img(src="./img/ddkdkdkd.jpg", alt="image").lazyload
-
+      .image.image_cover.rellax(data-rellax-speed="-3")
+        img(src="./img/ddddd.jpg", alt="image").lazyload
     .home-screen__container
       .container.home-screen__nav
-        a(href=servis).button-text.home-screen__prev
+        a(href=arenda).button-text.home-screen__prev
           svg.icon
             use(xlink:href='./img/icons/icons.svg#arrow')
-          span Сервис
+          span Аренда
         a(href=education).button-text.home-screen__next
           span Обучение
           svg.icon
@@ -23,52 +23,91 @@ block content
         .row
           h1.home-screen__title.col-xxl-6.col-xl-7.col-lg-8 Оказывает услуги ремонту и обслуживанию оборудования производства T.D.Williamson
           p.h6.home-screen__text.col-xxl-3.col-lg-4.col-md-7.col-sm-8 ООО НК «Евразия» является представителем группы компаний Т.D. Williamson 
+    
+    button.scroll-btn.home-screen__scroll.d-xl-none(aria-label='scroll bottom' data-scroll='bottom')
+      svg.icon
+        use(xlink:href='./img/icons/icons.svg#arrow')
 
-  section.section.content-section.bg-gray.bg-gradient-skew
+
+  section.v-section.v-section_type-2.bg-accent.bg-gradient
+    .v-section__size-wrapper
+      .v-section__outer(data-hide-header)
+        .v-section__container.container
+          button.scroll-btn.v-section__btn(aria-label='scroll bottom' data-scroll='self')
+            svg.icon
+              use(xlink:href='./img/icons/icons.svg#arrow')
+          .v-section__wrapper
+            h2.v-section__title Виды ремонта
+            .v-section__content
+              +block1(
+                '',
+                '01', 
+                'Техническое обслуживание', 
+                'Помощь при проектировании подраздела Технологические Решения (ТХ) стадии «П» и стадии «Р».',
+                'https://placehold.co/1000x1000/fff/393939?font=montserrat&text=Картинка',
+                true
+              )
+              +block2(
+                '',
+                '02', 
+                'Текущей ремонт (ТР)', 
+                '(ведомственных, региональных, федеральных) на специально-строительные и технологические работы, в соответствии с основной деятельностью предприятия.',
+                'https://placehold.co/1000x1000/fff/393939?font=montserrat&text=Картинка',
+                true
+              )
+              +block7(
+                '',
+                '03', 
+                'Капитальный ремонт (КР)', 
+                'Для выполнения специально-строительных и технологических работ, в соответствии с основной деятельностью предприятия.',
+                'https://placehold.co/1000x1000/fff/393939?font=montserrat&text=Картинка',
+                true
+              )
+
+
+  section.content-section.bg-gray.bg-gradient-skew
     .container
+      +block4(
+        'js-animate-top',
+        '01', 
+        'Специализированные оборудованные сервисные центры в Московской и Самарской областях', 
+        'Объединенных в Отдел главного механика (ОГМ) и обученных по специальности «слесарь-ремонтник 6 разряда по ремонту специализированного оборудования для врезки и перекрытия полости трубопроводов», имеющих опыт по специальности свыше 5 (пяти) лет.',
+        'https://placehold.co/1000x1000/fff/393939?font=montserrat&text=Картинка',
+        false
+      )
+      +block3(
+        'js-animate-top',
+        '02', 
+        'Специализированное оригинальное оборудование и ручной инструмент', 
+        'Объединенных в Отдел главного механика (ОГМ) и обученных по специальности «слесарь-ремонтник 6 разряда по ремонту специализированного оборудования для врезки и перекрытия полости трубопроводов», имеющих опыт по специальности свыше 5 (пяти) лет.',
+        'https://placehold.co/1000x1000/fff/393939?font=montserrat&text=Картинка',
+        false
+      )
+      +block6(
+        'js-animate-top',
+        '03', 
+        'Годовой запас частей импортного и отечественного производства', 
+        'Объединенных в Отдел главного механика (ОГМ) и обученных по специальности «слесарь-ремонтник 6 разряда по ремонту специализированного оборудования для врезки и перекрытия полости трубопроводов», имеющих опыт по специальности свыше 5 (пяти) лет.',
+        'https://placehold.co/1000x1000/fff/393939?font=montserrat&text=Картинка',
+        false,
+        'Объединенных в Отдел'
+      )
 
-      //block4
-      .content-block
+      //block7
+      .content-block.content-block-bg.js-bg-animate
         .content-block__container.row
-          .content-block__image.order-lg-2.offset-1.offset-sm-2.offset-md-3.offset-lg-1.col-11.col-sm-10.col-md-8.col-lg-6
-            .image.image_cover.image-size-4.image-align-right
-              img(data-src="https://placehold.co/1000x700/fff/393939?font=montserrat&text=Картинка", alt="image").lazyload
-          .content-block__container.order-lg-1.offset-sm-2.offset-md-3.offset-lg-0.col-sm-10.col-md-8.col-lg-5
+          .content-block__image.col-sm-10.col-md-12
+            .image.image_cover.image-size-1.image-stretch.js-bg-animate__bg
+              img(data-src="./img/ldldsss.jpg", alt="image").lazyload
+            .content-block-bg__mask.js-bg-animate__mask
+          .content-block__text.js-bg-animate__content.offset-md-4.offset-xl-6.offset-xxl-7.col-sm-10.col-md-8.col-xl-6.col-xxl-5
             .row
               .content-block__head
-                span.content-block__index 01
-                h5 Специализированные оборудованные сервисные центры в Московской и Самарской областях
-              .content-block__content
-                p Объединенных в Отдел главного механика (ОГМ) и обученных по специальности «слесарь-ремонтник 6 разряда по ремонту специализированного оборудования для врезки и перекрытия полости трубопроводов», имеющих опыт по специальности свыше 5 (пяти) лет.
-  
-      //block3
-      .content-block
-        .content-block__container.row
-          .content-block__image.col-sm-9.col-md-7.col-lg-5.col-xl-5
-            .image.image_cover.image-size-3.image-stretch.sm-image-align-left
-              img(data-src="https://placehold.co/1000x600/fff/393939?font=montserrat&text=Картинка", alt="image").lazyload
-          .content-block__container.offset-lg-1.col-sm-9.col-md-7.col-lg-6.col-xl-5
-            .row
-              .content-block__head
-                span.content-block__index 02
-                h5 Специализированное оригинальное оборудование и ручной инструмент
+                span.content-block__index 04
+                h5 Большой штат высококвалифицированных инженеров-механиков
               .content-block__content
                 p Объединенных в Отдел главного механика (ОГМ) и обученных по специальности «слесарь-ремонтник 6 разряда по ремонту специализированного оборудования для врезки и перекрытия полости трубопроводов», имеющих опыт по специальности свыше 5 (пяти) лет.
 
-      //block6
-      .content-block
-        .content-block__container.row
-          .vertical-text.vertical-text_right
-            .vertical-text__container Объединенных в Отдел
-          .content-block__image.order-lg-2.offset-1.offset-sm-2.offset-md-3.offset-lg-1.col-11.col-sm-10.col-md-8.col-lg-5
-            .image.image_cover.image-size-4.image-align-right
-              img(data-src="https://placehold.co/1000x700/fff/393939?font=montserrat&text=Картинка", alt="image").lazyload
-          .content-block__container.order-lg-1.offset-sm-2.offset-md-3.offset-lg-0.col-sm-10.col-md-8.col-lg-5
-            .row
-              .content-block__head
-                span.content-block__index 03
-                h5 Годовой запас частей импортного и отечественного производства
-              .content-block__content
-                p Объединенных в Отдел главного механика (ОГМ) и обученных по специальности «слесарь-ремонтник 6 разряда по ремонту специализированного оборудования для врезки и перекрытия полости трубопроводов», имеющих опыт по специальности свыше 5 (пяти) лет.
+
   
   include blocks/form-section

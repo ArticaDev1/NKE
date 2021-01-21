@@ -228,7 +228,8 @@
                 <ul class="nav__list">
                   <li class="nav__item"> <a class="nav__link h4" href="./proizvodstvo.html">Производство </a></li>
                   <li class="nav__item"><a class="nav__link h4" href="./arenda.html">Аренда</a></li>
-                  <li class="nav__item"><a class="nav__link h4" href="./servis.html">Сервис</a></li>
+                  <!--li.nav__itema(href=servis class=n3?'active':'').nav__link.h4 Сервис
+                  -->
                   <li class="nav__item"><a class="nav__link h4" href="./remont.html">Ремонт</a></li>
                   <li class="nav__item"><a class="nav__link h4" href="./education.html">Обучение</a></li>
                   <li class="nav__item"><a class="nav__link h4" href="./engineering.html">Проектирование</a></li>
@@ -445,21 +446,13 @@
                                           <h6 class="work-slide__title">Аренда</h6>
                                           <p class="work-slide__text">Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями</p>
                                         </div></a></div>
-                                    <!--slide-->
-                                    <div class="work-slide splide__slide"><a class="work-slide__container" href="./servis.html">
-                                        <div class="work-slide__background">
-                                          <div class="work-slide__image image image_cover"><img src="./img/wslider/w3.jpg" alt="photo"></div>
-                                        </div>
-                                        <div class="work-slide__content"><span class="work-slide__index h2">03</span>
-                                          <h6 class="work-slide__title">Сервис</h6>
-                                          <p class="work-slide__text">Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями</p>
-                                        </div></a></div>
+                  <!--+slide('', '03', 'Сервис', 'Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями', servis, './img/wslider/w3.jpg')-->
                                     <!--slide-->
                                     <div class="work-slide splide__slide"><a class="work-slide__container" href="./remont.html">
                                         <div class="work-slide__background">
                                           <div class="work-slide__image image image_cover"><img src="./img/wslider/w4.jpg" alt="photo"></div>
                                         </div>
-                                        <div class="work-slide__content"><span class="work-slide__index h2">04</span>
+                                        <div class="work-slide__content"><span class="work-slide__index h2">03</span>
                                           <h6 class="work-slide__title">Ремонт</h6>
                                           <p class="work-slide__text">Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями</p>
                                         </div></a></div>
@@ -468,7 +461,7 @@
                                         <div class="work-slide__background">
                                           <div class="work-slide__image image image_cover"><img src="./img/wslider/w5.jpg" alt="photo"></div>
                                         </div>
-                                        <div class="work-slide__content"><span class="work-slide__index h2">05</span>
+                                        <div class="work-slide__content"><span class="work-slide__index h2">04</span>
                                           <h6 class="work-slide__title">Обучение</h6>
                                           <p class="work-slide__text">Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями</p>
                                         </div></a></div>
@@ -477,7 +470,7 @@
                                         <div class="work-slide__background">
                                           <div class="work-slide__image image image_cover"><img src="./img/wslider/w6.jpg" alt="photo"></div>
                                         </div>
-                                        <div class="work-slide__content"><span class="work-slide__index h2">06</span>
+                                        <div class="work-slide__content"><span class="work-slide__index h2">05</span>
                                           <h6 class="work-slide__title">Проектирование</h6>
                                           <p class="work-slide__text">Состав узлов буровой установки, их конструкция определяется назначением скважины, условиями</p>
                                         </div></a></div>
@@ -650,7 +643,9 @@
         </div>
         <!--section-->
         <div class="helper__section"><span class="helper__section-title">Страницы:</span>
-          <div class="helper__section-content"><a class="helper__section-button" href="./index.html">Главная</a><a class="helper__section-button" href="./proizvodstvo.html">Производство </a><a class="helper__section-button" href="./arenda.html">Аренда</a><a class="helper__section-button" href="./servis.html">Сервис</a><a class="helper__section-button" href="./remont.html">Ремонт</a><a class="helper__section-button" href="./education.html">Обучение</a><a class="helper__section-button" href="./engineering.html">Проектирование</a><a class="helper__section-button" href="./contacts.html">Контакты</a></div>
+          <div class="helper__section-content"><a class="helper__section-button" href="./index.html">Главная</a><a class="helper__section-button" href="./proizvodstvo.html">Производство </a><a class="helper__section-button" href="./arenda.html">Аренда</a>
+            <!--a(href=servis).helper__section-button Сервис--><a class="helper__section-button" href="./remont.html">Ремонт</a><a class="helper__section-button" href="./education.html">Обучение</a><a class="helper__section-button" href="./engineering.html">Проектирование</a><a class="helper__section-button" href="./contacts.html">Контакты</a>
+          </div>
         </div>
         <!--section-->
         <div class="helper__section"><span class="helper__section-title">Прочее:</span>

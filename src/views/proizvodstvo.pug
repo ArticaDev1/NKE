@@ -7,11 +7,9 @@ block content
 
   section.home-screen(data-mobile-window)
     .home-screen__background
-      .image.image_cover
+      .image.image_cover.rellax(data-rellax-speed="-3")
         img(data-src="./img/photo-1539186607619-df476afe6ff1 1.jpg", alt="image").lazyload
-      .background-video
-        video.background-video__element(muted loop)
-          source(data-src='./videos/IMG_6534.mp4' type='video/mp4')
+      .background-video(data-src="./videos/IMG_2780.mp4").rellax(data-rellax-speed="-3")
     .home-screen__container
       .container.home-screen__nav
         a(href=arenda).button-text.home-screen__next
@@ -82,5 +80,6 @@ block content
         'https://placehold.co/1000x1000/fff/393939?font=montserrat&text=Картинка',
         false
       )
+
   
   include blocks/form-section

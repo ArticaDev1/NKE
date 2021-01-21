@@ -7,16 +7,16 @@ block content
 
   section.home-screen(data-mobile-window)
     .home-screen__background
-      .image.image_cover
-        img(src="./img/kdkkd.jpeg", alt="image").lazyload
+      .image.image_cover.rellax(data-rellax-speed="-3")
+        img(src="./img/PipelineIntegrity 1.jpg", alt="image").lazyload
     .home-screen__container
       .container.home-screen__nav
         a(href=proizvodstvo).button-text.home-screen__prev
           svg.icon
             use(xlink:href='./img/icons/icons.svg#arrow')
           span Производство
-        a(href=servis).button-text.home-screen__next
-          span Сервис
+        a(href=remont).button-text.home-screen__next
+          span Ремонт
           svg.icon
             use(xlink:href='./img/icons/icons.svg#arrow')
       .container.home-screen__content
@@ -29,7 +29,7 @@ block content
         use(xlink:href='./img/icons/icons.svg#arrow')
 
   section.arenda-info.bg-accent.bg-gradient
-    .container
+    .container.js-animate-fade
       h3.arenda-info__title В пользовании общества находится более
         span 200
         | единиц оборудования
@@ -38,6 +38,7 @@ block content
   section.content-section.bg-gray.bg-gradient-skew
     .container
       +block1(
+        'js-animate-top',
         '01', 
         'Аренда по всей стране', 
         'Все оборудование на сегодняшний день активно используется арендаторами по всей территории Российские Федерации.',
@@ -45,6 +46,7 @@ block content
         false
       )
       +block4(
+        'js-animate-top',
         '02', 
         'Оборудование проходит осмотр и ремонт', 
         'После каждого использования весь комплект оборудования проходит плановый технический осмотр и при необходимости ремонт, согласно нормативам завода-изготовителя.',
