@@ -4352,7 +4352,7 @@ table:not([class]) {
   .home__background .image img {
     object-position: 0 90%; }
   .home__content {
-    padding: 200px 0 100px 0;
+    padding: 190px 0 100px 0;
     flex: 1 1 100%;
     position: relative;
     display: flex;
