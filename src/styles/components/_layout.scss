@@ -6,6 +6,7 @@
   z-index: 2;
   background-color: var(--color-bg-accent);
   transition: background-color $trs2;
+  overflow: hidden;
 }
 .main {
   flex: 1 1 100%;

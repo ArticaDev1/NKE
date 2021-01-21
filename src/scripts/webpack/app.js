@@ -459,9 +459,10 @@ const Header = {
     let count = 0;
     document.querySelectorAll('[data-hide-header]').forEach(($element, index)=>{
       let h = $element.getBoundingClientRect().height;
+      console.log(h, window.innerHeight, $element.getBoundingClientRect().top)
       if(h==window.innerHeight) {
         let t = $element.getBoundingClientRect().top;
-        if(t<1 && t>-1) {
+        if(t<10 && t>-10) {
           count++;
         }
       }
