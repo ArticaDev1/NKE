@@ -1304,6 +1304,7 @@ class VSection2 {
     this.$button = this.$parent.querySelector('.v-section__btn');
     this.$button_icon = this.$parent.querySelector('.v-section__btn .icon');
     this.$blocks = this.$parent.querySelectorAll('.content-block');
+    this.$images = this.$parent.querySelectorAll('.content-block .image');
 
     let setParams = ()=> {
       let content_width = this.$content.getBoundingClientRect().width,
@@ -1396,9 +1397,10 @@ class VSection2 {
     });
 
     setTimeout(()=>{
+      console.log(this.$images)
 
       let animation = gsap.timeline({paused:true})
-        .fromTo(this.$blocks, {autoAlpha:0, y:100, scale:0.9}, {autoAlpha:1, y:0, scale:1, duration:1, ease:'power2.inOut', stagger:{each:0.5}})
+        .fromTo(this.$images, {x:40}, {x:-80, duration:1, ease:'power2.inOut'})
       
       ScrollTrigger.create({
         trigger: tr.spacer,
@@ -1415,7 +1417,7 @@ class VSection2 {
       });
 
 
-    }, 1000)
+    }, 500)
 
     
 
