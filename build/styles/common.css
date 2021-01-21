@@ -4347,7 +4347,7 @@ table:not([class]) {
 .home {
   display: flex;
   flex-direction: column; }
-  .home__background::before {
+  .home__background::before, .home__background::after {
     display: none; }
   .home__background .image img {
     object-position: 0 90%; }
