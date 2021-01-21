@@ -1,6 +1,6 @@
-mixin block1(index, title, text, image, button)
+mixin block1(c, index, title, text, image, button)
   //block1
-  .content-block
+  .content-block(class=c?c:'')
     .content-block__container.row
       .content-block__image.offset-md-1.offset-lg-0.col-11.col-sm-10.col-md-8.col-lg-6.col-xl-5
         .image.image_cover.image-size-1.image-align-left
@@ -18,9 +18,9 @@ mixin block1(index, title, text, image, button)
                 svg.icon
                   use(xlink:href='./img/icons/icons.svg#arrow')
 
-mixin block2(index, title, text, image, button)
+mixin block2(c, index, title, text, image, button)
   //block2
-  .content-block
+  .content-block(class=c?c:'')
     .content-block__container.row
       .content-block__image.order-lg-2.offset-2.offset-sm-3.offset-md-5.offset-lg-1.col-10.col-sm-9.col-md-7.col-lg-5.col-xl-6
         .image.image_cover.image-size-2.sm-image-align-right
@@ -38,9 +38,9 @@ mixin block2(index, title, text, image, button)
                 svg.icon
                   use(xlink:href='./img/icons/icons.svg#arrow')
 
-mixin block3(index, title, text, image, button)
+mixin block3(c, index, title, text, image, button)
   //block3
-  .content-block
+  .content-block(class=c?c:'')
     .content-block__container.row
       .content-block__image.col-sm-9.col-md-7.col-lg-5.col-xl-5
         .image.image_cover.image-size-3.image-stretch.sm-image-align-left
@@ -58,9 +58,9 @@ mixin block3(index, title, text, image, button)
                 svg.icon
                   use(xlink:href='./img/icons/icons.svg#arrow')
 
-mixin block4(index, title, text, image, button)     
+mixin block4(c, index, title, text, image, button)     
   //block4       
-  .content-block
+  .content-block(class=c?c:'')
     .content-block__container.row
       .content-block__image.order-lg-2.offset-1.offset-sm-2.offset-md-3.offset-lg-1.col-11.col-sm-10.col-md-8.col-lg-6
         .image.image_cover.image-size-4.image-align-right
@@ -78,9 +78,9 @@ mixin block4(index, title, text, image, button)
                 svg.icon
                   use(xlink:href='./img/icons/icons.svg#arrow')
 
-mixin block5(index, title, text, image, button, vtext)  
+mixin block5(c, index, title, text, image, button, vtext)  
   //block5
-  .content-block
+  .content-block(class=c?c:'')
     .content-block__container.row
       .vertical-text.vertical-text_left
         .vertical-text__container=vtext
@@ -100,9 +100,9 @@ mixin block5(index, title, text, image, button, vtext)
                 svg.icon
                   use(xlink:href='./img/icons/icons.svg#arrow')
 
-mixin block6(index, title, text, image, button, vtext)  
+mixin block6(c, index, title, text, image, button, vtext)  
   //block6
-  .content-block
+  .content-block(class=c?c:'')
     .content-block__container.row
       .vertical-text.vertical-text_right
         .vertical-text__container=vtext
@@ -122,9 +122,9 @@ mixin block6(index, title, text, image, button, vtext)
                 svg.icon
                   use(xlink:href='./img/icons/icons.svg#arrow')
 
-mixin block7(index, title, text, image, button)  
+mixin block7(c, index, title, text, image, button)  
   //block7
-  .content-block
+  .content-block(class=c?c:'')
     .content-block__container.row
       .content-block__image.offset-md-1.offset-lg-0.col-11.col-sm-10.col-md-8.col-lg-6
         .image.image_cover.image-size-4.image-align-left
@@ -142,9 +142,9 @@ mixin block7(index, title, text, image, button)
                 svg.icon
                   use(xlink:href='./img/icons/icons.svg#arrow')
 
-mixin block8(index, title, text, image, button) 
+mixin block8(c, index, title, text, image, button) 
   //block8
-  .content-block
+  .content-block(class=c?c:'')
     .content-block__container.row
       .content-block__image.order-lg-2.offset-sm-2.offset-md-5.offset-lg-1.col-sm-10.col-md-6.col-lg-6.col-xl-5
         .image.image_cover.image-size-5.image-stretch

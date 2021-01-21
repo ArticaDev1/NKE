@@ -7,9 +7,9 @@ block content
 
   section.home-screen(data-mobile-window)
     .home-screen__background
-      .image.image_cover.rellax(data-rellax-speed="-3")
+      .image.image_cover
         img(data-src="./img/photo-1539186607619-df476afe6ff1 1.jpg", alt="image").lazyload
-      .background-video.rellax(data-rellax-speed="-3")
+      .background-video
         video.background-video__element(muted loop)
           source(data-src='./videos/IMG_6534.mp4' type='video/mp4')
     .home-screen__container
@@ -30,15 +30,16 @@ block content
 
   section.v-section.v-section_type-1.bg-accent.bg-gradient
     .v-section__size-wrapper
-      .v-section__outer(data-hide-header)#scrollto
+      .v-section__outer(data-hide-header)
         .v-section__container.container
-          button.scroll-btn.v-section__btn(aria-label='scroll bottom' data-scroll='#scrollto')
+          button.scroll-btn.v-section__btn(aria-label='scroll bottom' data-scroll='self')
             svg.icon
               use(xlink:href='./img/icons/icons.svg#arrow')
           .v-section__wrapper
             h2.v-section__title Комплектующие изделия и режущий инструмент<br> для оборудования T.D.Williamson
             .v-section__content
               +block7(
+                '',
                 '01', 
                 'ТУ 22.19.73-002-34713450-2020', 
                 'Манжеты уплотнительные.',
@@ -46,6 +47,7 @@ block content
                 true
               )
               +block4(
+                '',
                 '02', 
                 'ТУ 24.20.40-001-34713450-2020', 
                 'Тройники разрезные для выполнения врезок под давлением от 1,2 МПа до 9,8 (10) МПа.',
@@ -53,6 +55,7 @@ block content
                 true
               )
               +block3(
+                '',
                 '03', 
                 'ТУ25.73.40-003-ХХХХ-2020', 
                 'Инструменты режущие и приспособления к оборудованию Т.D. Williamson.',
@@ -64,6 +67,7 @@ block content
   section.content-section.bg-gray.bg-gradient-skew
     .container
       +block4(
+        'js-animate-top',
         '01', 
         'В настоящее время идет оснащение собственного производства', 
         'Освоена технология изготовления разрезных тройников для врезки и перекрытия под давлением Ду100-Ду700.',
@@ -71,6 +75,7 @@ block content
         false
       )
       +block1(
+        'js-animate-top',
         '02', 
         'Производство разрезных тройников', 
         'осуществляется по принципу линейного производства, от пункта входного контроля комплектующих, через сварочные посты, вырезание «улыбки» под приварку отвода к телу тройника, далее пункт разреза тела тройника на обечайки, срезку кромок под подкладные пластины, фрезерный участок под проточку внутреннего диаметра отвода, контроля сварных швов подрядной организацией, дробеструйную и покрасочные камеры к пункту выходного контроля качества готовой продукции.',
