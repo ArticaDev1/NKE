@@ -5119,8 +5119,7 @@ table:not([class]) {
       margin-right: 0 !important; }
       .v-section .content-block__image .image {
         height: 100% !important;
-        width: 100% !important;
-        transform: translate(0) !important; }
+        width: 100% !important; }
         .v-section .content-block__image .image::before {
           display: none !important; }
     .v-section .content-block__text {
