@@ -155,6 +155,14 @@
 .home {
   display: flex;
   flex-direction: column;
+  &__background {
+    &::before {
+      display: none;
+    }
+    .image img {
+      object-position: 0 90%;
+    }
+  }
   &__content {
     padding: 200px 0 100px 0;
     flex: 1 1 100%;
@@ -1416,7 +1424,7 @@
       top: 0;
       left: 0;
       z-index: 2;
-      background: linear-gradient(180deg, rgba(69, 69, 69, 0.45) 0%, rgba(31, 34, 73, 0.51) 100%);
+      background: linear-gradient(180deg, rgba(69, 69, 69, 0.45) 0%, rgba(49, 49, 49, 0.51) 59.37%, rgba(74, 74, 74, 0.47) 100%);
     }
     .content-block {
       &__container {

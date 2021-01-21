@@ -167,28 +167,7 @@ window.onload = function () {
     check();
     window.addEventListener('resize', check);
   }
-
-  //bgsections
-  let $bgsections = document.querySelectorAll('.js-bg-animate');
-  if($bgsections.length) {
-    let instances = [];
-    let check=()=>{
-      if(window.innerWidth>=brakepoints.xl && !instances.length) {
-        $bgsections.forEach(($block, index)=>{
-          instances[index] = new BGSection($block);
-          instances[index].init();
-        })
-      } 
-      else if(window.innerWidth<brakepoints.xl && instances.length) {
-        for(let instance of instances) {
-          instance.destroy();
-        }
-        instances = [];
-      }
-    }
-    check();
-    window.addEventListener('resize', check);
-  }
+  
 
   //else
   if(mobile()) {
@@ -369,10 +348,23 @@ const Preloader = {
   hide: function () {
     $body.style.overflow = 'auto';
     disablePageScroll();
+    //home animation
+    let $screen = document.querySelector('.home-screen');
+    if($screen && !mobile()) {
+      let $bg = $screen.querySelector('.home-screen__background img'),
+          $text = $screen.querySelectorAll('.home-screen__item');
+      gsap.timeline()
+        .fromTo($bg, {scale:1.2}, {scale:1, ease:'power2.out', duration:Speed*1.5})
+        .fromTo($text, {autoAlpha:0}, {autoAlpha:1, duration:Speed*0.85, ease:'power2.inOut', stagger:{amount:Speed*0.15}}, `-=${Speed}`)
+        .fromTo($text, {y:50}, {y:0, duration:Speed*0.85, ease:'power2.out', stagger:{amount:Speed*0.15}}, `-=${Speed}`)
+    }
+    
+    
+    //
     gsap.timeline()
       .fromTo($preloader_items[0], {css: {'stroke-dashoffset': preloader_values[0] * 2}}, {css: {'stroke-dashoffset': preloader_values[0]},duration: Speed * 0.75,ease: 'power2.inOut'})
       .fromTo($preloader_items[1], {css: {'stroke-dashoffset': preloader_values[1] * 2}}, {css: {'stroke-dashoffset': preloader_values[1]},duration: Speed * 0.75,ease: 'power2.inOut'}, `-=${Speed*0.75}`)
-      .to($preloader, {autoAlpha: 0,duration: Speed / 2,ease: 'power2.inOut'}, `-=${Speed*0.5}`)
+      .to($preloader, {autoAlpha: 0,duration:Speed/2, ease:'power2.inOut'}, `-=${Speed*0.5}`)
       .eventCallback('onComplete', () => {
         enablePageScroll();
       })
@@ -1424,45 +1416,6 @@ class VSection {
     }
   }
 
-}
-
-class BGSection {
-  constructor($parent) {
-    this.$parent = $parent;
-  }
-  init() {
-    this.$bg = this.$parent.querySelector('.js-bg-animate__bg');
-    this.$mask = this.$parent.querySelector('.js-bg-animate__mask');
-    this.$content = this.$parent.querySelector('.js-bg-animate__content');
-    this.$container = this.$parent.querySelector('.js-bg-animate__container');
-
-    if(this.$mask) {
-      //animation
-      this.animation = gsap.timeline({paused:true})
-        .fromTo(this.$bg, {scale:1.1}, {scale:1, duration:1, ease:'power2.inOut'})
-        .fromTo(this.$mask, {autoAlpha:0}, {autoAlpha:1, duration:1, ease:'power2.inOut'}, '-=1')
-        .fromTo(this.$content, {autoAlpha:0}, {autoAlpha:1, duration:1, ease:'power2.inOut'}, '-=1')
-        .fromTo(this.$content, {y:100}, {y:0, duration:1, ease:'power2.out'}, '-=1')
-    } 
-
-
-    this.trigger = ScrollTrigger.create({
-      trigger: this.$parent,
-      start: "center center",
-      end: `+=${window.innerHeight}`,
-      pin: true,
-      anticipatePin: 1,
-      scrub: true,
-      animation: this.animation
-    });
-  }
-
-  destroy() {
-    this.trigger.kill();
-    gsap.set(this.$bg, {scale:1})
-    gsap.set(this.$content, {autoAlpha:1, y:0})
-    gsap.set(this.$mask, {autoAlpha:1})
-  }
 }
 
 class TopAnimation {
