@@ -4558,7 +4558,9 @@ table:not([class]) {
   margin-bottom: 120px; }
   @media (min-width: 1024px) {
     .section-head__title {
-      margin: 0; } }
+      margin: 0; }
+    .section-head h2 {
+      transform: translateY(-8px); } }
   @media (max-width: 1599.98px) {
     .section-head {
       margin-bottom: 100px; } }
@@ -4699,14 +4701,7 @@ table:not([class]) {
     top: 100%;
     transform: translate(-50%, 10px); }
 
-.form-section__head {
-  align-items: flex-start;
-  margin-bottom: 80px; }
-
 @media (min-width: 1024px) {
-  .form-section__title {
-    transform: translateY(-6px);
-    margin: 0; }
   .form-section__submit {
     margin-top: 34px; } }
 
@@ -4715,11 +4710,10 @@ table:not([class]) {
     bottom: 20px; } }
 
 @media (max-width: 1023.98px) {
-  .form-section__label {
-    display: none; }
   .form-section__head {
-    text-align: center;
-    margin-bottom: 40px; } }
+    margin-bottom: 40px; }
+  .form-section__label {
+    display: none; } }
 
 .contacts {
   padding-bottom: 0 !important; }

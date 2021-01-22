@@ -384,6 +384,9 @@
     &__title {
       margin: 0;
     }
+    h2 {
+      transform: translateY(-8px);
+    }
   }
   @include media-breakpoint-down(xxl) {
     margin-bottom: 100px;
@@ -572,15 +575,7 @@
       transform: translate(-50%, 10px);
     }
   }
-  &__head {
-    align-items: flex-start;
-    margin-bottom: 80px;
-  }
   @include media-breakpoint-up(lg) {
-    &__title {
-      transform: translateY(-6px);
-      margin: 0;
-    }
     &__submit {
       margin-top: 34px;
     }
@@ -591,12 +586,11 @@
     }
   }
   @include media-breakpoint-down(lg) {
+    &__head {
+      margin-bottom: 40px;
+    }
     &__label {
       display: none;
-    }
-    &__head {
-      text-align: center;
-      margin-bottom: 40px;
     }
   }
 }
