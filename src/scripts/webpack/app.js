@@ -167,7 +167,14 @@ window.onload = function () {
     check();
     window.addEventListener('resize', check);
   }
-  
+
+  //rslider
+  let $rslider = document.querySelectorAll('.rslider');
+  if($rslider.length) {
+    $rslider.forEach(($slider)=>{
+      new RSlider($slider).init();
+    })
+  }
 
   //else
   if(mobile()) {
@@ -1332,7 +1339,7 @@ class VSection {
       this.v_animation = gsap.timeline({paused:true})
         .fromTo(this.$wrapper, {y:30}, {y:0, duration:1, ease:'power2.out'})
         .fromTo(this.$wrapper, {x:0}, {x:-this.sw, duration:4, ease:'power1.inOut'}, '-=1')
-        .fromTo(this.$wrapper, {y:0}, {y:-30, duration:1, ease:'power2.in'}, '-=1')
+        .to(this.$wrapper, {y:-30, duration:1, ease:'power2.in'}, '-=1')
       this.animation = gsap.timeline({paused:true})
         .fromTo(this.$blocks, {autoAlpha:0, y:50}, {autoAlpha:1, y:0, duration:1, ease:'power2.inOut', stagger:{each:0.5}})
     }
@@ -1468,5 +1475,25 @@ class FadeAnimation {
     this.trigger.kill();
     this.animation.kill();
     gsap.set(this.$block, {autoAlpha:1, scale:1});
+  }
+}
+
+class RSlider {
+  constructor($parent) {
+    this.$parent = $parent;
+  }
+
+  init() {
+    //init
+    this.slider = new Splide(this.$parent, {
+      type: 'loop',
+      perPage: 1,
+      perMove: 1,
+      arrows: true,
+      pagination: true,
+      speed: Speed*500,
+    });
+    this.slider.mount();
+
   }
 }

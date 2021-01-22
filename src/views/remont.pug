@@ -21,13 +21,12 @@ block content
             use(xlink:href='./img/icons/icons.svg#arrow')
       .container.home-screen__content
         .row
-          h1.home-screen__title.col-xxl-6.col-xl-7.col-lg-8 Оказывает услуги ремонту и обслуживанию оборудования производства T.D.Williamson
-          p.h6.home-screen__text.col-xxl-3.col-lg-4.col-md-7.col-sm-8 ООО НК «Евразия» является представителем группы компаний Т.D. Williamson 
+          h1.home-screen__title.home-screen__item.col-xxl-6.col-xl-7.col-lg-8 Оказывает услуги ремонту и обслуживанию оборудования производства T.D.Williamson
+          p.h6.home-screen__text.home-screen__item.col-xxl-3.col-lg-4.col-md-7.col-sm-8 ООО НК «Евразия» является представителем группы компаний Т.D. Williamson 
     
     button.scroll-btn.home-screen__scroll.d-xl-none(aria-label='scroll bottom' data-scroll='bottom')
       svg.icon
         use(xlink:href='./img/icons/icons.svg#arrow')
-
 
   section.v-section.v-section_type-2.bg-accent.bg-gradient
     .v-section__size-wrapper
@@ -37,7 +36,7 @@ block content
             svg.icon
               use(xlink:href='./img/icons/icons.svg#arrow')
           .v-section__wrapper
-            h2.v-section__title Виды ремонта
+            h2.v-section__title.text-center.text-lg-left Виды ремонта
             .v-section__content
               +block1(
                 '',
@@ -64,8 +63,67 @@ block content
                 true
               )
 
+  section.content-section.bg-light.rslider-block
+    .container
+      .section-head.rslider-block__head.row
+        h4.section-head__title.color-accent.col-xxl-5.col-lg-6 При поступлении заявки на проведении ТО, ТР и КР производятся следующие мероприятия:
+        p.offset-xxl-2.offset-lg-1.col-xxl-4.col-lg-5 Приминимо для оборудование для врезки и перекрытия полости трубопроводов по давлением до 10 МПа
+      .rslider-block__slider.js-animate-top
+        .splide.rslider.row
+          .splide__track.rslider__track.col-xl-6.col-lg-8.col-sm-10
+            .splide__list.rslider__list
+              //slide
+              .splide__slide.rslider__slide 
+                span.h6.rslider__slide-index 1
+                h3.rslider__slide-title.color-accent Осмотр
+                p.rslider__slide-text Осмотр оборудования и составление дефектных актов.
+              //slide
+              .splide__slide.rslider__slide
+                span.h6.rslider__slide-index 2
+                h3.rslider__slide-title.color-accent Разработка
+                p.rslider__slide-text Разработка комплектовочной ведомости, определение состава работ и затрат, разработка сметной документации.
+              //slide
+              .splide__slide.rslider__slide
+                span.h6.rslider__slide-index 3
+                h3.rslider__slide-title.color-accent Заключение договора
+                p.rslider__slide-text Заключение договора оказания услуг на проведение ТО, ТР и КР.
+              //slide
+              .splide__slide.rslider__slide 
+                span.h6.rslider__slide-index 4
+                h3.rslider__slide-title.color-accent Разработка проекта
+                p.rslider__slide-text Разработка проекта производства работ и операционно-технологических карт.
+              //slide
+              .splide__slide.rslider__slide 
+                span.h6.rslider__slide-index 5
+                h3.rslider__slide-title.color-accent Комплектация
+                p.rslider__slide-text Комплектация объекта проведения ТО, ТР и КР расходными ремонтными материалами.
+              //slide
+              .splide__slide.rslider__slide 
+                span.h6.rslider__slide-index 6
+                h3.rslider__slide-title.color-accent Выезд специалистов
+                p.rslider__slide-text Выезд специалистов ОГМ до места проведения работ или вывоз оборудования до места проведения работ в сервисные центры ООО НК «Евразия».
+              //slide
+              .splide__slide.rslider__slide 
+                span.h6.rslider__slide-index 7
+                h3.rslider__slide-title.color-accent Ремонт
+                p.rslider__slide-text Проведение работ по ТО, ТР и КР оборудования для врезки и перекрытия полости.
+              //slide
+              .splide__slide.rslider__slide 
+                span.h6.rslider__slide-index 8
+                h3.rslider__slide-title.color-accent Результат
+                p.rslider__slide-text Сдача результатов оказания услуг Заказчику.
+              //slide
+              .splide__slide.rslider__slide 
+                span.h6.rslider__slide-index 9
+                h3.rslider__slide-title.color-accent Отчёт
+                p.rslider__slide-text Сдача исполнительно-технической и отчетной документации.
+
+
 
   section.content-section.bg-gray.bg-gradient-skew
+    .container
+      .section-head.row.text-center.text-lg-left
+        h2.section-head__title.col-xxl-6.col-xl-7 В настоящее время,<br> у ООО НК «Евразия» имеются:
     .container
       +block4(
         'js-animate-top',

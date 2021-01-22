@@ -18,6 +18,12 @@
   --color-btn-dark-hover: #575757;
   --color-btn-dark-click: #252EB6;
   --color-arrow-hover: #fff;
+  --color-slider-arrow: #000000;
+  --color-slider-arrow-bg-hover: #E2E3E5;
+  --color-slider-arrow-bg-click: #C4C4C4;
+  --color-slider-pag: #C4C4C4;
+  --color-slider-pag-hover: #949494;
+  --color-slider-pag-active: #000;
   --color-text-light: #fff;
   --color-text-accent: #434BC3;
   --color-text-dark: #393939;

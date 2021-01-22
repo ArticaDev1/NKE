@@ -18,6 +18,12 @@
   --color-btn-dark-hover: #C4C4C4;
   --color-btn-dark-click: #949494;
   --color-arrow-hover: #393939;
+  --color-slider-arrow: #fff;
+  --color-slider-arrow-bg-hover: #949494;
+  --color-slider-arrow-bg-click: #575757;
+  --color-slider-pag: #949494;
+  --color-slider-pag-hover: #C4C4C4;
+  --color-slider-pag-active: #FFFFFF;
   --color-text-light: #fff;
   --color-text-accent: #fff;
   --color-text-dark: #fff;
@@ -26,7 +32,7 @@
   --color-bg-none: transparent;
   --color-bg-accent: #575757;
   --color-bg-light: #393939;
-  --color-bg-gray: #686E7A;
+  --color-bg-gray: #484848;
   --color-bg-images: #949494;
   --color-bg-transparent: rgba(0, 0, 0, 0.4);
   --color-bg-overlay: rgba(0, 0, 0, 0.3);
