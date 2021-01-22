@@ -3,12 +3,12 @@ block variables
   -var title = sitename+' - Проектирование'
   -var n6 = true;
 block content
+  include blocks/blocks
+
   section.home-screen(data-mobile-window)
-
     .home-screen__background
-      .image.image_cover
-        img(src="./img/dddd.jpg", alt="image").lazyload
-
+      .image.image_cover.rellax(data-rellax-speed="-3")
+        img(src="./img/engineering/shutterstock_1727599432.jpg", alt="image").lazyload
     .home-screen__container
       .container.home-screen__nav
         a(href=education).button-text.home-screen__prev
@@ -17,89 +17,128 @@ block content
           span Обучение
       .container.home-screen__content
         .row
-          h1.home-screen__title.col-lg-8 Осуществлям деятельность по импорто&shy;замещению технологий и предоставлению профильных улуг 
-          p.h6.home-screen__text.col-xxl-3.col-lg-4.col-md-7.col-sm-8 В рамках программы научно-исследовательских и опытно-конструкторских работ (НИОКР)
-  
+          h1.home-screen__title.home-screen__item.col-lg-8 Осуществлям деятельность по импорто&shy;замещению технологий и предоставлению профильных улуг 
+          p.h6.home-screen__text.home-screen__item.col-xxl-3.col-lg-4.col-md-7.col-sm-8 В рамках программы научно-исследовательских и опытно-конструкторских работ (НИОКР)
+    button.scroll-btn.home-screen__scroll.d-xl-none(aria-label='scroll bottom' data-scroll='bottom')
+      svg.icon
+        use(xlink:href='./img/icons/icons.svg#arrow')
+
+  section.v-section.v-section_type-2.bg-accent.bg-gradient
+    .v-section__size-wrapper
+      .v-section__outer(data-hide-header)
+        .v-section__container.container
+          button.scroll-btn.v-section__btn(aria-label='scroll bottom' data-scroll='self')
+            svg.icon
+              use(xlink:href='./img/icons/icons.svg#arrow')
+          .v-section__wrapper
+            h2.v-section__title.text-center.text-lg-left Услуги при проектировании
+            .v-section__content
+              +block3(
+                '',
+                '01', 
+                'Технологические Решения (ТХ) стадии «П» и стадии «Р»', 
+                'Помощь при проектировании подраздела Технологические Решения (ТХ) стадии «П» и стадии «Р».',
+                './img/engineering/WP_20150811_10_40_56_Pro.jpg',
+                true
+              )
+              +block2(
+                '',
+                '02', 
+                'Помощь в прохождении экспертиз', 
+                '(ведомственных, региональных, федеральных) на специально-строительные и технологические работы, в соответствии с основной деятельностью предприятия.',
+                './img/engineering/shutterstock_568736821.jpg',
+                true
+              )
+              +block7(
+                '',
+                '03', 
+                'Подбор линейки расходных материалов', 
+                'Для выполнения специально-строительных и технологических работ, в соответствии с основной деятельностью предприятия.',
+                './img/engineering/shutterstock_761906896.jpg',
+                true
+              )
+              +block4(
+                '',
+                '04', 
+                'Проведение технико-экономического аудита', 
+                'В соответствии с основной деятельностью предприятия.',
+                './img/engineering/shutterstock_1019230627.jpg',
+                true
+              )
+              +block3(
+                '',
+                '05', 
+                'Разработка сметной документации', 
+                'Помощь при проектировании подраздела Технологические Решения (ТХ) стадии «П» и стадии «Р».',
+                './img/engineering/shutterstock_1020255610.jpg',
+                true
+              )
+              +block7(
+                '',
+                '06', 
+                'Помощь при проведении изыскательских работ', 
+                'Для выполнения специально-строительных и технологических работ, в соответствии с основной деятельностью предприятия.',
+                './img/engineering/shutterstock_162274277.jpg',
+                true
+              )
+
+
   section.content-section.bg-gray.bg-gradient-skew
     .container
+      +block4(
+        'js-animate-top',
+        '01', 
+        'Технологии врезок под давлением', 
+        'Импортозамещение технологии врезок под давлением и перекрытия полости магистральных и распределительных трубопроводов давлением до 10 МПа без отключения потребителей.',
+        './img/engineering/PipelineIntegrity 1.jpg',
+        true
+      )
+      +block5(
+        'js-animate-top',
+        '02', 
+        'Производства фитингов и тройников ', 
+        'Открытие производства фитингов и тройников для выполнения работ по   врезке под давлением и перекрытия полости магистральных и распределительных трубопроводов давлением до 10 МПа без отключения потребителей.',
+        './img/engineering/shutterstock_316634720.jpg',
+        true,
+        'Объединенных в Отдел главного механика'
+      )
     
-      //block4
-      .content-block
-        .content-block__container.row
-          .content-block__image.order-lg-2.offset-1.offset-sm-2.offset-md-3.offset-lg-1.col-11.col-sm-10.col-md-8.col-lg-6
-            .image.image_cover.image-size-4.image-align-right
-              img(data-src="https://placehold.co/1000x700/fff/393939?font=montserrat&text=Картинка", alt="image").lazyload
-          .content-block__container.order-lg-1.offset-sm-2.offset-md-3.offset-lg-0.col-sm-10.col-md-8.col-lg-5
-            .row
-              .content-block__head
-                span.content-block__index 01
-                h5 Технологии врезок под давлением
-              .content-block__content
-                p Импортозамещение технологии врезок под давлением и перекрытия полости магистральных и распределительных трубопроводов давлением до 10 МПа без отключения потребителей.
-                a(href='#modal-form' data-modal='open').button-text
-                  span Подробнее
-                  svg.icon
-                    use(xlink:href='./img/icons/icons.svg#arrow')
-      //block5
-      .content-block
-        .content-block__container.row
-          .vertical-text.vertical-text_left
-            .vertical-text__container Объединенных в Отдел главного механика
+    .w-bg-block.js-animate-top
+      .w-bg-block__container
+        .w-bg-block__image.image.image_cover
+          img(data-src="./img/engineering/shutterstock_1810401379.jpg", alt="image").lazyload
+        .container.w-bg-block__content
+          .row
+            .content-block.col-xxl-5.col-xl-6.col-lg-8
+              .content-block__text.js-animate-top
+                .row
+                  .content-block__head
+                    span.content-block__index 03
+                    h5 Технологии защиты морских и речных берегов 
+                  .content-block__content
+                    p Развитие технологии защиты морских и речных берегов от размыва береговой линии при помощи волногасящих элементов из композитных материалов.
+                    a(href='#modal-form' data-modal='open').button-text
+                      span Подробнее
+                      svg.icon
+                        use(xlink:href='./img/icons/icons.svg#arrow')
 
-          .content-block__image.offset-md-1.col-11.col-sm-10.col-md-8.col-lg-5.col-xl-4
-            .image.image_cover.image-size-1.image-align-left
-              img(data-src="https://placehold.co/1000x1200/fff/393939?font=montserrat&text=Картинка", alt="image").lazyload
-          .content-block__container.offset-md-1.offset-lg-1.col-sm-10.col-md-8.col-lg-5.col-xl-5
-            .row
-              .content-block__head
-                span.content-block__index 02
-                h5 Производства фитингов и тройников 
-              .content-block__content
-                p Открытие производства фитингов и тройников для выполнения работ по   врезке под давлением и перекрытия полости магистральных и распределительных трубопроводов давлением до 10 МПа без отключения потребителей.
-                a(href='#modal-form' data-modal='open').button-text
-                  span Подробнее
-                  svg.icon
-                    use(xlink:href='./img/icons/icons.svg#arrow')
-
-
-
-  section.content-section.bg-gray.bg-gradient-skew
     .container
-
-      //block7
-      .content-block
-        .content-block__container.row
-          .content-block__image.offset-md-1.offset-lg-0.col-11.col-sm-10.col-md-8.col-lg-6
-            .image.image_cover.image-size-4.image-align-left
-              img(data-src="https://placehold.co/1000x700/fff/393939?font=montserrat&text=Картинка", alt="image").lazyload
-          .content-block__container.offset-md-1.offset-lg-1.col-sm-10.col-md-8.col-lg-5
-            .row
-              .content-block__head
-                span.content-block__index 04
-                h5 Технологии берегоукрепления
-              .content-block__content
-                p Развитие технологии берегоукрепления от разрушения с креплением микроцементными составами и шпунтом их композитных материалов.
-                a(href='#modal-form' data-modal='open').button-text
-                  span Подробнее
-                  svg.icon
-                    use(xlink:href='./img/icons/icons.svg#arrow')
-
-      //block2
-      .content-block
-        .content-block__container.row
-          .content-block__image.order-lg-2.offset-2.offset-sm-3.offset-md-5.offset-lg-1.col-10.col-sm-9.col-md-7.col-lg-5.col-xl-6
-            .image.image_cover.image-size-2.sm-image-align-right
-              img(data-src="https://placehold.co/1000x600/fff/393939?font=montserrat&text=Картинка", alt="image").lazyload
-          .content-block__container.order-lg-1.offset-sm-3.offset-md-5.offset-lg-0.col-sm-9.col-md-7.col-lg-6.col-xl-5
-            .row
-              .content-block__head
-                span.content-block__index 05
-                h5 Производство волногасящих элементов 
-              .content-block__content
-                p Открытие производства волногасящих элементов шарнирного типа из стеклобазальтопластиковых труб с креплением фланцевыми соединениями через полнообхватные фитинги.
-                a(href='#modal-form' data-modal='open').button-text
-                  span Подробнее
-                  svg.icon
-                    use(xlink:href='./img/icons/icons.svg#arrow')
+      +block7(
+        'js-animate-top',
+        '04', 
+        'Технологии берегоукрепления', 
+        'Развитие технологии берегоукрепления от разрушения с креплением микроцементными составами и шпунтом их композитных материалов.',
+        './img/engineering/shutterstock_1767459332.jpg',
+        true
+      )
+      +block2(
+        'js-animate-top',
+        '05', 
+        'Производство волногасящих элементов', 
+        'Открытие производства волногасящих элементов шарнирного типа из стеклобазальтопластиковых труб с креплением фланцевыми соединениями через полнообхватные фитинги.',
+        './img/engineering/shutterstock_1788914045.jpg',
+        true
+      )
+  
 
   include blocks/form-section
