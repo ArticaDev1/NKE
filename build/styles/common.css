@@ -4560,7 +4560,7 @@ table:not([class]) {
     .section-head__title {
       margin: 0; }
     .section-head h2 {
-      transform: translateY(-8px); } }
+      transform: translateY(-6px); } }
   @media (max-width: 1599.98px) {
     .section-head {
       margin-bottom: 100px; } }
