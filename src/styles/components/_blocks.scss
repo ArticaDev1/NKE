@@ -493,6 +493,9 @@
     }
     &--prev {
       transform: rotate(-180deg);
+      &[data-focus] {
+        transform: rotate(-180deg) scale(0.9);
+      }
     }
     svg {
       width: 16px;

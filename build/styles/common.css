@@ -4652,6 +4652,8 @@ table:not([class]) {
         transform: scale(1.11); }
     .rslider .splide__arrow--prev {
       transform: rotate(-180deg); }
+      .rslider .splide__arrow--prev[data-focus] {
+        transform: rotate(-180deg) scale(0.9); }
     .rslider .splide__arrow svg {
       width: 16px;
       height: 16px;
