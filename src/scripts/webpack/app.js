@@ -430,7 +430,7 @@ const Theme = {
 
 const Header = {
   init: function () {
-    this.scrollY = 0;
+    this.old_scroll = 0;
     window.addEventListener('scroll', () => {
       this.check();
     })
@@ -438,22 +438,28 @@ const Header = {
   },
   check: function () {
     let y = window.pageYOffset,
-        h = window.innerHeight/2;
+        h = window.innerHeight/2,
+        fixed = $header.classList.contains('header_fixed'),
+        hidden = $header.classList.contains('header_hidden');
 
-    if (y > 0 && !this.fixed) {
-      this.fixed = true;
+    if (y > 0 && !fixed) {
       $header.classList.add('header_fixed');
-    } else if (y<=0 && this.fixed) {
-      this.fixed = false;
+    } else if (y<=0 && fixed) {
       $header.classList.remove('header_fixed');
     }
 
-    if(this.scrollY<y && this.scrollY>h && !this.hidden && !Nav.opened) {
-      this.hidden = true;
-      $header.classList.add('header_hidden');
-    } else if(this.scrollY>y && this.hidden) {
-      this.hidden = false;
-      $header.classList.remove('header_hidden');
+    //листаем вниз
+    if(this.old_scroll<y) {
+      this.old_flag = y;
+      if(y>h && !hidden) {
+        $header.classList.add('header_hidden');
+      }
+    }
+    //листаем вверх
+    else if(this.old_scroll>y) {
+      if(hidden && (y<h || y+200<this.old_flag)) {
+        $header.classList.remove('header_hidden');
+      }
     }  
 
     //check
@@ -474,7 +480,7 @@ const Header = {
       $header.classList.remove('header_content-hidden');
     }
 
-    this.scrollY = y;
+    this.old_scroll = y;
   }
 }
 
@@ -835,7 +841,6 @@ const Modal = {
     let play = () => {
       this.$active = $modal;
       disablePageScroll();
-      $header.classList.add('header_hidden');
       let $content = $modal.querySelector('.modal-block');
       this.animation = gsap.effects.modal($modal, $content);
       this.animation.play();
@@ -848,7 +853,6 @@ const Modal = {
   close: function (callback) {
     if(this.$active) {
       this.animation.timeScale(2).reverse().eventCallback('onReverseComplete', () => {
-        $header.classList.remove('header_hidden');
         delete this.animation;
         enablePageScroll();
         if (callback) callback();

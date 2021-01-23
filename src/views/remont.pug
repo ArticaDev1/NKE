@@ -2,6 +2,10 @@ extends layout/layout
 block variables
   -var title = sitename+' - Ремонт'
   -var n4 = true;
+  -var prev = arenda;
+  -var prev_name = 'Аренда';
+  -var next = education;
+  -var next_name = 'Обучение';
 block content
   include blocks/blocks
 
@@ -10,15 +14,20 @@ block content
       .image.image_cover.rellax(data-rellax-speed="-3")
         img(src="./img/remont/P902.jpg", alt="image").lazyload
     .home-screen__container
-      .container.home-screen__nav
-        a(href=arenda).button-text.home-screen__prev
-          svg.icon
-            use(xlink:href='./img/icons/icons.svg#arrow')
-          span Аренда
-        a(href=education).button-text.home-screen__next
-          span Обучение
-          svg.icon
-            use(xlink:href='./img/icons/icons.svg#arrow')
+      //NAV START
+      if next || prev
+        .pager-navigation.container.home-screen__navigation
+          if prev
+            a(href=prev).button-text
+              svg.icon
+                use(xlink:href='./img/icons/icons.svg#arrow')
+              span=prev_name
+          if next
+            a(href=next).button-text.pager-navigation__next
+              span=next_name
+              svg.icon
+                use(xlink:href='./img/icons/icons.svg#arrow')
+      //NAV END
       .container.home-screen__content
         .row
           h1.home-screen__title.home-screen__item.col-xxl-6.col-xl-7.col-lg-8 Оказывает услуги ремонту и обслуживанию оборудования производства T.D.Williamson
