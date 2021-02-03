@@ -78,7 +78,7 @@ window.onload = function () {
 
   //video
   let $video = document.querySelector('.video-slider');
-  if ($video) new Video($video, {points: [2, 4, 5.9, 9.08, 11.5]}).init();
+  if ($video) new Video($video, {points: [5.20, 10.21, 15.09]}).init();
 
   //work slider
   let $work_slider = document.querySelector('.work-slider');
