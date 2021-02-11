@@ -789,7 +789,7 @@ const mobileWindow = {
     $el.remove();
     //
     let $window = document.querySelector('[data-mobile-window]');
-    if ($window) {
+    if ($window && window.innerWidth<brakepoints.sm) {
       $window.style.height = `${this.h}px`;
       let wh = $window.getBoundingClientRect().height;
       if ($window.closest('.home')) {
@@ -940,7 +940,7 @@ class Video {
       if (this.autoscroll_timeout) clearTimeout(this.autoscroll_timeout);
       if(!mobile()) {
         let h = this.$parent.getBoundingClientRect().height;
-        if(!Scroll.inScroll && h==window.innerHeight) {
+        if(!Scroll.inScroll && h<window.innerHeight+2 && h>window.innerHeight-2) {
           let y = this.$parent.getBoundingClientRect().top,
               t = this.$parent.getBoundingClientRect().top + pageYOffset;
           if (h/3 - y > 0 && h * 1.33 > window.innerHeight - y) {

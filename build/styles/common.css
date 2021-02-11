@@ -3645,21 +3645,18 @@ table:not([class]) {
     align-content: flex-end; }
   .video-slider__titles {
     position: relative;
-    transform: translateY(8px);
     transition: opacity 500ms ease-in-out, visibility 500ms ease-in-out; }
   .video-slider__text {
     position: relative;
     transform: translateY(4px);
-    transition: opacity 500ms ease-in-out, visibility 500ms ease-in-out; }
-  .video-slider__label {
-    margin-bottom: 50px;
     transition: opacity 500ms ease-in-out, visibility 500ms ease-in-out; }
   .video-slider__text-item {
     position: absolute;
     bottom: 0;
     margin: 0 !important;
     opacity: 0;
-    visibility: hidden; }
+    visibility: hidden;
+    max-width: calc(100% - 24px); }
   .video-slider__title {
     position: absolute;
     bottom: 0;
@@ -3744,10 +3741,6 @@ table:not([class]) {
       .video-slider.disabled .video-slider__titles, .video-slider.disabled .video-slider__text, .video-slider.disabled .video-slider__label, .video-slider.disabled .video-slider__nav {
         opacity: 0;
         visibility: hidden; }
-      .video-slider__titles {
-        margin-bottom: 30px; }
-      .video-slider__label {
-        margin-bottom: 40px; }
       .video-slider__content {
         position: absolute;
         width: 100%;
@@ -3756,8 +3749,11 @@ table:not([class]) {
         left: 0;
         padding: inherit;
         z-index: 4;
-        background-color: var(--color-bg-overlay);
-        transition: background-color 500ms ease-in-out; } }
+        background-color: rgba(60, 70, 88, 0.7);
+        transition: background-color 500ms ease-in-out; }
+      .video-slider__titles {
+        position: absolute;
+        top: 0; } }
   @media (min-width: 1280px) {
     .video-slider__titles {
       margin: 0; } }
@@ -3768,18 +3764,7 @@ table:not([class]) {
   @media (max-width: 1023.98px) {
     .video-slider {
       padding: 0 !important;
-      background: var(--color-bg-gray);
-      transition: background-color 200ms ease-in-out; }
-      .video-slider::before {
-        content: '';
-        display: block;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        top: 0;
-        left: 0;
-        background: var(--color-gradient); }
+      background: #84909D; }
       .video-slider__background {
         position: relative;
         height: auto; }
@@ -3791,26 +3776,31 @@ table:not([class]) {
         align-self: start;
         margin: 0; }
       .video-slider__nav {
-        bottom: initial;
-        top: -110px; }
+        bottom: initial; }
       .video-slider__items {
         height: 100%;
         align-content: space-between; }
+      .video-slider__titles {
+        margin-bottom: 30px; }
       .video-slider__text {
         align-self: start;
-        transform: translate(0);
-        margin-bottom: 30px; }
+        transform: translate(0); }
       .video-slider__text-item {
         bottom: auto;
         top: 0; }
       .video-slider__content {
-        padding: 80px 0;
-        position: relative; } }
+        padding: 40px 0 80px 0;
+        position: relative; }
+        .video-slider__content::before {
+          content: '';
+          display: block;
+          position: absolute;
+          width: 100%;
+          height: 64px;
+          bottom: 100%;
+          left: 0;
+          background: linear-gradient(180deg, rgba(132, 144, 157, 0) 0%, #84909D 100%); } }
   @media (max-width: 767.98px) {
-    .video-slider__content {
-      padding: 40px 0 80px 0; }
-    .video-slider__nav {
-      top: -12px; }
     .video-slider__control {
       width: 48px;
       height: 48px; }
@@ -3830,16 +3820,17 @@ table:not([class]) {
     .video-slider__text {
       margin: 0; }
     .video-slider__titles {
-      margin-bottom: 20px;
-      transform: translate(0); }
+      margin-bottom: 20px; }
     .video-slider__title {
-      bottom: initial;
-      top: 0; } }
+      padding-right: 120px; } }
   @media (max-width: 575.98px) {
     .video-slider__content {
       padding: 40px 0 60px 0; }
+      .video-slider__content::before {
+        height: 38px; }
     .video-slider__nav {
-      right: 16px; }
+      right: 16px;
+      top: 0; }
     .video-slider__title {
       width: calc(100% - 16px); } }
 
