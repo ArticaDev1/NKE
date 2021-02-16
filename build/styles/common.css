@@ -5064,6 +5064,8 @@ table:not([class]) {
   .about__descr {
     color: var(--color-text-gray);
     transition: color 200ms ease-in-out; }
+  .about__wrapper {
+    padding-bottom: 120px; }
   .about__content {
     position: relative;
     padding: 65px 0; }
