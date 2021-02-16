@@ -5103,21 +5103,21 @@ table:not([class]) {
     position: relative;
     z-index: 2; }
   @media (max-width: 1279.98px) {
-    .about__container {
-      padding-bottom: 80px; }
+    .about__wrapper {
+      padding-bottom: 100px; }
     .about__content .icon-logo {
-      left: 70px; } }
+      left: 70px; }
+    .about__content .icon:last-child {
+      right: 0; } }
   @media (max-width: 1023.98px) {
     .about__photo {
       width: 100px; }
-    .about__container {
+    .about__wrapper {
       padding-bottom: 60px; }
     .about__signature {
       width: 190px;
       height: 52px;
       right: 110px; }
-    .about__content .icon:last-child {
-      right: 0; }
     .about__content .icon-logo {
       width: 220px;
       height: 220px;

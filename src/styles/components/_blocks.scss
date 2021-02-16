@@ -1127,12 +1127,17 @@
     z-index: 2;
   }
   @include media-breakpoint-down(xl) {
-    &__container {
-      padding-bottom: 80px;
+    &__wrapper {
+      padding-bottom: 100px;
     }
     &__content {
       .icon-logo {
         left: 70px;
+      }
+      .icon {
+        &:last-child {
+          right: 0;
+        }
       }
     }
   }
@@ -1140,7 +1145,7 @@
     &__photo {
       width: 100px;
     }
-    &__container {
+    &__wrapper {
       padding-bottom: 60px;
     }
     &__signature {
@@ -1149,11 +1154,6 @@
       right: 110px;
     }
     &__content {
-      .icon {
-        &:last-child {
-          right: 0;
-        }
-      }
       .icon-logo {
         width: 220px;
         height: 220px;
