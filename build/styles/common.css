@@ -3749,7 +3749,7 @@ table:not([class]) {
         left: 0;
         padding: inherit;
         z-index: 4;
-        background-color: rgba(98, 108, 128, 0.5);
+        background-color: rgba(80, 88, 104, 0.8);
         transition: background-color 500ms ease-in-out; }
       .video-slider__titles {
         position: absolute;

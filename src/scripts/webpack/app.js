@@ -26,7 +26,7 @@ const $wrapper = document.querySelector('.wrapper');
 const $header = document.querySelector('.header');
 const Speed = 1;
 
-const dev = false;
+const dev = true;
 
 //get width
 const contentWidth = () => {
@@ -761,22 +761,29 @@ const Validation = {
   submitEvent: function ($form) {
     let $submit = $form.querySelector('button'),
         $inputs = $form.querySelectorAll('input, textarea');
-    $inputs.forEach(($input) => {
-      $input.parentNode.classList.add('loading');
-    })
+    $inputs.forEach($input => $input.parentNode.classList.add('loading'));
     $submit.classList.add('loading');
-    //test
-    setTimeout(() => {
-      $inputs.forEach(($input) => {
-        $input.parentNode.classList.remove('loading');
-      })
+
+    let finished = ()=> {
+      $inputs.forEach($input => $input.parentNode.classList.remove('loading'));
       $submit.classList.remove('loading');
       this.reset($form);
       Modal.open(document.querySelector('#succes'));
+      setTimeout(()=>{Modal.close()}, 3000)
+    }
+
+    if(!dev) {
+      $($form).request('onSend', {
+        success: ()=>{
+          finished();
+        }
+      })
+    } 
+    else {
       setTimeout(()=>{
-        Modal.close();
-      }, 3000)
-    }, 2000)
+        finished();
+      }, 2000)
+    }
   }
 }
 
