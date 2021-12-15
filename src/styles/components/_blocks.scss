@@ -1557,6 +1557,11 @@
       background-color: currentColor;
     }
   }
+  &__text-content {
+    &:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
   &__index {
     position: absolute;
     top: 0;

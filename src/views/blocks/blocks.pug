@@ -11,7 +11,7 @@ mixin block1(c, index, title, text, image, button)
             span.content-block__index=index
             h5=title
           .content-block__content
-            p=text
+            .content-block__text-content !{text}
             if button
               a(href='#modal-form' data-modal='open').button-text
                 span Подробнее
@@ -31,7 +31,7 @@ mixin block2(c, index, title, text, image, button)
             span.content-block__index=index
             h5=title
           .content-block__content
-            p=text
+            .content-block__text-content !{text}
             if button
               a(href='#modal-form' data-modal='open').button-text
                 span Подробнее
@@ -51,7 +51,7 @@ mixin block3(c, index, title, text, image, button)
             span.content-block__index=index
             h5=title
           .content-block__content
-            p=text
+            .content-block__text-content !{text}
             if button
               a(href='#modal-form' data-modal='open').button-text
                 span Подробнее
@@ -71,7 +71,7 @@ mixin block4(c, index, title, text, image, button)
             span.content-block__index=index
             h5=title
           .content-block__content
-            p=text
+            .content-block__text-content !{text}
             if button
               a(href='#modal-form' data-modal='open').button-text
                 span Подробнее
@@ -93,7 +93,7 @@ mixin block5(c, index, title, text, image, button, vtext)
             span.content-block__index=index
             h5=title
           .content-block__content
-            p=text
+            .content-block__text-content !{text}
             if button
               a(href='#modal-form' data-modal='open').button-text
                 span Подробнее
@@ -115,7 +115,7 @@ mixin block6(c, index, title, text, image, button, vtext)
             span.content-block__index=index
             h5=title
           .content-block__content
-            p=text
+            .content-block__text-content !{text}
             if button
               a(href='#modal-form' data-modal='open').button-text
                 span Подробнее
@@ -135,7 +135,7 @@ mixin block7(c, index, title, text, image, button)
             span.content-block__index=index
             h5=title
           .content-block__content
-            p=text
+            .content-block__text-content !{text}
             if button
               a(href='#modal-form' data-modal='open').button-text
                 span Подробнее
@@ -155,7 +155,7 @@ mixin block8(c, index, title, text, image, button)
             span.content-block__index=index
             h5=title
           .content-block__content
-            p=text
+            .content-block__text-content !{text}
             if button
               a(href='#modal-form' data-modal='open').button-text
                 span Подробнее

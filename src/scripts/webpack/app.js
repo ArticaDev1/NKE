@@ -1,8 +1,4 @@
 import 'lazysizes';
-lazySizes.cfg.init = false;
-lazySizes.cfg.expand = 100;
-lazySizes.cfg.preloadAfterLoad = true;
-
 import {gsap} from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
@@ -26,7 +22,7 @@ const $wrapper = document.querySelector('.wrapper');
 const $header = document.querySelector('.header');
 const Speed = 1;
 
-const dev = false;
+const dev = window.location.host == 'localhost:9000' ? true : false;
 
 //get width
 const contentWidth = () => {
@@ -186,9 +182,6 @@ window.onload = function () {
     //parralax
     new Rellax('.rellax');
   }
-
-  //lazy
-  lazySizes.init();
 }
 
 const TouchHoverEvents = {

@@ -3520,6 +3520,32 @@ table:not([class]) {
   h6, .h6 {
     margin-bottom: 0.765rem; } }
 
+ul:not([class]):not(:last-child), ul.list:not(:last-child), ol:not([class]):not(:last-child), ol.list:not(:last-child) {
+  margin-bottom: 1rem; }
+
+ul:not([class]) li:not(:last-child), ul.list li:not(:last-child), ol:not([class]) li:not(:last-child), ol.list li:not(:last-child) {
+  margin-bottom: 10px; }
+
+ul:not([class]) li, ul.list li {
+  padding-left: 15px;
+  position: relative; }
+  ul:not([class]) li::before, ul.list li::before {
+    content: '';
+    position: absolute;
+    top: calc(0.65em - 2px);
+    left: 0;
+    display: block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50px;
+    background-color: currentColor; }
+
+ol:not([class]), ol.list {
+  counter-reset: section; }
+  ol:not([class]) li:before, ol.list li:before {
+    counter-increment: section;
+    content: counter(section) ". "; }
+
 /*========== Layout ==========*/
 .wrapper {
   display: flex;
@@ -5382,6 +5408,9 @@ table:not([class]) {
     height: calc(100% - 12px);
     width: 1px;
     background-color: currentColor; }
+
+.content-block__text-content:not(:last-child) {
+  margin-bottom: 15px; }
 
 .content-block__index {
   position: absolute;
